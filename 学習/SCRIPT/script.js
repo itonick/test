@@ -1,0 +1,6 @@
+for(var i=1;i<=5;i++){
+   for(var a=1;a<=5;a++){
+      if(i==a){
+         document.write("☆");}
+      document.write("★");}
+      document.write("<br>");}

@@ -1,0 +1,14 @@
+function yuenchi(adult,kids,otona=500,kodomo=200){
+   return adult*otona+kids*kodomo+"円です。";
+}
+document.write("Aグループ:"+yuenchi(2,4)+"<br>");
+document.write("Bグループ:"+yuenchi(1,5)+"<br>");
+document.write("Cグループ:"+yuenchi(3,7)+"<br>");
+
+function en(hankei,ensyuritsu=3.14){
+   return "円の面積＝"+hankei*hankei*ensyuritsu;
+}
+document.write(en(5)+"<br>");
+document.write(en(7)+"<br>");
+document.write(en(10)+"<br>");
+   
