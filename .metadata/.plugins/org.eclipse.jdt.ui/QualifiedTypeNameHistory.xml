@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.sql.DriverManager"/>
 <fullyQualifiedTypeName name="com.internous.login.util.DBConnector"/>
 <fullyQualifiedTypeName name="com.internous.login.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj2.util.DBConnector"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj2.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj3.dao.HelloStrutsDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj3.util.DBConnector"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj3.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj3.dto.LoginDTO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj4.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="javax.swing.text.DefaultEditorKit.InsertBreakAction"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj4.dto.InquiryDTO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj4.dao.InquiryCompleteDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj4.util.DBConnector"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj4.dao.TestDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj4.dto.LoginDTO"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.dto.HelloStrutsDTO"/>
+<fullyQualifiedTypeName name="java.lang.StrictMath"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.dao.HelloStrutsDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.dto.LoginDTO"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.Util"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.util.DBConnector"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="com.opensymphony.xwork2.ActionSupport"/>
+<fullyQualifiedTypeName name="org.apache.struts2.interceptor.SessionAware"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.dto.InquiryDTO"/>
+<fullyQualifiedTypeName name="com.internousdev.webproj5.dao.InquiryCompleteDAO"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
 </qualifiedTypeNameHistroy>
