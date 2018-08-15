@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="com.internous.login.util.DBConnector"/>
-<fullyQualifiedTypeName name="com.internous.login.dao.LoginDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.webproj2.util.DBConnector"/>
 <fullyQualifiedTypeName name="com.internousdev.webproj2.dao.LoginDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.webproj3.dao.HelloStrutsDAO"/>
@@ -26,7 +22,6 @@
 <fullyQualifiedTypeName name="com.internousdev.webproj5.dao.InquiryCompleteDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.webproj5.util.DBConnector"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.internousdev.webproj5.dto.LoginDTO"/>
 <fullyQualifiedTypeName name="com.internousdev.webproj5.dao.TestDAO"/>
 <fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
@@ -37,9 +32,7 @@
 <fullyQualifiedTypeName name="com.internousdev.template.dto.BuyItemDTO"/>
 <fullyQualifiedTypeName name="com.opensymphony.xwork2.Action"/>
 <fullyQualifiedTypeName name="javax.websocket.Session"/>
-<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="com.internousdev.template.dao.UserCreateCompleteDAO"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.internousdev.template.util.DateUtil"/>
 <fullyQualifiedTypeName name="com.internousdev.template.dao.BuyItemCompleteDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.template.util.DBConnector"/>
@@ -47,14 +40,21 @@
 <fullyQualifiedTypeName name="com.internousdev.template.dto.MyPageDTO"/>
 <fullyQualifiedTypeName name="com.internousdev.template.dao.MyPageDAO"/>
 <fullyQualifiedTypeName name="java.sql.DriverManager"/>
-<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="com.sun.org.apache.regexp.internal.recompile"/>
+<fullyQualifiedTypeName name="com.opensymphony.xwork2.ActionChainResult"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.internousdev.ecsite.dao.BuyItemDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.ecsite.util.DateUtil"/>
 <fullyQualifiedTypeName name="com.internousdev.ecsite.util.DBConnector"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-<fullyQualifiedTypeName name="com.sun.org.apache.regexp.internal.recompile"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="com.internousdev.ecsite.dao.MyPageDAO"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="com.internousdev.ecsite.dao.BuyItemDAO"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="com.opensymphony.xwork2.ActionSupport"/>
 <fullyQualifiedTypeName name="org.apache.struts2.interceptor.SessionAware"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
