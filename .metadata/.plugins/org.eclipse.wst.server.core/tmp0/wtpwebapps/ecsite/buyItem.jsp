@@ -110,6 +110,7 @@
 			</table>
 			</s:form>
 				<div>
+					<p>管理者画面は<a href='<s:url action="CreateAction"/>'>こちら</a></p>
 					<p>前画面に戻る場合は<a href='<s:url action="GoHomeAction"/>'>こちら</a></p>
 					<p>マイページは<a href='<s:url action="MyPageAction"/>'>こちら</a></p>
 				</div>

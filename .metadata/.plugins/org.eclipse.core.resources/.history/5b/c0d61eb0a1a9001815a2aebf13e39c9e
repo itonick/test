@@ -1,0 +1,76 @@
+package com.internousdev.ecsite.action;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ecsite.dao.ItemDetailDAO;
+import com.internousdev.ecsite.dto.ItemDetailDTO;
+import com.opensymphony.xwork2.ActionSupport;
+
+
+public class ItemDetailAction extends ActionSupport implements SessionAware{
+	public Map<String,Object> session;
+	private ItemDetailDAO itemDetailDAO=new ItemDetailDAO();
+	private ArrayList<ItemDetailDTO> itemDetail=new ArrayList<ItemDetailDTO>();
+	private String detailFlg;
+	private String message;
+
+	public String execute() throws SQLException{
+		String result;
+		if(!session.containsKey("id")){
+			result= ERROR;
+		}
+
+		if(detailFlg==null){
+
+			itemDetail=itemDetailDAO.getItemInfo();
+		}
+
+		result=SUCCESS;
+		return result;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public ItemDetailDAO getItemDetailDAO() {
+		return itemDetailDAO;
+	}
+
+	public void setItemDetailDAO(ItemDetailDAO itemDetailDAO) {
+		this.itemDetailDAO = itemDetailDAO;
+	}
+
+	public ArrayList<ItemDetailDTO> getItemDetail() {
+		return itemDetail;
+	}
+
+	public void setItemDetail(ArrayList<ItemDetailDTO> itemDetail) {
+		this.itemDetail = itemDetail;
+	}
+
+	public String getDetailFlg() {
+		return detailFlg;
+	}
+
+	public void setDetailFlg(String detailFlg) {
+		this.detailFlg = detailFlg;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+}

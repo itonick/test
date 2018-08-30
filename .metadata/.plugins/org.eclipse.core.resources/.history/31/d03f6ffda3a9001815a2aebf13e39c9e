@@ -1,0 +1,55 @@
+package com.internousdev.ecsite.action;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ecsite.dao.ItemDetailDAO;
+import com.internousdev.ecsite.dto.ItemDetailDTO;
+import com.opensymphony.xwork2.ActionSupport;
+
+
+public class ItemDetailAction extends ActionSupport implements SessionAware{
+	private List<ItemDetailDTO> itemDetailList = new ArrayList<ItemDetailDTO>();
+	private Map<String, Object> session;
+	public String execute() {
+		String result = ERROR;
+		ItemDetailDAO itemDetailDAO = new ItemDetailDAO();
+		ItemDetailDTO itemDetailDTO = new ItemDetailDTO();
+		itemDetailDTO = itemDetailDAO.getItemInfo();
+		session.put("id", itemDetailDTO.getId());
+		session.put("itemName", itemDetailDTO.getItemName());
+		session.put("itemPrice", itemDetailDTO.getItemPrice());
+		session.put("itemStock", itemDetailDTO.getItemStock());
+		session.put("insert_date", itemDetailDTO.getInsert_date());
+		List<Integer> productCountList = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+		session.put("productCountList", productCountList);
+		if(!(iterator.hasNext())) {
+			productCountList = null;
+		}
+		if(!itemDetailList.isEmpty() || productCountList==null) {
+			session.put("productInfoDtoList", itemDetailList);
+			result = SUCCESS;
+		}
+		return result;
+	}
+	public List<ItemDetailDTO> getItemDetailList() {
+		return itemDetailList;
+	}
+	public void setItemDetailList(List<ItemDetailDTO> itemDetailList) {
+		this.itemDetailList = itemDetailList;
+	}
+	public Map<String, Object> getSession() {
+		return session;
+	}
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+
+
+}

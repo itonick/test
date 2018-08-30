@@ -1,0 +1,47 @@
+package com.internousdev.ecsite.action;
+
+import java.util.Map;
+
+import com.internousdev.ecsite.dao.UserDetailDAO;
+import com.internousdev.ecsite.dto.UserDetailDTO;
+
+public class UserDetailAction {
+	private Map<String, Object> session;
+	private String id;
+	public String execute() {
+		System.out.println(id);
+		String result = ERROR;
+		UserDetailDAO userDetailDAO = new UserDetailDAO();
+		UserDetailDTO userDetailDTO = new UserDetailDTO();
+		userDetailDTO = userDetailDAO.getUserInfoList(id);
+
+		System.out.println(userDetailDTO.getId());
+		System.out.println(userDetailDTO.getLoginName());
+		System.out.println(userDetailDTO.getLoginPassword());
+		System.out.println(userDetailDTO.getInsert_date());
+
+
+		if(userDetailDTO!=null) {
+			result = SUCCESS;
+		}
+		return result;
+
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+
+}

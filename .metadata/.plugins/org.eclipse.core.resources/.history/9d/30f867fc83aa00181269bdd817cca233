@@ -1,0 +1,42 @@
+package com.internousdev.ecsite.dto;
+
+
+public class UserDetailDTO {
+	public int id;
+	public String login_name;
+	public String login_assword;
+	public String user_name;
+	public String insert_date;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getLogin_name() {
+		return login_name;
+	}
+	public void setLogin_name(String login_name) {
+		this.login_name = login_name;
+	}
+	public String getLogin_assword() {
+		return login_assword;
+	}
+	public void setLogin_assword(String login_assword) {
+		this.login_assword = login_assword;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getInsert_date() {
+		return insert_date;
+	}
+	public void setInsert_date(String insert_date) {
+		this.insert_date = insert_date;
+	}
+
+
+}

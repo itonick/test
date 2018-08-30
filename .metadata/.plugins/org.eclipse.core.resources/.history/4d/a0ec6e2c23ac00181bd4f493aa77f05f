@@ -1,0 +1,32 @@
+package com.internousdev.ecsite.action;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ecsite.dao.ItemDeleteConfirmDAO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class ItemDeleteConfirmAction extends ActionSupport implements SessionAware{
+
+	public Map<String,Object> session;
+	private ItemDeleteConfirmDAO itemDeleteConfirmDAO=new ItemDeleteConfirmDAO();
+	public String result;
+	public String execute() throws SQLException{
+		ItemDeleteConfirmDAO.ItemDelete(
+				session.get("id").toString(),
+				session.get("item_name").toString(),
+				session.get("item_price").toString(),
+				session.get("item_stock").toString(),
+
+		result="SUCCESS");
+		return result;
+	}
+
+	@Override
+	public void setSession(Map<String,Object> session){
+		this.session=session;
+	}
+
+}
