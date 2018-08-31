@@ -1,0 +1,13 @@
+package com.internousdev.ecsite.dao;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class ItemDeleteConfirmDAO extends ActionSupport{
+	public String execute(){
+		String result=SUCCESS;
+		return result;
+
+	}
+
+
+}
