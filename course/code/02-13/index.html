@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo｜やることリスト</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main class="app">
+
+    <header class="app-header">
+      <h1>やること</h1>
+      <button type="button" id="themeToggle" class="icon-btn" aria-pressed="false">
+        <span aria-hidden="true">☾</span>
+        <span class="visually-hidden">ダークモードに切り替え</span>
+      </button>
+    </header>
+
+    <!-- 追加フォーム -->
+    <form id="addForm" class="add-form" autocomplete="off">
+      <label for="newTodo" class="visually-hidden">新しいタスク</label>
+      <input type="text" id="newTodo" name="text"
+             placeholder="やることを入力して Enter" maxlength="120">
+      <button type="submit" class="btn-primary">追加</button>
+    </form>
+    <p class="form-error" id="formError" role="alert"></p>
+
+    <!-- 絞り込み -->
+    <div class="toolbar">
+      <div class="filters" role="group" aria-label="表示の絞り込み">
+        <button type="button" class="chip is-active" data-filter="all"    aria-pressed="true">すべて</button>
+        <button type="button" class="chip"           data-filter="active" aria-pressed="false">未完了</button>
+        <button type="button" class="chip"           data-filter="done"   aria-pressed="false">完了</button>
+      </div>
+      <button type="button" class="link-btn" id="clearDone">完了を削除</button>
+    </div>
+
+    <!-- リスト -->
+    <ul class="todo-list" id="todoList"></ul>
+
+    <!-- 空の状態 -->
+    <p class="empty" id="emptyState" hidden></p>
+
+    <!-- 集計 -->
+    <footer class="app-footer">
+      <p id="counter" aria-live="polite"></p>
+      <p class="storage-warning" id="storageWarning" hidden>
+        このブラウザではデータを保存できません。リロードすると消えます。
+      </p>
+    </footer>
+
+  </main>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
