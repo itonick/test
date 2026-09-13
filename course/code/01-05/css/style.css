@@ -1,0 +1,124 @@
+/* ==========================================================
+   KOMOREBI COFFEE — レッスン1-5 時点のスタイル
+   ========================================================== */
+
+/* ==========================================================
+   1. リセット・基本設定
+   ========================================================== */
+
+/* すべての要素で、width に padding と border を含める */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ブラウザ標準の余白を消す */
+body,
+h1, h2, h3, p,
+ul, ol, li,
+figure, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* リストの点・番号を消す */
+ul, ol {
+  list-style: none;
+}
+
+/* 画像をブロック要素にして、はみ出しを防ぐ */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* リンクの下線を消し、色を継承させる */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* フォーム部品にフォントを継承させる（初期状態では継承されない） */
+input, textarea, select, button {
+  font: inherit;
+  color: inherit;
+}
+
+
+/* ==========================================================
+   2. カラーとフォントの定義（カスタムプロパティ）
+   ========================================================== */
+
+:root {
+  --color-text: #2b2723;
+  --color-text-light: #6b6259;
+  --color-bg: #fdfcfa;
+  --color-accent: #8a5a3b;
+  --color-border: #e6e0d8;
+
+  --font-base: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  --font-en: "Helvetica Neue", Arial, sans-serif;
+}
+
+
+/* ==========================================================
+   3. ベーススタイル
+   ========================================================== */
+
+body {
+  font-family: var(--font-base);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+h1, h2, h3 {
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+h1 { font-size: 32px; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+
+p {
+  color: var(--color-text-light);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   4. 個別パーツ（演習1の解答例）
+   ========================================================== */
+
+.logo {
+  font-family: var(--font-en);
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--color-text);
+}
+
+.global-nav a {
+  font-size: 14px;
+}
+
+.price {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.site-footer {
+  font-size: 13px;
+  text-align: center;
+}
