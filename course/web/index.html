@@ -1,0 +1,813 @@
+<title>AIと一緒につくるWebアプリ開発入門</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --paper:#FAF9F5;
+  --surface:#FFFFFF;
+  --sunk:#F2F0EA;
+  --ink:#1B1D23;
+  --ink-2:#5B6068;
+  --ink-3:#8A8F97;
+  --rule:#E2DFD6;
+  --rule-soft:#EDEAE2;
+  --grid:rgba(27,29,35,.045);
+  --shu:#BE4126;
+  --shu-soft:#FBEDE9;
+  --ai:#0E6F68;
+  --ai-soft:#E7F2F1;
+  --ok:#3F7A3A;
+  --shadow:0 1px 2px rgba(27,29,35,.05), 0 8px 24px -16px rgba(27,29,35,.25);
+  --maxw:1240px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131519;
+    --surface:#1A1D22;
+    --sunk:#0F1114;
+    --ink:#E8E5DE;
+    --ink-2:#A0A6AF;
+    --ink-3:#767C86;
+    --rule:#2C3037;
+    --rule-soft:#23272D;
+    --grid:rgba(232,229,222,.045);
+    --shu:#E77B62;
+    --shu-soft:#2B1D19;
+    --ai:#4FBFB2;
+    --ai-soft:#122A29;
+    --ok:#7FB878;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131519;
+  --surface:#1A1D22;
+  --sunk:#0F1114;
+  --ink:#E8E5DE;
+  --ink-2:#A0A6AF;
+  --ink-3:#767C86;
+  --rule:#2C3037;
+  --rule-soft:#23272D;
+  --grid:rgba(232,229,222,.045);
+  --shu:#E77B62;
+  --shu-soft:#2B1D19;
+  --ai:#4FBFB2;
+  --ai-soft:#122A29;
+  --ok:#7FB878;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:28px 28px;
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:15.5px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,h4{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:800;line-height:1.35;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* ---------- shell ---------- */
+.shell{max-width:var(--maxw);margin:0 auto;padding-inline:20px;padding-block:0 80px}
+.layout{display:grid;grid-template-columns:236px minmax(0,1fr);gap:56px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--rule);margin-bottom:44px}
+.masthead-in{max-width:var(--maxw);margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.wordmark{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:15px;letter-spacing:.02em}
+.wordmark span{color:var(--shu)}
+.mast-spacer{flex:1}
+.mast-note{font-size:11.5px;color:var(--ink-3);letter-spacing:.08em}
+.themetoggle{background:none;border:1px solid var(--rule);color:var(--ink-2);border-radius:999px;padding:4px 12px;font:inherit;font-size:11.5px;cursor:pointer;font-family:"JetBrains Mono",monospace}
+.themetoggle:hover{border-color:var(--ink-3);color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{padding:8px 0 52px;border-bottom:1px solid var(--rule);margin-bottom:44px}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--shu);text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(30px,5.4vw,54px);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--shu)}
+.lede{margin-top:22px;max-width:36em;color:var(--ink-2);font-size:16px}
+.figures{display:flex;flex-wrap:wrap;gap:0;margin-top:36px;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--surface)}
+.fig{flex:1 1 132px;padding:16px 18px;border-right:1px solid var(--rule-soft)}
+.fig:last-child{border-right:0}
+.fig b{display:block;font-family:"JetBrains Mono",monospace;font-size:24px;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums}
+.fig small{display:block;font-size:11.5px;color:var(--ink-3);letter-spacing:.06em;margin-top:4px}
+
+/* ---------- sidebar ---------- */
+.side{position:sticky;top:20px}
+@media (max-width:900px){.side{position:static;margin-bottom:40px}}
+.side nav{display:flex;flex-direction:column;gap:1px;border-left:2px solid var(--rule);padding-left:0}
+.side nav a{
+  display:block;padding:7px 0 7px 14px;margin-left:-2px;border-left:2px solid transparent;
+  text-decoration:none;color:var(--ink-2);font-size:13.5px;line-height:1.4;
+}
+.side nav a:hover{color:var(--ink)}
+.side nav a.on{color:var(--ink);border-left-color:var(--shu);font-weight:700}
+.side nav a i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-3);margin-right:8px}
+
+.progress-card{margin-top:26px;border:1px solid var(--rule);background:var(--surface);border-radius:3px;padding:16px;display:flex;gap:14px;align-items:center}
+.ring{flex:0 0 auto}
+.ring circle{fill:none;stroke-width:6}
+.ring .bg{stroke:var(--rule)}
+.ring .fg{stroke:var(--shu);stroke-linecap:round;transition:stroke-dashoffset .45s ease}
+.progress-card b{display:block;font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:600;line-height:1.3}
+.progress-card small{display:block;font-size:11.5px;color:var(--ink-3);line-height:1.5}
+.reset{background:none;border:0;padding:0;margin-top:3px;font:inherit;font-size:11px;color:var(--ink-3);text-decoration:underline;cursor:pointer}
+.reset:hover{color:var(--shu)}
+
+/* ---------- sections ---------- */
+section{scroll-margin-top:24px;margin-bottom:76px}
+.sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:30px}
+.sec-head .n{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--shu);letter-spacing:.14em;flex:0 0 auto}
+.sec-head h2{font-size:clamp(21px,3vw,28px)}
+.sec-intro{max-width:40em;color:var(--ink-2);margin-bottom:28px}
+
+/* ---------- failure grid ---------- */
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.why > div{background:var(--surface);padding:20px 22px}
+.why h3{font-size:16px;margin-bottom:8px}
+.why .cause{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--shu);margin-bottom:10px}
+.why p{font-size:13.5px;color:var(--ink-2);line-height:1.8}
+
+/* ---------- curriculum ---------- */
+.part{border:1px solid var(--rule);border-radius:3px;background:var(--surface);margin-bottom:12px;overflow:hidden}
+.part-head{display:flex;align-items:center;gap:14px;width:100%;background:none;border:0;padding:15px 18px;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.part-head:hover{background:var(--sunk)}
+.part-no{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--shu);letter-spacing:.1em;flex:0 0 auto}
+.part-title{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:16px;flex:1 1 auto;min-width:0}
+.part-meta{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);flex:0 0 auto;font-variant-numeric:tabular-nums}
+.chev{flex:0 0 auto;color:var(--ink-3);transition:transform .2s}
+.part.open .chev{transform:rotate(90deg)}
+.lessons{border-top:1px solid var(--rule-soft)}
+.lesson{display:flex;align-items:flex-start;gap:12px;padding:9px 18px;border-bottom:1px solid var(--rule-soft);font-size:13.5px;line-height:1.6}
+.lesson:last-child{border-bottom:0}
+.lesson:hover{background:var(--sunk)}
+.lesson input{margin:5px 0 0;accent-color:var(--shu);width:15px;height:15px;flex:0 0 auto;cursor:pointer}
+.lesson label{flex:1 1 auto;cursor:pointer;min-width:0}
+.lesson .id{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);margin-right:10px}
+.lesson.done label{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--rule)}
+.lesson .tags{display:flex;gap:6px;flex:0 0 auto;align-items:center;padding-top:2px}
+.chip{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;padding:1px 7px;border-radius:2px;white-space:nowrap}
+.chip.ai{background:var(--ai-soft);color:var(--ai)}
+.chip.build{background:var(--shu-soft);color:var(--shu)}
+.chip.h{border:1px solid var(--rule);color:var(--ink-3)}
+
+/* ---------- sample lesson ---------- */
+.lesson-sheet{border:1px solid var(--rule);border-radius:3px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.sheet-top{padding:26px 30px 22px;border-bottom:1px solid var(--rule)}
+@media (max-width:560px){.sheet-top{padding:22px 18px}}
+.sheet-top .id{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--shu)}
+.sheet-top h3{font-size:clamp(20px,3.4vw,26px);margin-top:8px}
+.goal{margin-top:18px;border-left:3px solid var(--ink);padding-left:16px}
+.goal b{font-size:12.5px;letter-spacing:.06em;display:block;margin-bottom:4px}
+.goal ul{margin:0;padding-left:1.2em;font-size:13.5px;color:var(--ink-2)}
+.sheet-body{padding:26px 30px 30px}
+@media (max-width:560px){.sheet-body{padding:22px 18px}}
+.sheet-body h4{font-size:16px;margin:30px 0 12px}
+.sheet-body h4:first-child{margin-top:0}
+.sheet-body p{margin:0 0 14px;max-width:40em}
+.sheet-body ul,.sheet-body ol{margin:0 0 16px;padding-left:1.4em;color:var(--ink-2);max-width:40em}
+.sheet-body li{margin-bottom:5px}
+
+.callout{border-radius:3px;padding:14px 18px;margin:0 0 18px;font-size:13.5px;line-height:1.8}
+.callout b{display:block;font-size:12.5px;letter-spacing:.05em;margin-bottom:5px}
+.callout.warn{background:var(--shu-soft);border-left:3px solid var(--shu)}
+.callout.warn b{color:var(--shu)}
+.callout.ai{background:var(--ai-soft);border-left:3px solid var(--ai)}
+.callout.ai b{color:var(--ai)}
+.callout p{margin:0 0 8px;max-width:none}
+.callout p:last-child{margin:0}
+
+.steps{list-style:none;padding:0;margin:0 0 20px;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:14px;max-width:40em}
+.steps li::before{
+  content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;
+  border:1px solid var(--rule);display:grid;place-items:center;
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--shu);background:var(--surface)
+}
+.steps b{display:block;font-size:14px}
+.steps span{font-size:13px;color:var(--ink-2)}
+
+pre{
+  background:var(--sunk);border:1px solid var(--rule-soft);border-radius:3px;
+  padding:14px 16px;overflow-x:auto;margin:0 0 16px;
+  font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;color:var(--ink);
+  white-space:pre-wrap;word-break:break-word;
+}
+pre.code{white-space:pre;word-break:normal}
+
+.tblwrap{overflow-x:auto;margin:0 0 18px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--surface)}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-size:11px;letter-spacing:.1em;color:var(--ink-3);font-weight:500;background:var(--sunk);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--sunk);padding:1px 5px;border-radius:2px}
+
+/* ---------- error book ---------- */
+.search{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.search input{
+  flex:1 1 260px;min-width:0;font:inherit;font-size:14px;padding:9px 14px;
+  background:var(--surface);border:1px solid var(--rule);border-radius:3px;color:var(--ink);
+}
+.search input:focus{outline:2px solid var(--shu);outline-offset:1px;border-color:transparent}
+.search .count{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);flex:0 0 auto}
+.errs{display:flex;flex-direction:column;gap:8px}
+.err{border:1px solid var(--rule);border-radius:3px;background:var(--surface);padding:14px 18px}
+.err .msg{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--shu);word-break:break-word;line-height:1.6}
+.err .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:1px 6px;margin-left:8px;white-space:nowrap}
+.err .fix{font-size:13.5px;color:var(--ink-2);margin-top:7px;line-height:1.75}
+.err .fix em{font-style:normal;color:var(--ink);font-weight:500}
+.empty{padding:26px;text-align:center;color:var(--ink-3);font-size:13.5px;border:1px dashed var(--rule);border-radius:3px}
+
+/* ---------- prompts ---------- */
+.prompts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.prompt{border:1px solid var(--rule);border-radius:3px;background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+.prompt header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--rule-soft)}
+.prompt header h3{font-size:14px;flex:1 1 auto;min-width:0}
+.prompt header .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ai);letter-spacing:.1em;flex:0 0 auto}
+.prompt pre{margin:0;border:0;border-radius:0;flex:1 1 auto;background:transparent;font-size:12px;line-height:1.7;color:var(--ink-2)}
+.prompt footer{padding:10px 16px;border-top:1px solid var(--rule-soft);background:var(--sunk)}
+.copy{font:inherit;font-family:"JetBrains Mono",monospace;font-size:11.5px;background:var(--surface);border:1px solid var(--rule);color:var(--ink-2);border-radius:2px;padding:4px 12px;cursor:pointer}
+.copy:hover{border-color:var(--shu);color:var(--shu)}
+.copy.done{border-color:var(--ok);color:var(--ok)}
+
+/* ---------- closing ---------- */
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.files > div{background:var(--surface);padding:16px 18px}
+.files .path{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--shu);margin-bottom:5px;word-break:break-all}
+.files p{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+
+footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3);font-size:12px;line-height:1.9}
+
+:focus-visible{outline:2px solid var(--shu);outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <span class="wordmark">AIと一緒につくる<span>／</span>Webアプリ開発入門</span>
+    <span class="mast-spacer"></span>
+    <span class="mast-note mono">第0部 全文公開</span>
+    <button class="themetoggle" id="tt" type="button">☾ / ☀</button>
+  </div>
+</header>
+
+<div class="shell">
+
+  <div class="hero">
+    <div class="eyebrow mono">for absolute beginners ／ ai-native</div>
+    <h1>AIに書かせるな。<br><em>AIを疑え。</em></h1>
+    <p class="lede">
+      HTML から Laravel まで、180時間で「一人で作りきる力」を身につける全7部の教材です。
+      この教材の主役は文法ではなく、<strong>詰まったときに自力で抜け出す手順</strong>と、
+      <strong>AIの答えが正しいかを自分で判断する技術</strong>です。
+    </p>
+    <div class="figures">
+      <div class="fig"><b>7</b><small class="mono">部 / PARTS</small></div>
+      <div class="fig"><b>62</b><small class="mono">レッスン</small></div>
+      <div class="fig"><b>180<span style="font-size:15px">h</span></b><small class="mono">総学習時間</small></div>
+      <div class="fig"><b>9</b><small class="mono">AI専用レッスン</small></div>
+      <div class="fig"><b>5</b><small class="mono">ポートフォリオ成果物</small></div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <aside class="side">
+      <nav id="toc">
+        <a href="#why" class="on"><i>01</i>なぜ挫折するのか</a>
+        <a href="#map"><i>02</i>カリキュラム</a>
+        <a href="#sample"><i>03</i>サンプルレッスン</a>
+        <a href="#errors"><i>04</i>エラー図鑑</a>
+        <a href="#prompts"><i>05</i>AIプロンプト集</a>
+        <a href="#files"><i>06</i>教材の構成</a>
+      </nav>
+      <div class="progress-card">
+        <svg class="ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true">
+          <circle class="bg" cx="26" cy="26" r="22"></circle>
+          <circle class="fg" id="ring" cx="26" cy="26" r="22" transform="rotate(-90 26 26)"
+                  stroke-dasharray="138.2" stroke-dashoffset="138.2"></circle>
+        </svg>
+        <div>
+          <b id="pcount">0 / 62</b>
+          <small>レッスン完了</small>
+          <button class="reset" id="reset" type="button">進捗をリセット</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+
+      <!-- 01 ---------------------------------------------------------- -->
+      <section id="why">
+        <div class="sec-head"><span class="n mono">01</span><h2>なぜ挫折するのか</h2></div>
+        <p class="sec-intro">
+          プログラミング学習が続かない理由は、才能でも意志でもありません。原因は驚くほど決まっていて、
+          そのすべてが教材の設計で潰せます。この教材は、この4つを潰すためだけに構成されています。
+        </p>
+        <div class="why">
+          <div>
+            <div class="cause mono">CAUSE 01</div>
+            <h3>環境構築で詰む</h3>
+            <p>「書いてある通りにやったのに動かない」。OSも既存ソフトも人によって違うのだから当然です。<strong>うまくいかなかったときの分岐まで</strong>全部書きます。ポート衝突の犯人3種、その特定手順まで。</p>
+          </div>
+          <div>
+            <div class="cause mono">CAUSE 02</div>
+            <h3>エラーが読めず止まる</h3>
+            <p>英語のエラーは、3か所だけ拾えば読めます。全レッスンに「つまずきポイント」を置き、巻末には<strong>症状から逆引きできるエラー図鑑</strong>を用意しました。</p>
+          </div>
+          <div>
+            <div class="cause mono">CAUSE 03</div>
+            <h3>写経しても身につかない</h3>
+            <p>読む → 打つ → <strong>AIに説明させる</strong> → 自分で変える。この4ステップを毎回踏みます。3番目が理解の穴を可視化し、4番目が応用力になります。</p>
+          </div>
+          <div>
+            <div class="cause mono">CAUSE 04</div>
+            <h3>AIに丸投げして詰む</h3>
+            <p>動くコードは手に入っても、実力は残りません。AI活用を<strong>独立した学習項目</strong>として扱い、聞き方・検証の仕方・任せてはいけない範囲まで教えます。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 ---------------------------------------------------------- -->
+      <section id="map">
+        <div class="sec-head"><span class="n mono">02</span><h2>カリキュラム</h2></div>
+        <p class="sec-intro">
+          部をクリックすると全レッスンが開きます。チェックを付けると、このブラウザに進捗が保存されます。
+          <span class="chip ai mono">AI</span> はAI活用が主題の回、<span class="chip build mono">成果物</span> は手元に動くものが残る回です。
+        </p>
+        <div id="parts"></div>
+      </section>
+
+      <!-- 03 ---------------------------------------------------------- -->
+      <section id="sample">
+        <div class="sec-head"><span class="n mono">03</span><h2>サンプルレッスン</h2></div>
+        <p class="sec-intro">
+          第0部の最終レッスンを、実際の形式のまま掲載します。全62レッスンがこの構成です。
+        </p>
+
+        <article class="lesson-sheet">
+          <div class="sheet-top">
+            <div class="id mono">LESSON 0-7 ／ 60分 ／ 難度 ふつう</div>
+            <h3>AIの答えを疑う技術 — 検証編</h3>
+            <div class="goal">
+              <b>このレッスンのゴール</b>
+              <ul>
+                <li>AIの回答が信用できるかを、初学者でも判定できるようになる</li>
+                <li>5段階の検証手順を身につける</li>
+                <li>AIに任せてはいけない領域を線引きできる</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sheet-body">
+            <h4>この技術が、あなたの市場価値になる</h4>
+            <p>いま「AIにコードを書かせられる人」は珍しくありません。誰でもできます。希少なのは、<strong>AIが出したコードの正しさを判断できる人</strong>です。</p>
+            <p>現場では、AIが出したコードをそのまま入れてSQLインジェクションの穴が空いた、提案されたライブラリが3年前に開発終了していた、といった事故が実際に起きています。これらを<strong>リリース前に止められる人</strong>が、いま最も評価されています。</p>
+
+            <h4>AIが間違える5つのパターン</h4>
+            <div class="tblwrap">
+              <table>
+                <thead><tr><th>パターン</th><th>具体例</th><th>見抜き方</th></tr></thead>
+                <tbody>
+                  <tr><td>存在しないものを作る</td><td>PHPに <code>str_reverse()</code> はない（正しくは <code>strrev()</code>）</td><td>公式ドキュメントで検索する</td></tr>
+                  <tr><td>情報が古い</td><td>PHP 7.0 で削除された <code>mysql_query()</code> を提示する</td><td>「非推奨になっていませんか」と追加で聞く</td></tr>
+                  <tr><td>バージョンがずれる</td><td>Laravel 11 の質問に 8 の書き方で答える</td><td>質問時に必ずバージョンを書く</td></tr>
+                  <tr><td>質問を誤解する</td><td>ズレた問いに、完成度の高い答えを返す</td><td>「私の質問をどう理解したか要約して」</td></tr>
+                  <tr><td>動くが、まずい</td><td>SQLインジェクションやXSSを含んだまま動作する</td><td>別会話でセキュリティレビューをかける</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout warn">
+              <b>⚠ つまずきポイント</b>
+              <p>5番目が最も危険です。<strong>動いてしまうので、初学者には問題が見えません。</strong>「動いた＝正しい」は、この教材で最初に捨てる思い込みです。</p>
+            </div>
+
+            <h4>検証の5ステップ</h4>
+            <ol class="steps">
+              <li><b>自分の言葉で説明できるか？</b><span>できないコードは使わない。「この行がないとどうなりますか」と聞き返す。</span></li>
+              <li><b>その関数は実在するか？</b><span>php.net / MDN で検索する。ページが無ければ、その関数は存在しない。</span></li>
+              <li><b>動かして、期待通りか？</b><span>正常系だけでなく、空・特殊文字・0・極端に長い入力も試す。</span></li>
+              <li><b>セキュリティ上の問題はないか？</b><span>新しい会話でレビューさせる。同じ会話だと自分の出力を庇う傾向がある。</span></li>
+              <li><b>もっと簡単な方法はないか？</b><span>AIは複雑な解を出しがち。「もっと簡単に」と聞き返す。</span></li>
+            </ol>
+
+            <div class="callout ai">
+              <b>🤖 AIに聞いてみよう ─ セキュリティレビュー</b>
+              <p>自分で書いたコードにも、AIに書かせたコードにも、必ずこれをかけます。</p>
+              <pre>以下のコードを、セキュリティの観点からレビューしてください。
+Webアプリケーションで、一般ユーザーからの入力を扱うコードです。
+
+（コードを貼る）
+
+次の観点で、問題があれば具体的に指摘してください。
+- SQLインジェクション  - XSS  - CSRF
+- ファイルアップロードの脆弱性
+- 認証・認可の不備   - 機密情報のハードコーディング
+
+それぞれ、なぜ危険か・攻撃されると何が起きるかも説明してください。
+問題がない場合は「問題なし」と明言してください。</pre>
+            </div>
+
+            <h4>任せてよい領域 / いけない領域</h4>
+            <div class="tblwrap">
+              <table>
+                <thead><tr><th>判断</th><th>領域</th></tr></thead>
+                <tbody>
+                  <tr><td><strong style="color:var(--ok)">任せてよい</strong></td><td>概念の説明、エラー文の翻訳、定型コードの雛形、命名のアイデア、自分のコードのレビュー、練習問題の作成</td></tr>
+                  <tr><td><strong style="color:var(--ink-2)">検証すれば可</strong></td><td>実装コード、SQL文、正規表現、ライブラリ選定、パフォーマンス改善の提案</td></tr>
+                  <tr><td><strong style="color:var(--shu)">任せてはいけない</strong></td><td>「何を作るか」の意思決定、セキュリティの最終判断、個人情報・APIキー・パスワードを含むコードの貼り付け、業務データの投入</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>やってみよう ─ AIの嘘を見つける</h4>
+            <p>AIに頼らず、自力でやってください。ここが実力になる部分です。</p>
+            <pre>PHPで、文字列を逆順にする関数を教えてください。
+また、配列の要素をランダムに並べ替える関数も教えてください。
+それぞれ、コード例も示してください。</pre>
+            <p>返ってきた関数名を、<strong>すべて php.net で確認</strong>してください。正しく答えた場合も、引数の順番と戻り値まで公式で確認します。AIは名前は合っていても<strong>引数の順番を間違える</strong>ことがあります。</p>
+
+            <div class="callout warn">
+              <b>⚠ 追加演習 ─ この4行には脆弱性が2つある</b>
+              <pre class="code">$name = $_GET['name'];
+$conn = new mysqli("localhost", "root", "", "testdb");
+$result = $conn-&gt;query("SELECT * FROM users WHERE name = '$name'");
+echo "こんにちは、" . $name . "さん";</pre>
+              <p>上のプロンプトでAIにレビューさせてください。SQLインジェクションとXSSの両方を指摘できましたか？ 指摘できなかったAIの答えは、鵜呑みにできないということです。</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 04 ---------------------------------------------------------- -->
+      <section id="errors">
+        <div class="sec-head"><span class="n mono">04</span><h2>エラー図鑑</h2></div>
+        <p class="sec-intro">
+          巻末資料からの抜粋です。エラーメッセージの一部を貼り付けて検索してください。
+          <strong>エラーは敵ではありません。</strong>どこが問題かを教えてくれる通知です。最悪なのは、エラーも出ずに間違った結果が出ることです。
+        </p>
+        <div class="search">
+          <input id="q" type="search" placeholder="例: Cannot read properties of null / 真っ白 / 文字化け" aria-label="エラーを検索">
+          <span class="count mono" id="qcount"></span>
+        </div>
+        <div class="errs" id="errs"></div>
+        <div class="empty" id="qempty" hidden>該当なし。エラーメッセージの一部だけで検索してみてください。</div>
+      </section>
+
+      <!-- 05 ---------------------------------------------------------- -->
+      <section id="prompts">
+        <div class="sec-head"><span class="n mono">05</span><h2>AIプロンプト集</h2></div>
+        <p class="sec-intro">
+          そのまま使えるテンプレートです。どれにも<strong>学習効果を守るための一文</strong>が入っています。
+          「修正コードは出さないで」「答えは教えないで」——この指示があるかないかで、AIは教師にも代筆屋にもなります。
+        </p>
+        <div class="prompts" id="prompts"></div>
+      </section>
+
+      <!-- 06 ---------------------------------------------------------- -->
+      <section id="files">
+        <div class="sec-head"><span class="n mono">06</span><h2>教材の構成</h2></div>
+        <p class="sec-intro">教材本体は Markdown で提供されます。このページは第0部と巻末資料の公開版です。</p>
+        <div class="files">
+          <div><div class="path mono">README.md</div><p>教材全体の案内と到達点</p></div>
+          <div><div class="path mono">COURSE_MAP.md</div><p>全62レッスンの一覧・所要時間・依存関係</p></div>
+          <div><div class="path mono">00-orientation/</div><p>第0部 全7レッスン。環境構築とAI入門</p></div>
+          <div><div class="path mono">01〜06/</div><p>HTML/CSS・JS・PHP・DB・Laravel・公開</p></div>
+          <div><div class="path mono">appendix/</div><p>エラー図鑑・AIプロンプト集・用語集・チートシート</p></div>
+          <div><div class="path mono">code/</div><p>各レッスンの完成コード</p></div>
+        </div>
+      </section>
+
+      <footer class="page">
+        本教材は購入者個人の学習目的に限り利用できます。無断での再配布・転載・法人研修での二次利用を禁じます。
+        掲載サンプルコードは MIT License 相当の条件で、学習・ポートフォリオ・商用を問わず自由に利用いただけます。<br>
+        進捗チェックはこのブラウザにのみ保存され、外部には送信されません。
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- theme toggle ---------- */
+  var root = document.documentElement;
+  document.getElementById("tt").addEventListener("click", function () {
+    var cur = root.getAttribute("data-theme");
+    if (!cur) {
+      cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+  });
+
+  /* ---------- curriculum data ---------- */
+  var PARTS = [
+    { n: "第0部", t: "オリエンテーション", h: 6, ls: [
+      ["0-1","ようこそ / この教材の使い方",""],
+      ["0-2","挫折しない学び方の設計",""],
+      ["0-3","Webサイトが表示される仕組み",""],
+      ["0-4","開発環境をつくる（Windows / Mac）","build"],
+      ["0-5","VS Code を自分の道具にする","build"],
+      ["0-6","AIを開発の相棒にする — 基本編","ai"],
+      ["0-7","AIの答えを疑う技術 — 検証編","ai"]
+    ]},
+    { n: "第1部", t: "HTML / CSS", h: 25, ls: [
+      ["1-1","HTMLの骨格とタグの考え方","build"],
+      ["1-2","文書構造とセマンティックHTML",""],
+      ["1-3","画像・リンク・リストを扱う",""],
+      ["1-4","フォームの部品をひと通り","build"],
+      ["1-5","CSSの書き方とセレクタ",""],
+      ["1-6","ボックスモデルを完全に理解する",""],
+      ["1-7","文字と色のデザイン基礎",""],
+      ["1-8","Flexbox で横並びを制する","build"],
+      ["1-9","CSS Grid でページ全体を組む",""],
+      ["1-10","レスポンシブ対応とメディアクエリ",""],
+      ["1-11","position と重なり順",""],
+      ["1-12","開発者ツールでCSSをデバッグする",""],
+      ["1-13","AIにデザインカンプを実装させる","ai"],
+      ["1-14","【総合演習】架空カフェのLPを作る","build"]
+    ]},
+    { n: "第2部", t: "JavaScript", h: 30, ls: [
+      ["2-1","JavaScriptを動かす・値と変数",""],
+      ["2-2","条件分岐と繰り返し",""],
+      ["2-3","関数とスコープ",""],
+      ["2-4","配列とオブジェクト",""],
+      ["2-5","配列メソッド（map / filter / reduce）",""],
+      ["2-6","DOM操作で画面を書き換える",""],
+      ["2-7","イベントで「動く」を作る","build"],
+      ["2-8","フォームバリデーション実装",""],
+      ["2-9","エラーの読み方とデバッグ手順",""],
+      ["2-10","非同期処理と fetch でAPIを叩く","build"],
+      ["2-11","localStorage でデータを保存する",""],
+      ["2-12","AIとペアプロする実践フロー","ai"],
+      ["2-13","【総合演習】ToDoアプリを作る","build"]
+    ]},
+    { n: "第3部", t: "PHP", h: 30, ls: [
+      ["3-1","サーバーサイドとは何か / PHPを動かす",""],
+      ["3-2","変数・型・演算子",""],
+      ["3-3","条件分岐・繰り返し・配列",""],
+      ["3-4","関数と組み込み関数の調べ方",""],
+      ["3-5","HTMLとPHPを混ぜて書く",""],
+      ["3-6","GET / POST でデータを受け取る","build"],
+      ["3-7","バリデーションとエスケープ（XSS対策）",""],
+      ["3-8","セッションとクッキー","build"],
+      ["3-9","ファイルアップロードを扱う",""],
+      ["3-10","クラスとオブジェクト指向の入口",""],
+      ["3-11","AIにコードレビューさせる","ai"],
+      ["3-12","【総合演習】掲示板を作る","build"]
+    ]},
+    { n: "第4部", t: "データベースとSQL", h: 20, ls: [
+      ["4-1","データベースが必要な理由",""],
+      ["4-2","MySQL に触れる / phpMyAdmin",""],
+      ["4-3","SELECT で取り出す",""],
+      ["4-4","INSERT / UPDATE / DELETE",""],
+      ["4-5","テーブル設計と正規化の基本","build"],
+      ["4-6","JOIN で複数テーブルをつなぐ",""],
+      ["4-7","PHPからDBを操作する（PDO）",""],
+      ["4-8","SQLインジェクションを防ぐ",""],
+      ["4-9","AIにSQLとテーブル設計を相談する","ai"],
+      ["4-10","【総合演習】掲示板をDB化する","build"]
+    ]},
+    { n: "第5部", t: "Laravel", h: 45, ls: [
+      ["5-1","フレームワークとは / Laravelを入れる",""],
+      ["5-2","ディレクトリ構成とMVC",""],
+      ["5-3","ルーティング",""],
+      ["5-4","コントローラ",""],
+      ["5-5","Bladeテンプレート",""],
+      ["5-6","マイグレーションでテーブルを作る",""],
+      ["5-7","Eloquent ORM の基本",""],
+      ["5-8","リレーション（1対多・多対多）",""],
+      ["5-9","フォームリクエストとバリデーション",""],
+      ["5-10","認証機能（Breeze）","build"],
+      ["5-11","認可（ポリシー）とミドルウェア",""],
+      ["5-12","ファイルアップロードと画像表示",""],
+      ["5-13","ページネーション・検索・並び替え",""],
+      ["5-14","テストを書く（PHPUnit入門）",""],
+      ["5-15","AIにLaravelの設計を相談する","ai"],
+      ["5-16","【総合演習】フリマアプリを作る","build"]
+    ]},
+    { n: "第6部", t: "ポートフォリオ制作と公開", h: 24, ls: [
+      ["6-1","Git / GitHub の基本操作","build"],
+      ["6-2","読まれる README の書き方",""],
+      ["6-3","要件定義と画面設計",""],
+      ["6-4","オリジナルアプリを企画する",""],
+      ["6-5","AIと進める個人開発の進め方","ai"],
+      ["6-6","レンタルサーバーにデプロイする","build"],
+      ["6-7","実務でのAI利用のマナーと注意点","ai"],
+      ["6-8","学習を続けるためのロードマップ",""]
+    ]}
+  ];
+
+  var KEY = "wk-course-progress-v1";
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) { /* private mode */ }
+  }
+
+  var total = PARTS.reduce(function (a, p) { return a + p.ls.length; }, 0);
+  var ringEl = document.getElementById("ring");
+  var CIRC = 2 * Math.PI * 22;
+  ringEl.setAttribute("stroke-dasharray", CIRC.toFixed(1));
+
+  function esc(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function refresh() {
+    var n = 0, k;
+    for (k in done) { if (done[k]) n++; }
+    document.getElementById("pcount").textContent = n + " / " + total;
+    ringEl.setAttribute("stroke-dashoffset", (CIRC * (1 - n / total)).toFixed(1));
+    PARTS.forEach(function (p, i) {
+      var c = p.ls.filter(function (l) { return done[l[0]]; }).length;
+      var m = document.getElementById("pm" + i);
+      if (m) m.textContent = c + "/" + p.ls.length + " ・ " + p.h + "h";
+    });
+  }
+
+  var host = document.getElementById("parts");
+  PARTS.forEach(function (p, i) {
+    var art = document.createElement("div");
+    art.className = "part" + (i === 0 ? " open" : "");
+    var rows = p.ls.map(function (l) {
+      var tag = l[2] === "ai"
+        ? '<span class="chip ai mono">AI</span>'
+        : (l[2] === "build" ? '<span class="chip build mono">成果物</span>' : "");
+      var id = "L" + l[0];
+      return '<div class="lesson' + (done[l[0]] ? " done" : "") + '" data-l="' + l[0] + '">' +
+             '<input type="checkbox" id="' + id + '"' + (done[l[0]] ? " checked" : "") + '>' +
+             '<label for="' + id + '"><span class="id mono">' + l[0] + '</span>' + esc(l[1]) + '</label>' +
+             '<span class="tags">' + tag + '</span></div>';
+    }).join("");
+    art.innerHTML =
+      '<button class="part-head" type="button" aria-expanded="' + (i === 0) + '">' +
+        '<span class="part-no mono">' + p.n + '</span>' +
+        '<span class="part-title">' + esc(p.t) + '</span>' +
+        '<span class="part-meta" id="pm' + i + '"></span>' +
+        '<span class="chev">›</span>' +
+      '</button>' +
+      '<div class="lessons">' + rows + '</div>';
+    var body = art.querySelector(".lessons");
+    body.hidden = i !== 0;
+    art.querySelector(".part-head").addEventListener("click", function () {
+      var open = art.classList.toggle("open");
+      body.hidden = !open;
+      this.setAttribute("aria-expanded", String(open));
+    });
+    host.appendChild(art);
+  });
+
+  host.addEventListener("change", function (e) {
+    var box = e.target;
+    if (box.type !== "checkbox") return;
+    var row = box.closest(".lesson");
+    var id = row.getAttribute("data-l");
+    if (box.checked) { done[id] = 1; } else { delete done[id]; }
+    row.classList.toggle("done", box.checked);
+    save();
+    refresh();
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    done = {};
+    save();
+    Array.prototype.forEach.call(host.querySelectorAll(".lesson"), function (r) {
+      r.classList.remove("done");
+      r.querySelector("input").checked = false;
+    });
+    refresh();
+  });
+
+  refresh();
+
+  /* ---------- error book ---------- */
+  var ERRORS = [
+    ["404 Not Found", "共通", "ファイルが <em>htdocs</em> の外にある／URLのつづり違い（大文字小文字も区別）／拡張子が <em>index.html.txt</em> になっている／ポート番号の付け忘れ。あなたのコードは悪くない。"],
+    ["500 Internal Server Error", "共通", "PHPの文法エラーか <em>.htaccess</em> の記述ミス。<em>php.ini</em> で display_errors = On にして Apache を再起動すると原因が画面に出る。"],
+    ["画面が真っ白（何も出ない）", "共通", "PHPなら文法エラーでエラー表示がOFF。JSなら Console を見る。CSSなら文字色と背景色が同じ。まず開発者ツールを開く。"],
+    ["修正したのに画面が変わらない", "共通", "保存できているか（タブの●）／ブラウザのキャッシュ。<em>Ctrl+Shift+R</em> でスーパーリロード。CSSが変わらない原因の8割はこれ。"],
+    ["CSSがまったく効かない", "CSS", "link のパスが 404 になっていないか Network タブで確認／<em>rel=\"stylesheet\"</em> の書き忘れ／全角スペースの混入／キャッシュ。"],
+    ["CSSが一部だけ効かない", "CSS", "詳細度で負けている。開発者ツールで打ち消し線の付いた指定を探す。<em>!important</em> では解決せず、セレクタを見直すのが正解。"],
+    ["要素が横並びにならない", "CSS", "<em>display:flex</em> は子ではなく親に付ける。子の width が大きすぎて折り返していないかも確認。"],
+    ["スマホで表示が崩れる", "CSS", "head に viewport の meta があるか。固定 width を max-width に変える。"],
+    ["Uncaught TypeError: Cannot read properties of null", "JS", "最頻出。querySelector で要素が取れていない（セレクタ違い）か、script が head にあり HTML より先に実行されている。<em>&lt;/body&gt; 直前</em>に置くか <em>defer</em> を付ける。"],
+    ["Uncaught ReferenceError: xxx is not defined", "JS", "その名前のものが存在しない。スペルミス／定義前に使っている／スコープの外／script の読み込み順。"],
+    ["Uncaught TypeError: xxx is not a function", "JS", "メソッド名のスペルミス（addEventListner など）／型が違う／変数名と関数名の衝突。"],
+    ["クリックしても反応しない", "JS", "addEventListener の第2引数に <em>()</em> を付けていないか。<em>myFunc()</em> ではなく <em>myFunc</em> を渡す。"],
+    ["フォーム送信でページがリロードされる", "JS", "submit イベントの先頭で <em>e.preventDefault()</em> を呼ぶ。"],
+    ["Parse error: syntax error, unexpected", "PHP", "文法ミス。指摘された行の<em>1〜3行前</em>も見る。セミコロン／括弧の閉じ忘れ／全角スペース／全角の記号。"],
+    ["Call to undefined function", "PHP", "関数が存在しない。スペルミスか、AIが作った架空の関数。php.net で実在を確認する。"],
+    ["Warning: Undefined array key", "PHP", "そのキーが無い。<em>$_POST['name'] ?? ''</em> のように null合体演算子で受ける。"],
+    ["Cannot modify header information - headers already sent", "PHP", "header() や session_start() の前に出力がある。<em>&lt;?php より前の空白</em>／末尾の ?&gt; の後の改行／BOM付き保存が原因。末尾の ?&gt; は書かないのが定石。"],
+    ["Allowed memory size exhausted", "PHP", "無限ループの可能性が高い。while の条件／for のカウンタ更新／再帰の終了条件を確認。"],
+    ["PHPのコードがそのまま表示される", "PHP", "ファイルが htdocs の外／拡張子が .php でない／<em>Live Server で開いている</em>。PHPは必ず localhost で開く。"],
+    ["日本語が文字化けする", "PHP", "meta charset があるか／<em>ファイル自体がUTF-8で保存されているか</em>／DBが utf8mb4 か／接続時に charset=utf8mb4 を指定しているか。"],
+    ["Access denied for user 'root'@'localhost'", "SQL", "XAMPP は root / パスワード空。<em>MAMP は root / root</em>。ここで詰まる人が非常に多い。"],
+    ["No such file or directory（Mac）", "SQL", "ホストを <em>127.0.0.1</em> にしてポートを指定する。MAMP の MySQL ポートは 8889。"],
+    ["Duplicate entry for key 'PRIMARY'", "SQL", "主キーまたはユニークキーの重複。同じIDを2回登録しようとしている。"],
+    ["foreign key constraint fails", "SQL", "参照先のレコードが無い。親（参照される側）を先に作成する。"],
+    ["No application encryption key has been specified", "Laravel", "<em>php artisan key:generate</em> を実行する。"],
+    [".env を変更したのに反映されない", "Laravel", "設定がキャッシュされている。<em>php artisan config:clear</em> と <em>cache:clear</em>。.env を触ったら必ず実行する癖をつける。"],
+    ["419 | Page Expired", "Laravel", "CSRFトークンが無い。フォームに <em>@csrf</em> を追加する。"],
+    ["The GET method is not supported for this route", "Laravel", "ルートのHTTPメソッド違い。<em>php artisan route:list</em> で登録済みルートを確認する。"],
+    ["Class ... not found", "Laravel", "use の書き忘れ／クラス名とファイル名の不一致／<em>composer dump-autoload</em>。"],
+    ["Port 80 in use（Apacheが起動しない）", "環境構築", "犯人はほぼ Skype / IIS / VMware。特定できなければ httpd.conf の Listen を <em>8080</em> に変えるのが早い。"],
+    ["Port 3306 in use（MySQLが起動しない）", "環境構築", "以前入れた MySQL サービスが残っている。<em>services.msc</em> から停止し、スタートアップを手動にする。"],
+    ["php / composer: command not found", "環境構築", "PATH が通っていない。追加後は<em>ターミナルを開き直す</em>必要がある。"]
+  ];
+
+  var errHost = document.getElementById("errs");
+  var qEmpty = document.getElementById("qempty");
+  var qCount = document.getElementById("qcount");
+  errHost.innerHTML = ERRORS.map(function (e, i) {
+    return '<div class="err" data-i="' + i + '">' +
+      '<div class="msg">' + esc(e[0]) + '<span class="tag">' + esc(e[1]) + '</span></div>' +
+      '<div class="fix">' + e[2] + '</div></div>';
+  }).join("");
+
+  var errNodes = Array.prototype.slice.call(errHost.children);
+  var haystack = ERRORS.map(function (e) {
+    return (e[0] + " " + e[1] + " " + e[2].replace(/<[^>]+>/g, "")).toLowerCase();
+  });
+
+  function filter() {
+    var q = document.getElementById("q").value.trim().toLowerCase();
+    var shown = 0;
+    errNodes.forEach(function (n, i) {
+      var hit = !q || haystack[i].indexOf(q) !== -1;
+      n.hidden = !hit;
+      if (hit) shown++;
+    });
+    qEmpty.hidden = shown !== 0;
+    qCount.textContent = shown + " 件";
+  }
+  document.getElementById("q").addEventListener("input", filter);
+  filter();
+
+  /* ---------- prompt library ---------- */
+  var PROMPTS = [
+    ["エラーが出た", "DEBUG", "【状況】\n（何をしようとして、何が起きたか）\n\n【環境】\nOS / 実行環境 / ブラウザ\n\n【エラーメッセージ】\n（省略せず、丸ごとコピペ）\n\n【該当コード】\n（ファイル全体を貼る）\n\n【自分で試したこと】\n-\n\n【お願い】\n1. 原因として考えられるものを、可能性の高い順に3つ挙げてください\n2. それぞれについて、原因かどうかを確認する手順を教えてください\n3. すぐに修正コードを出すのではなく、まず私が自分で確認できる手順を示してください"],
+    ["自分のコードをレビューさせる", "REVIEW", "以下は、私が書いたコードです。学習3週目の初学者が書いたものです。\n\n（コードを貼る）\n\n次の観点でレビューしてください。\n1. 動作上のバグ\n2. セキュリティ上の問題（あれば、なぜ危険かも）\n3. 読みやすさ・命名\n4. もっと簡潔に書ける箇所\n\nただし、修正後のコードは提示しないでください。\n「どこを・なぜ直すべきか」だけを指摘してください。私が自分で直します。"],
+    ["理解度をテストさせる", "QUIZ", "私は「（学習した内容）」を学びました。\n\n理解度を確認するため、初学者向けのクイズを5問出してください。\n- 易しい順に\n- 「知識を問う」だけでなく「使えるか」を問う問題を混ぜて\n- 「間違い探し」形式を必ず2問入れて\n- まだ答えは書かないでください\n\n私が回答したら、1問ずつ採点し、間違いは\n「なぜ間違えたか」の思考のズレを指摘してください。"],
+    ["答えではなくヒントだけもらう", "HINT", "以下の課題に取り組んでいますが、詰まっています。\n\n【課題】\n【現在の自分のコード】\n【どこまではわかっているか】\n【どこがわからないか】\n\n答えは教えないでください。\n私が自力で解けるように、次の一歩のヒントだけをください。\nそれでも解けなかったら、もう一段階だけヒントをください。"],
+    ["AIの回答を検証する", "VERIFY", "いま教えていただいた方法について確認させてください。\n\n1. この書き方は、（技術名 バージョン）で現在も推奨されていますか？\n2. 非推奨・廃止予定になっていませんか？\n3. 公式ドキュメントの該当ページのURLを教えてください\n4. あなたの回答のうち、確信が持てない部分があれば明示してください"],
+    ["自分の理解を説明して確認する", "EXPLAIN", "これから私が「（学習した内容）」を自分の言葉で説明します。\nあなたは、初学者に教える立場のエンジニアとして、\n私の説明に間違いや説明不足がないかチェックしてください。\n\n【私の説明】\n（自分の言葉で書く）\n\n1. 正しく理解できている点\n2. 間違っている点\n3. 説明が足りていない点\n4. 私がまだ気づいていない、次に学ぶべきこと"]
+  ];
+
+  document.getElementById("prompts").innerHTML = PROMPTS.map(function (p, i) {
+    return '<div class="prompt">' +
+      '<header><h3>' + esc(p[0]) + '</h3><span class="k mono">' + p[1] + '</span></header>' +
+      '<pre id="pr' + i + '">' + esc(p[2]) + '</pre>' +
+      '<footer><button class="copy mono" type="button" data-i="' + i + '">コピー</button></footer>' +
+      '</div>';
+  }).join("");
+
+  document.getElementById("prompts").addEventListener("click", function (e) {
+    var btn = e.target.closest(".copy");
+    if (!btn) return;
+    var text = PROMPTS[+btn.getAttribute("data-i")][2];
+    var ok = function () {
+      btn.textContent = "コピーしました";
+      btn.classList.add("done");
+      setTimeout(function () { btn.textContent = "コピー"; btn.classList.remove("done"); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok, function () { btn.textContent = "選択してコピーしてください"; });
+    } else {
+      btn.textContent = "選択してコピーしてください";
+    }
+  });
+
+  /* ---------- scrollspy ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll("#toc a"));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var i = secs.indexOf(en.target);
+      links.forEach(function (a, j) { a.classList.toggle("on", i === j); });
+    });
+  }, { rootMargin: "-10% 0px -70% 0px" });
+  secs.forEach(function (s) { if (s) spy.observe(s); });
+})();
+</script>
