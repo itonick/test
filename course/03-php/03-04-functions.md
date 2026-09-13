@@ -387,10 +387,13 @@ function e(?string $value): string
 
 /**
  * 全角スペースも含めて前後の空白を除去する
+ *
+ * ⚠️ trim() の第2引数に全角スペースを渡してはいけない（下記の警告参照）。
+ *    正規表現の /u フラグで「文字単位」に処理する。
  */
 function trim_ja(?string $value): string
 {
-    return trim($value ?? "", " \t\n\r\0\x0B　");
+    return preg_replace('/\A[\s　]+|[\s　]+\z/u', "", $value ?? "") ?? "";
 }
 
 /**
