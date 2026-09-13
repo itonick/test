@@ -234,6 +234,37 @@ td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--s
 .err .fix em{font-style:normal;color:var(--ink);font-weight:500}
 .empty{padding:26px;text-align:center;color:var(--ink-3);font-size:13.5px;border:1px dashed var(--rule);border-radius:3px}
 
+/* ---------- code library ---------- */
+.codetabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.codetab{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;
+  padding:5px 14px;border:1px solid var(--rule);border-radius:999px;
+  background:var(--surface);color:var(--ink-2);cursor:pointer;
+}
+.codetab:hover{background:var(--sunk)}
+.codetab.on{border-color:var(--shu);color:var(--shu);background:var(--shu-soft);font-weight:600}
+
+.codes{display:flex;flex-direction:column;gap:14px}
+.codecard{border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden}
+.codecard > header{display:flex;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--rule-soft);flex-wrap:wrap}
+.codecard h3{font-size:14px;flex:1 1 auto;min-width:0}
+.codecard .lang{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:1px 6px;white-space:nowrap}
+.codecard .from{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ai)}
+.codecard p.note{padding:10px 16px 0;margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.75}
+
+/* copy button attached to any pre */
+.prewrap{position:relative}
+.prewrap > pre{margin:0}
+.copybtn{
+  position:absolute;top:8px;right:8px;
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.04em;
+  padding:3px 10px;border:1px solid var(--rule);border-radius:2px;
+  background:var(--surface);color:var(--ink-3);cursor:pointer;opacity:.75;
+}
+.prewrap:hover .copybtn{opacity:1}
+.copybtn:hover{border-color:var(--shu);color:var(--shu)}
+.copybtn.done{border-color:var(--ok);color:var(--ok);opacity:1}
+
 /* ---------- prompts ---------- */
 .prompts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 .prompt{border:1px solid var(--rule);border-radius:3px;background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
@@ -262,7 +293,7 @@ footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3)
   <div class="masthead-in">
     <span class="wordmark">AIと一緒につくる<span>／</span>Webアプリ開発入門</span>
     <span class="mast-spacer"></span>
-    <span class="mast-note mono">第0部 全文公開</span>
+    <span class="mast-note mono">第0〜3部 執筆済み</span>
     <button class="themetoggle" id="tt" type="button">☾ / ☀</button>
   </div>
 </header>
@@ -293,9 +324,10 @@ footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3)
         <a href="#why" class="on"><i>01</i>なぜ挫折するのか</a>
         <a href="#map"><i>02</i>カリキュラム</a>
         <a href="#sample"><i>03</i>サンプルレッスン</a>
-        <a href="#errors"><i>04</i>エラー図鑑</a>
-        <a href="#prompts"><i>05</i>AIプロンプト集</a>
-        <a href="#files"><i>06</i>教材の構成</a>
+        <a href="#code"><i>04</i>コード集</a>
+        <a href="#errors"><i>05</i>エラー図鑑</a>
+        <a href="#prompts"><i>06</i>AIプロンプト集</a>
+        <a href="#files"><i>07</i>教材の構成</a>
       </nav>
       <div class="progress-card">
         <svg class="ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true">
@@ -456,8 +488,20 @@ echo "こんにちは、" . $name . "さん";</pre>
       </section>
 
       <!-- 04 ---------------------------------------------------------- -->
+      <section id="code">
+        <div class="sec-head"><span class="n mono">04</span><h2>コード集</h2></div>
+        <p class="sec-intro">
+          教材内で実際に使っている、そのまま動くコードです。右上のボタンでコピーできます。
+          <strong>レッスン本文では手で打つことを推奨</strong>していますが、
+          ここにあるのは完成コード・共通ライブラリ・答え合わせ用なので、コピーして構いません。
+        </p>
+        <div class="codetabs" id="codetabs"></div>
+        <div class="codes" id="codes"></div>
+      </section>
+
+      <!-- 05 ---------------------------------------------------------- -->
       <section id="errors">
-        <div class="sec-head"><span class="n mono">04</span><h2>エラー図鑑</h2></div>
+        <div class="sec-head"><span class="n mono">05</span><h2>エラー図鑑</h2></div>
         <p class="sec-intro">
           巻末資料からの抜粋です。エラーメッセージの一部を貼り付けて検索してください。
           <strong>エラーは敵ではありません。</strong>どこが問題かを教えてくれる通知です。最悪なのは、エラーも出ずに間違った結果が出ることです。
@@ -470,9 +514,9 @@ echo "こんにちは、" . $name . "さん";</pre>
         <div class="empty" id="qempty" hidden>該当なし。エラーメッセージの一部だけで検索してみてください。</div>
       </section>
 
-      <!-- 05 ---------------------------------------------------------- -->
+      <!-- 06 ---------------------------------------------------------- -->
       <section id="prompts">
-        <div class="sec-head"><span class="n mono">05</span><h2>AIプロンプト集</h2></div>
+        <div class="sec-head"><span class="n mono">06</span><h2>AIプロンプト集</h2></div>
         <p class="sec-intro">
           そのまま使えるテンプレートです。どれにも<strong>学習効果を守るための一文</strong>が入っています。
           「修正コードは出さないで」「答えは教えないで」——この指示があるかないかで、AIは教師にも代筆屋にもなります。
@@ -480,17 +524,19 @@ echo "こんにちは、" . $name . "さん";</pre>
         <div class="prompts" id="prompts"></div>
       </section>
 
-      <!-- 06 ---------------------------------------------------------- -->
+      <!-- 07 ---------------------------------------------------------- -->
       <section id="files">
-        <div class="sec-head"><span class="n mono">06</span><h2>教材の構成</h2></div>
-        <p class="sec-intro">教材本体は Markdown で提供されます。このページは第0部と巻末資料の公開版です。</p>
+        <div class="sec-head"><span class="n mono">07</span><h2>教材の構成</h2></div>
+        <p class="sec-intro">教材本体は Markdown で提供されます。このページはその公開版です。</p>
         <div class="files">
           <div><div class="path mono">README.md</div><p>教材全体の案内と到達点</p></div>
           <div><div class="path mono">COURSE_MAP.md</div><p>全62レッスンの一覧・所要時間・依存関係</p></div>
           <div><div class="path mono">00-orientation/</div><p>第0部 全7レッスン。環境構築とAI入門</p></div>
-          <div><div class="path mono">01〜06/</div><p>HTML/CSS・JS・PHP・DB・Laravel・公開</p></div>
+          <div><div class="path mono">01-html-css/</div><p>第1部 全14レッスン。カフェLPを1枚作りきる</p></div>
+          <div><div class="path mono">02-javascript/</div><p>第2部 全13レッスン。ToDoアプリを作る</p></div>
+          <div><div class="path mono">03-php/</div><p>第3部 全12レッスン。掲示板を作る</p></div>
           <div><div class="path mono">appendix/</div><p>エラー図鑑・AIプロンプト集・用語集・チートシート</p></div>
-          <div><div class="path mono">code/</div><p>各レッスンの完成コード</p></div>
+          <div><div class="path mono">code/</div><p>各レッスンの完成コード（動作確認済み）</p></div>
         </div>
       </section>
 
@@ -797,6 +843,486 @@ echo "こんにちは、" . $name . "さん";</pre>
       btn.textContent = "選択してコピーしてください";
     }
   });
+
+  /* ---------- code library ---------- */
+  var CODE_LIB = [
+    {
+      group: "html", lang: "HTML", from: "LESSON 1-2",
+      title: "HTMLの雛形",
+      note: "すべてのページの出発点。charset と viewport が無いと、文字化けとスマホ崩れが起きます。",
+      code: [
+        '<!DOCTYPE html>',
+        '<html lang="ja">',
+        '<head>',
+        '  <meta charset="UTF-8">',
+        '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        '  <title>ページタイトル</title>',
+        '  <meta name="description" content="100文字程度の説明">',
+        '  <link rel="stylesheet" href="css/style.css">',
+        '</head>',
+        '<body>',
+        '',
+        '  <script src="js/app.js" defer><\/script>',
+        '</body>',
+        '</html>'
+      ].join("\n")
+    },
+    {
+      group: "html", lang: "CSS", from: "LESSON 1-5 / 1-7",
+      title: "リセット＋デザイントークン",
+      note: "box-sizing の統一と、hsl で管理する配色。色相の数字を変えるだけでサイト全体の印象が変わります。",
+      code: [
+        '*, *::before, *::after { box-sizing: border-box; }',
+        '',
+        'body, h1, h2, h3, p, ul, ol, li, figure, dl, dd {',
+        '  margin: 0; padding: 0;',
+        '}',
+        'ul, ol { list-style: none; }',
+        'img { display: block; max-width: 100%; height: auto; }',
+        'a { color: inherit; text-decoration: none; }',
+        'input, textarea, select, button { font: inherit; color: inherit; }',
+        '',
+        ':root {',
+        '  /* 色相・彩度を固定し、明度だけ変えて派生色を作る */',
+        '  --color-bg:         hsl(35 33% 98%);',
+        '  --color-surface:    hsl(0 0% 100%);',
+        '  --color-text:       hsl(25 12% 15%);',
+        '  --color-text-light: hsl(25 8%  42%);',
+        '  --color-accent:     hsl(25 40% 39%);',
+        '  --color-border:     hsl(30 20% 88%);',
+        '',
+        '  /* clamp(最小, 可変, 最大) でメディアクエリなしの可変サイズ */',
+        '  --fs-base: 16px;',
+        '  --fs-2xl:  clamp(24px, 3.2vw, 34px);',
+        '  --fs-3xl:  clamp(28px, 5.2vw, 48px);',
+        '  --gutter:  clamp(16px, 4vw, 32px);',
+        '}'
+      ].join("\n")
+    },
+    {
+      group: "html", lang: "CSS", from: "LESSON 1-9",
+      title: "列数が自動で変わるグリッド",
+      note: "メディアクエリ0個でレスポンシブになります。min(100%, 240px) が極小画面での横スクロールを防ぎます。",
+      code: [
+        '.cards {',
+        '  display: grid;',
+        '  /* 240px を保てる限り列を増やし、無理なら折り返す */',
+        '  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));',
+        '  gap: 24px;',
+        '}',
+        '',
+        '/* 画像の縦横比を揃える。写真のサイズがバラバラでも崩れない */',
+        '.card img {',
+        '  width: 100%;',
+        '  aspect-ratio: 1 / 1;',
+        '  object-fit: cover;',
+        '}'
+      ].join("\n")
+    },
+    {
+      group: "js", lang: "JavaScript", from: "LESSON 2-6",
+      title: "escapeHtml（XSS対策）",
+      note: "ユーザー入力を innerHTML に渡す前に必ず通します。textContent が使える場面では、そちらを優先してください。",
+      code: [
+        'const escapeHtml = (str) =>',
+        '  String(str)',
+        '    .replaceAll("&", "&amp;")',
+        '    .replaceAll("<", "&lt;")',
+        '    .replaceAll(">", "&gt;")',
+        '    .replaceAll(\'"\', "&quot;")',
+        '    .replaceAll("\'", "&#39;");'
+      ].join("\n")
+    },
+    {
+      group: "js", lang: "JavaScript", from: "LESSON 2-7",
+      title: "イベント委譲",
+      note: "親にリスナーを1つ付けるだけ。再描画しても効き続け、後から追加した要素にも反応します。",
+      code: [
+        '// 親（ずっと存在する要素）にリスナーを付ける',
+        'list.addEventListener("click", (e) => {',
+        '  // クリックされた要素から親をたどって .delete-btn を探す',
+        '  const btn = e.target.closest(".delete-btn");',
+        '  if (!btn) return;              // 対象外なら何もしない',
+        '',
+        '  const id = btn.closest("[data-id]").dataset.id;',
+        '  deleteItem(id);',
+        '  render();',
+        '});'
+      ].join("\n")
+    },
+    {
+      group: "js", lang: "JavaScript", from: "LESSON 2-11",
+      title: "localStorage の安全なラッパー",
+      note: "シークレットモードや容量オーバーで例外が飛びます。try/catch なしで使うと、その環境でページ全体が止まります。",
+      code: [
+        'const storage = {',
+        '  set(key, value) {',
+        '    try {',
+        '      localStorage.setItem(key, JSON.stringify(value));',
+        '      return true;',
+        '    } catch (error) {',
+        '      console.error("保存に失敗しました:", error);',
+        '      return false;',
+        '    }',
+        '  },',
+        '',
+        '  get(key, fallback = null) {',
+        '    try {',
+        '      const raw = localStorage.getItem(key);',
+        '      if (raw === null) return fallback;',
+        '      return JSON.parse(raw) ?? fallback;',
+        '    } catch (error) {',
+        '      console.error("読み込みに失敗しました:", error);',
+        '      return fallback;   // 壊れたJSONでもクラッシュさせない',
+        '    }',
+        '  },',
+        '',
+        '  isAvailable() {',
+        '    try {',
+        '      const k = "__test__";',
+        '      localStorage.setItem(k, "1");',
+        '      localStorage.removeItem(k);',
+        '      return true;',
+        '    } catch { return false; }',
+        '  },',
+        '};'
+      ].join("\n")
+    },
+    {
+      group: "js", lang: "JavaScript", from: "LESSON 2-10",
+      title: "fetch（HTTPエラーとタイムアウト対応）",
+      note: "fetch は 404 や 500 では reject しません。res.ok の確認と、AbortController によるタイムアウトが必須です。",
+      code: [
+        'const fetchJson = async (url, timeoutMs = 10000) => {',
+        '  const controller = new AbortController();',
+        '  const timer = setTimeout(() => controller.abort(), timeoutMs);',
+        '',
+        '  try {',
+        '    const res = await fetch(url, { signal: controller.signal });',
+        '',
+        '    // ★ fetch は 404/500 で例外を投げないので、自分で確認する',
+        '    if (!res.ok) throw new Error("サーバーエラー（" + res.status + "）が発生しました");',
+        '',
+        '    return await res.json();',
+        '  } catch (error) {',
+        '    if (error.name === "AbortError") {',
+        '      throw new Error("通信がタイムアウトしました。電波状況をご確認ください。");',
+        '    }',
+        '    if (error instanceof TypeError) {',
+        '      throw new Error("ネットワークに接続できません。");',
+        '    }',
+        '    throw error;',
+        '  } finally {',
+        '    clearTimeout(timer);',
+        '  }',
+        '};'
+      ].join("\n")
+    },
+    {
+      group: "js", lang: "JavaScript", from: "LESSON 2-7",
+      title: "debounce（処理の間引き）",
+      note: "input イベントは打鍵ごとに発火します。検索や通信は、これで間引かないと重くなります。",
+      code: [
+        'const debounce = (fn, delay = 300) => {',
+        '  let timerId;',
+        '  return (...args) => {',
+        '    clearTimeout(timerId);',
+        '    timerId = setTimeout(() => fn(...args), delay);',
+        '  };',
+        '};',
+        '',
+        '// 使い方：最後の入力から300ms後に1回だけ実行される',
+        'const debouncedSearch = debounce(search, 300);',
+        'input.addEventListener("input", (e) => debouncedSearch(e.target.value));'
+      ].join("\n")
+    },
+    {
+      group: "php", lang: "PHP", from: "LESSON 3-4",
+      title: "共通ユーティリティ",
+      note: "e() は全出力に通します。trim() は全角スペースを消さないので、日本語フォームでは trim_ja() が必要です。",
+      code: [
+        '<?php',
+        'declare(strict_types=1);',
+        '',
+        '/** HTMLエスケープ。すべての出力に必ず通す */',
+        'function e(?string $value): string',
+        '{',
+        '    return htmlspecialchars($value ?? "", ENT_QUOTES, "UTF-8");',
+        '}',
+        '',
+        '/** 全角スペースも含めて前後の空白を除去する */',
+        'function trim_ja(?string $value): string',
+        '{',
+        '    return trim($value ?? "", " \\t\\n\\r\\0\\x0B　");',
+        '}',
+        '',
+        '/** 未入力かどうか（"0" は未入力ではない） */',
+        'function is_blank(?string $value): bool',
+        '{',
+        '    return trim_ja($value) === "";',
+        '}',
+        '',
+        '/** http/https 以外のURLを弾く（javascript: によるXSS対策） */',
+        'function safe_url(?string $url): ?string',
+        '{',
+        '    $url = trim($url ?? "");',
+        '    if ($url === "") return null;',
+        '',
+        '    $scheme = parse_url($url, PHP_URL_SCHEME);',
+        '    if (!in_array(strtolower((string) $scheme), ["http", "https"], true)) {',
+        '        return null;',
+        '    }',
+        '    return $url;',
+        '}'
+      ].join("\n")
+    },
+    {
+      group: "php", lang: "PHP", from: "LESSON 3-7",
+      title: "CSRF対策",
+      note: "random_bytes で推測不能なトークンを作り、hash_equals で比較します。=== ではタイミング攻撃に弱くなります。",
+      code: [
+        '<?php',
+        'declare(strict_types=1);',
+        '',
+        'function csrf_token(): string',
+        '{',
+        '    if (empty($_SESSION["_csrf_token"])) {',
+        '        // 暗号学的に安全な乱数。rand() や mt_rand() は使わない',
+        '        $_SESSION["_csrf_token"] = bin2hex(random_bytes(32));',
+        '    }',
+        '    return $_SESSION["_csrf_token"];',
+        '}',
+        '',
+        'function csrf_field(): string',
+        '{',
+        '    $token = htmlspecialchars(csrf_token(), ENT_QUOTES, "UTF-8");',
+        '    return \'<input type="hidden" name="_csrf_token" value="\' . $token . \'">\';',
+        '}',
+        '',
+        'function csrf_verify(?string $token): bool',
+        '{',
+        '    $saved = $_SESSION["_csrf_token"] ?? "";',
+        '    if ($saved === "" || $token === null || $token === "") return false;',
+        '',
+        '    // hash_equals はタイミング攻撃に強い比較',
+        '    return hash_equals($saved, $token);',
+        '}'
+      ].join("\n")
+    },
+    {
+      group: "php", lang: "PHP", from: "LESSON 3-8",
+      title: "安全なセッション開始",
+      note: "httponly で JavaScript から読めなくし（XSS対策）、samesite で他サイトからの送信を防ぎます（CSRF対策）。",
+      code: [
+        '<?php',
+        'declare(strict_types=1);',
+        '',
+        'function start_secure_session(): void',
+        '{',
+        '    if (session_status() === PHP_SESSION_ACTIVE) return;',
+        '',
+        '    session_set_cookie_params([',
+        '        "lifetime" => 0,',
+        '        "path"     => "/",',
+        '        "secure"   => !empty($_SERVER["HTTPS"]),  // HTTPSのときだけ送信',
+        '        "httponly" => true,   // ★ JavaScript から読めない',
+        '        "samesite" => "Lax",  // ★ 他サイトからのPOSTで送らない',
+        '    ]);',
+        '',
+        '    session_start();',
+        '}',
+        '',
+        '// ログイン成功時は必ず呼ぶ（セッション固定攻撃の対策）',
+        '// session_regenerate_id(true);'
+      ].join("\n")
+    },
+    {
+      group: "php", lang: "PHP", from: "LESSON 3-9",
+      title: "画像アップロードの検証",
+      note: "$_FILES の name と type はクライアントの申告です。finfo で中身を見て、ファイル名は自分で生成します。",
+      code: [
+        '<?php',
+        'declare(strict_types=1);',
+        '',
+        'const ALLOWED = [',
+        '    "image/jpeg" => "jpg", "image/png" => "png",',
+        '    "image/gif"  => "gif", "image/webp" => "webp",',
+        '];',
+        '',
+        'function save_uploaded_image(array $file, string $dir): array',
+        '{',
+        '    if (($file["error"] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {',
+        '        return ["ok" => false, "error" => "アップロードに失敗しました"];',
+        '    }',
+        '',
+        '    // ★ 本当にアップロードされたファイルか（任意パス指定を防ぐ）',
+        '    if (!is_uploaded_file($file["tmp_name"])) {',
+        '        return ["ok" => false, "error" => "不正なリクエストです"];',
+        '    }',
+        '',
+        '    if ($file["size"] > 2 * 1024 * 1024) {',
+        '        return ["ok" => false, "error" => "2MB以下にしてください"];',
+        '    }',
+        '',
+        '    // ★ 申告ではなく、中身のマジックナンバーから判定する',
+        '    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($file["tmp_name"]);',
+        '    if (!array_key_exists($mime, ALLOWED)) {',
+        '        return ["ok" => false, "error" => "画像ファイルを選択してください"];',
+        '    }',
+        '    if (@getimagesize($file["tmp_name"]) === false) {',
+        '        return ["ok" => false, "error" => "画像として読み込めませんでした"];',
+        '    }',
+        '',
+        '    // ★ ファイル名は自分で作る（../ による上書きを防ぐ）',
+        '    $filename = bin2hex(random_bytes(16)) . "." . ALLOWED[$mime];',
+        '',
+        '    if (!move_uploaded_file($file["tmp_name"], $dir . "/" . $filename)) {',
+        '        return ["ok" => false, "error" => "保存に失敗しました"];',
+        '    }',
+        '    chmod($dir . "/" . $filename, 0644);   // 実行権限を与えない',
+        '',
+        '    return ["ok" => true, "filename" => $filename];',
+        '}'
+      ].join("\n")
+    },
+    {
+      group: "php", lang: "PHP", from: "LESSON 3-12",
+      title: "ファイルの排他制御",
+      note: "「読み込み → 変更 → 書き込み」をロックしたまま行います。LOCK_EX を付けるだけでは、読み書きの間に割り込まれます。",
+      code: [
+        '<?php',
+        'declare(strict_types=1);',
+        '',
+        '/** @param callable(array): array $mutator */',
+        'function with_lock(string $path, callable $mutator): void',
+        '{',
+        '    $handle = fopen($path, "c+");',
+        '    if ($handle === false) {',
+        '        throw new RuntimeException("ファイルを開けません: {$path}");',
+        '    }',
+        '',
+        '    try {',
+        '        flock($handle, LOCK_EX);          // ロックを取る',
+        '',
+        '        $size = filesize($path) ?: 0;',
+        '        $raw  = $size > 0 ? (string) fread($handle, $size) : "";',
+        '        $rows = json_decode($raw ?: "[]", true) ?: [];',
+        '',
+        '        $rows = $mutator($rows);          // 変更',
+        '',
+        '        $json = json_encode($rows,',
+        '            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);',
+        '',
+        '        ftruncate($handle, 0);',
+        '        rewind($handle);',
+        '        fwrite($handle, $json);',
+        '        fflush($handle);',
+        '    } finally {',
+        '        flock($handle, LOCK_UN);          // 必ず解放する',
+        '        fclose($handle);',
+        '    }',
+        '}'
+      ].join("\n")
+    }
+  ];
+
+  var CODE_GROUPS = [
+    { id: "all",  label: "すべて" },
+    { id: "html", label: "HTML / CSS" },
+    { id: "js",   label: "JavaScript" },
+    { id: "php",  label: "PHP" }
+  ];
+
+  var codeGroup = "all";
+  var codesHost = document.getElementById("codes");
+  var tabsHost  = document.getElementById("codetabs");
+
+  tabsHost.innerHTML = CODE_GROUPS.map(function (g) {
+    return '<button type="button" class="codetab' + (g.id === "all" ? " on" : "") +
+           '" data-g="' + g.id + '">' + esc(g.label) + "</button>";
+  }).join("");
+
+  function renderCodes() {
+    var list = CODE_LIB.filter(function (c) {
+      return codeGroup === "all" || c.group === codeGroup;
+    });
+
+    codesHost.innerHTML = list.map(function (c, i) {
+      return '<article class="codecard">' +
+        '<header>' +
+          '<h3>' + esc(c.title) + '</h3>' +
+          '<span class="from mono">' + esc(c.from) + '</span>' +
+          '<span class="lang mono">' + esc(c.lang) + '</span>' +
+        '</header>' +
+        (c.note ? '<p class="note">' + esc(c.note) + '</p>' : "") +
+        '<div class="prewrap">' +
+          '<pre class="code">' + esc(c.code) + '</pre>' +
+          '<button type="button" class="copybtn mono" data-code="' + i + '">コピー</button>' +
+        '</div>' +
+      '</article>';
+    }).join("");
+
+    // どのコードがどのボタンに対応するかを覚えておく
+    codesHost._codes = list.map(function (c) { return c.code; });
+  }
+
+  tabsHost.addEventListener("click", function (e) {
+    var tab = e.target.closest(".codetab");
+    if (!tab) return;
+    codeGroup = tab.getAttribute("data-g");
+    Array.prototype.forEach.call(tabsHost.children, function (t) {
+      t.classList.toggle("on", t.getAttribute("data-g") === codeGroup);
+    });
+    renderCodes();
+  });
+
+  function flashCopied(btn, text) {
+    var ok = function () {
+      var original = btn.textContent;
+      btn.textContent = "コピーしました";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok, function () {
+        btn.textContent = "選択してコピーしてください";
+      });
+    } else {
+      btn.textContent = "選択してコピーしてください";
+    }
+  }
+
+  codesHost.addEventListener("click", function (e) {
+    var btn = e.target.closest(".copybtn");
+    if (!btn) return;
+    var idx = +btn.getAttribute("data-code");
+    flashCopied(btn, codesHost._codes[idx]);
+  });
+
+  renderCodes();
+
+  /* ---------- サンプルレッスン内の pre にもコピーボタンを付ける ---------- */
+  Array.prototype.forEach.call(
+    document.querySelectorAll("#sample pre"),
+    function (pre) {
+      var wrap = document.createElement("div");
+      wrap.className = "prewrap";
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "copybtn mono";
+      btn.textContent = "コピー";
+      btn.addEventListener("click", function () {
+        flashCopied(btn, pre.textContent);
+      });
+      wrap.appendChild(btn);
+    }
+  );
 
   /* ---------- scrollspy ---------- */
   var links = Array.prototype.slice.call(document.querySelectorAll("#toc a"));
