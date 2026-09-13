@@ -1,0 +1,362 @@
+/* ==========================================================
+   ひとこと掲示板 — 第3部 完成版スタイル
+   ========================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg:        hsl(210 20% 97%);
+  --surface:   hsl(0 0% 100%);
+  --sunk:      hsl(210 18% 94%);
+  --text:      hsl(215 18% 18%);
+  --text-weak: hsl(215 10% 46%);
+  --border:    hsl(212 18% 88%);
+  --accent:    hsl(212 58% 42%);
+  --accent-weak: hsl(212 58% 96%);
+  --danger:    hsl(6 60% 46%);
+  --danger-weak: hsl(6 70% 96%);
+  --success:   hsl(150 46% 32%);
+  --success-weak: hsl(150 46% 95%);
+  --radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        hsl(215 20% 12%);
+    --surface:   hsl(215 18% 17%);
+    --sunk:      hsl(215 20% 14%);
+    --text:      hsl(210 16% 90%);
+    --text-weak: hsl(210 10% 62%);
+    --border:    hsl(215 14% 28%);
+    --accent:    hsl(212 62% 66%);
+    --accent-weak: hsl(212 40% 22%);
+    --danger:    hsl(6 68% 68%);
+    --danger-weak: hsl(6 40% 22%);
+    --success:   hsl(150 44% 62%);
+    --success-weak: hsl(150 30% 20%);
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- ヘッダー / フッター ---------- */
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .inner {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 16px clamp(16px, 4vw, 24px);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(18px, 4vw, 22px);
+  letter-spacing: .04em;
+}
+.site-header h1 a { color: inherit; text-decoration: none; }
+
+.count {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+.site-footer {
+  margin-top: 48px;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-weak);
+  border-top: 1px solid var(--border);
+}
+.site-footer p { margin: 0; }
+
+/* ---------- レイアウト ---------- */
+
+.container {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 24px clamp(16px, 4vw, 24px) 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(16px, 4vw, 24px);
+  margin-bottom: 24px;
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+/* ---------- 通知 ---------- */
+
+.alert {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border-left: 3px solid;
+  font-size: 14px;
+}
+.alert-success {
+  background: var(--success-weak);
+  border-color: var(--success);
+  color: var(--success);
+}
+.alert-error {
+  background: var(--danger-weak);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* ---------- フォーム ---------- */
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.required, .optional {
+  font-size: 11px;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  vertical-align: 1px;
+}
+.required { color: #fff; background: var(--danger); }
+.optional { color: var(--text-weak); border: 1px solid var(--border); }
+
+input[type="text"],
+input[type="search"],
+textarea {
+  width: 100%;
+  padding: 11px 13px;
+  font: inherit;
+  font-size: 16px;              /* iOS のズーム防止 */
+  color: var(--text);
+  background: var(--sunk);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 7em;
+  line-height: 1.8;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--danger);
+}
+.error:empty { display: none; }
+
+.btn {
+  align-self: flex-start;
+  padding: 11px 28px;
+  font: inherit;
+  font-size: 15px;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(.92); }
+
+.btn-sub {
+  padding: 9px 20px;
+  font-size: 14px;
+  align-self: auto;
+}
+
+.link-btn {
+  padding: 4px 6px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--text-weak);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-btn:hover { color: var(--accent); }
+.link-btn.danger:hover { color: var(--danger); }
+
+/* ---------- 検索 ---------- */
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.search-form input { flex: 1 1 200px; min-width: 0; }
+
+.search-result {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--text-weak);
+}
+
+/* ---------- 投稿一覧 ---------- */
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
+
+.post-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.post-name {
+  font-weight: 700;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.post-date {
+  font-size: 12px;
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.post-body {
+  margin: 0;
+  /* 改行をそのまま表示する。HTMLを生成しないのでXSSの心配がない */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.delete-form {
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* ---------- 空の状態 ---------- */
+
+.empty {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--text-weak);
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- ページ送り ---------- */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pagination a,
+.pagination span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 38px;
+  height: 38px;
+  padding-inline: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.pagination a:hover { background: var(--accent-weak); }
+
+.pagination .current {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.pagination .disabled {
+  color: var(--text-weak);
+  opacity: .5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
