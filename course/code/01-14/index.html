@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOMOREBI COFFEE｜木漏れ日の下で、一杯を。</title>
+  <meta name="description" content="住宅街の小さな自家焙煎コーヒースタンド、KOMOREBI COFFEE。季節ごとに産地を変えたハンドドリップと、近所の焼き菓子店のケーキをご用意しています。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Marcellus&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="logo">KOMOREBI COFFEE</p>
+      <nav class="global-nav" aria-label="メインナビゲーション">
+        <ul>
+          <li><a href="#menu">MENU</a></li>
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#access">ACCESS</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-media">
+        <picture>
+          <source media="(min-width: 768px)" srcset="images/hero.jpg">
+          <img src="images/hero-sp.jpg"
+               alt="窓辺の席に差し込む木漏れ日とコーヒーカップ"
+               width="800" height="1000">
+        </picture>
+        <div class="hero-copy">
+          <h1>木漏れ日の下で、一杯を。</h1>
+          <p>住宅街の小さな自家焙煎コーヒースタンド。</p>
+          <a href="#menu" class="btn btn-on-image">メニューを見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MENU ===== -->
+    <section id="menu" class="menu">
+      <h2>MENU</h2>
+      <p class="section-lead">季節ごとに、産地を変えてお出ししています。</p>
+
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-thumb">
+            <img src="images/menu-drip.jpg" alt="ドリッパーから注がれるコーヒー"
+                 width="800" height="800" loading="lazy">
+            <span class="badge">おすすめ</span>
+          </div>
+          <h3>ハンドドリップ</h3>
+          <p class="price">¥600</p>
+          <p>その日の豆から、お好みの一杯を選べます。</p>
+        </li>
+
+        <li class="menu-item">
+          <div class="menu-thumb">
+            <img src="images/menu-latte.jpg" alt="ラテアートの施されたカフェラテ"
+                 width="800" height="800" loading="lazy">
+          </div>
+          <h3>カフェラテ</h3>
+          <p class="price">¥600</p>
+          <p>深煎りの豆と、きめ細かいミルクで。</p>
+        </li>
+
+        <li class="menu-item">
+          <div class="menu-thumb">
+            <img src="images/menu-cake.jpg" alt="皿に盛り付けられたチーズケーキ"
+                 width="800" height="800" loading="lazy">
+          </div>
+          <h3>本日のケーキ</h3>
+          <p class="price">¥550</p>
+          <p>近所の焼き菓子店から、毎朝届きます。</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="about">
+      <h2>ABOUT</h2>
+      <div class="about-body">
+        <p>2019年、この街で焙煎を始めました。豆は月替わりで、
+           小さなロースターから直接仕入れています。</p>
+        <p>大きな店ではありませんが、一杯ずつ、ていねいに。
+           窓から入る光を眺めながら、ゆっくり過ごしていただけたらうれしいです。</p>
+      </div>
+    </section>
+
+    <!-- ===== ACCESS ===== -->
+    <section id="access" class="access">
+      <h2>ACCESS</h2>
+      <dl class="info">
+        <dt>住所</dt>
+        <dd>東京都〇〇区〇〇 1-2-3</dd>
+        <dt>営業時間</dt>
+        <dd>8:00 - 18:00（L.O. 17:30）</dd>
+        <dt>定休日</dt>
+        <dd>水曜日</dd>
+        <dt>電話</dt>
+        <dd><a href="tel:0312345678">03-1234-5678</a></dd>
+      </dl>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="contact">
+      <h2>CONTACT</h2>
+      <p class="section-lead">ご予約・お問い合わせはこちらから。<span class="req-note">※は必須項目です。</span></p>
+
+      <form action="contact.php" method="post" class="contact-form">
+
+        <div class="field">
+          <label for="name">お名前 <span class="req">※</span></label>
+          <input type="text" id="name" name="name"
+                 placeholder="山田 太郎" maxlength="50" required>
+        </div>
+
+        <div class="field">
+          <label for="email">メールアドレス <span class="req">※</span></label>
+          <input type="email" id="email" name="email"
+                 placeholder="you@example.com" required>
+        </div>
+
+        <div class="field">
+          <label for="tel">電話番号</label>
+          <input type="tel" id="tel" name="tel" placeholder="03-1234-5678">
+        </div>
+
+        <div class="field">
+          <label for="topic">ご用件</label>
+          <select id="topic" name="topic">
+            <option value="">選択してください</option>
+            <option value="reserve">ご予約について</option>
+            <option value="bean">豆の販売について</option>
+            <option value="event">イベントについて</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="visit-date">ご希望日</label>
+          <input type="date" id="visit-date" name="visit_date">
+        </div>
+
+        <div class="field">
+          <label for="guests">ご来店人数</label>
+          <input type="number" id="guests" name="guests" min="1" max="8" value="2">
+        </div>
+
+        <fieldset class="field">
+          <legend>ご希望の時間帯</legend>
+          <div class="radio-group">
+            <input type="radio" id="time-am" name="time_slot" value="am" checked>
+            <label for="time-am">午前（8:00-12:00）</label>
+
+            <input type="radio" id="time-pm" name="time_slot" value="pm">
+            <label for="time-pm">午後（12:00-18:00）</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="message">お問い合わせ内容 <span class="req">※</span></label>
+          <textarea id="message" name="message" rows="6"
+                    placeholder="ご自由にお書きください" required></textarea>
+        </div>
+
+        <div class="field field-check">
+          <input type="checkbox" id="agree" name="agree" value="1" required>
+          <label for="agree">プライバシーポリシーに同意する <span class="req">※</span></label>
+        </div>
+
+        <button type="submit" class="btn btn-submit">送信する</button>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="logo">KOMOREBI COFFEE</p>
+        <p class="footer-addr">東京都〇〇区〇〇 1-2-3</p>
+      </div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="#menu">MENU</a></li>
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#access">ACCESS</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="copyright">&copy; 2026 KOMOREBI COFFEE</p>
+  </footer>
+
+  <a href="#top" class="to-top" aria-label="ページ上部へ戻る">↑</a>
+
+</body>
+</html>

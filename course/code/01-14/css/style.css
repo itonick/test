@@ -1,0 +1,617 @@
+/* ==========================================================
+   KOMOREBI COFFEE — 第1部 完成版スタイル
+   目次
+     1. リセット
+     2. デザイントークン（カスタムプロパティ）
+     3. ベース
+     4. レイアウト共通
+     5. ヘッダー
+     6. ヒーロー
+     7. メニュー
+     8. ABOUT
+     9. アクセス
+    10. フォーム
+    11. フッター
+    12. ユーティリティ
+   ========================================================== */
+
+
+/* ==========================================================
+   1. リセット
+   ========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, p,
+ul, ol, li,
+figure, dl, dd,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, textarea, select, button {
+  font: inherit;
+  color: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* ==========================================================
+   2. デザイントークン
+   ========================================================== */
+
+:root {
+  /* ---- 色（hsl で管理。明度だけ変えて派生色を作る） ---- */
+  --color-bg:          hsl(35 33% 98%);
+  --color-surface:     hsl(0 0% 100%);
+  --color-text:        hsl(25 12% 15%);
+  --color-text-light:  hsl(25 8%  42%);
+  --color-accent:      hsl(25 40% 39%);
+  --color-accent-dark: hsl(25 40% 28%);
+  --color-accent-pale: hsl(25 40% 95%);
+  --color-border:      hsl(30 20% 88%);
+
+  /* ---- フォント ---- */
+  --font-base: "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif;
+  --font-en:   "Marcellus", "Times New Roman", serif;
+
+  /* ---- 文字サイズ（clamp で可変） ---- */
+  --fs-xs:  12px;
+  --fs-sm:  14px;
+  --fs-base:16px;
+  --fs-lg:  clamp(17px, 1.6vw, 19px);
+  --fs-xl:  clamp(20px, 2.4vw, 26px);
+  --fs-2xl: clamp(24px, 3.2vw, 34px);
+  --fs-3xl: clamp(28px, 5.2vw, 48px);
+
+  /* ---- レイアウト ---- */
+  --container: 1040px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --section-space: clamp(48px, 8vw, 88px);
+  --header-h: 64px;
+
+  /* ---- 重なり順 ---- */
+  --z-header: 500;
+  --z-float: 400;
+}
+
+
+/* ==========================================================
+   3. ベース
+   ========================================================== */
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--fs-base);
+  line-height: 1.9;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  line-height: 1.4;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p {
+  color: var(--color-text-light);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   4. レイアウト共通
+   ========================================================== */
+
+main > section {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: var(--section-space);
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+main > section:last-child {
+  border-bottom: none;
+}
+
+/* セクション見出し（英字・小さく・字間を広く） */
+main > section > h2 {
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: .28em;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.section-lead {
+  max-width: 34em;
+}
+
+
+/* ==========================================================
+   5. ヘッダー（外枠＝画面幅いっぱい、内枠＝中央寄せ）
+   ========================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo {
+  font-family: var(--font-en);
+  font-size: var(--fs-lg);
+  letter-spacing: .18em;
+  color: var(--color-text);
+}
+
+.global-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 18px;
+}
+
+.global-nav a {
+  display: inline-block;
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  letter-spacing: .12em;
+  padding-block: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, color .2s;
+}
+
+.global-nav a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 16px;
+  }
+  .global-nav ul {
+    gap: 28px;
+  }
+}
+
+
+/* ==========================================================
+   6. ヒーロー
+   ========================================================== */
+
+.hero {
+  max-width: none;
+  padding: 0;
+  border-bottom: none;
+}
+
+.hero-media {
+  position: relative;
+}
+
+.hero-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* 写真の上の文字を読みやすくする暗いレイヤー */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 8%) 30%, rgb(0 0 0 / 62%));
+}
+
+.hero-copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: clamp(24px, 5vw, 56px) var(--gutter);
+  text-align: center;
+  color: #fff;
+}
+
+.hero-copy h1 {
+  font-size: var(--fs-3xl);
+  letter-spacing: .04em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.hero-copy p {
+  color: rgb(255 255 255 / 90%);
+  max-width: 30em;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .hero-media img {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+
+/* ==========================================================
+   7. メニュー
+   ========================================================== */
+
+.menu-list {
+  display: grid;
+  /* min(100%, 240px) で極小画面での横はみ出しを防ぐ */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(28px, 4vw, 40px) clamp(20px, 3vw, 32px);
+  margin-top: 40px;
+}
+
+.menu-thumb {
+  position: relative;
+  overflow: hidden;          /* ホバー拡大のはみ出しを切る */
+  margin-bottom: 16px;
+}
+
+.menu-thumb img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.menu-item:hover .menu-thumb img {
+  transform: scale(1.05);
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 12px;
+  font-size: var(--fs-xs);
+  letter-spacing: .08em;
+  color: #fff;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+.menu-item h3 {
+  font-size: var(--fs-lg);
+  margin-bottom: 2px;
+}
+
+.price {
+  font-family: var(--font-en);
+  font-size: var(--fs-lg);
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+.menu-item p:last-child {
+  font-size: var(--fs-sm);
+  max-width: 28em;
+}
+
+
+/* ==========================================================
+   8. ABOUT
+   ========================================================== */
+
+.about-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 20px 48px;
+  max-width: 900px;
+}
+
+.about-body p {
+  max-width: 34em;
+}
+
+
+/* ==========================================================
+   9. アクセス
+   ========================================================== */
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 16px;
+  margin-top: 24px;
+  max-width: 520px;
+}
+
+.info dt {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: .12em;
+  color: var(--color-accent);
+}
+
+.info dd {
+  color: var(--color-text-light);
+  margin-bottom: 12px;
+}
+
+@media (min-width: 600px) {
+  .info {
+    grid-template-columns: 96px 1fr;
+    gap: 12px 16px;
+  }
+  .info dd {
+    margin-bottom: 0;
+  }
+}
+
+
+/* ==========================================================
+   10. フォーム
+   ========================================================== */
+
+.req-note {
+  font-size: var(--fs-xs);
+  margin-left: 8px;
+}
+
+.req {
+  color: var(--color-accent);
+  font-size: var(--fs-xs);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 3vw, 24px);
+  max-width: 560px;
+  margin-top: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field > label,
+.field legend {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;               /* iOS のズーム防止のため 16px 以上 */
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  background-color: var(--color-surface);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 8em;
+}
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
+.radio-group input {
+  width: auto;
+  accent-color: var(--color-accent);
+}
+
+.radio-group label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-light);
+}
+
+.field-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.field-check input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;                /* 潰れないように */
+  accent-color: var(--color-accent);
+}
+
+.field-check label {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+}
+
+
+/* ==========================================================
+   11. フッター
+   ========================================================== */
+
+.site-footer {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: clamp(32px, 6vw, 56px);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px 32px;
+}
+
+.footer-addr {
+  font-size: var(--fs-sm);
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.footer-nav a {
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  letter-spacing: .12em;
+}
+
+.copyright {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: .1em;
+  text-align: center;
+}
+
+
+/* ==========================================================
+   12. ユーティリティ
+   ========================================================== */
+
+.btn {
+  display: inline-block;
+  padding: 13px 34px;
+  font-size: var(--fs-sm);
+  letter-spacing: .1em;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  background: none;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+}
+
+.btn:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-on-image {
+  margin-top: 22px;
+  color: #fff;
+  border-color: rgb(255 255 255 / 70%);
+}
+
+.btn-on-image:hover {
+  background-color: #fff;
+  color: var(--color-text);
+  border-color: #fff;
+}
+
+.btn-submit {
+  align-self: flex-start;
+}
+
+.to-top {
+  position: fixed;
+  right: clamp(12px, 3vw, 24px);
+  bottom: clamp(12px, 3vw, 24px);
+  z-index: var(--z-float);
+
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-accent);
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+  transition: background-color .2s, color .2s;
+}
+
+.to-top:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+
+/* ==========================================================
+   アニメーションを控える設定への対応
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
