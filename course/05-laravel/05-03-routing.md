@@ -185,6 +185,13 @@ Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 > 💡 **これは第1部で学んだ「変数で色を管理する（カスタムプロパティ）」と同じ発想です。**
 > 「1か所を直せば全部変わる」——保守しやすいコードの基本原則です。
 
+> 🆘 **ここで詰まったら**（ルート関連のエラー）
+> - **`Route [items.show] not defined`**：`->name('items.show')` を付け忘れ、または `route('...')` の名前のつづり違い。`php artisan route:list` で登録名を確認
+> - **`The GET method is not supported for this route`（405）**：フォームの `method` とルートの定義がズレている（`Route::post` なのに GET で開いた等）。削除・更新は `@method('DELETE')`/`@method('PUT')` が要る
+> - **`404`**：パラメータ付きルート（`/items/{id}`）の順序に注意。`/items/create` は `/items/{id}` より**先**に書く（後だと `create` が `{id}` に一致してしまう）
+> - **直らなければ、AIにこう聞く**（web.php と、叩いているURL/フォームを貼る）：
+>   「Laravelのルーティングで○○エラーが出ます。route:list の結果も添えます。原因を教えてください」
+
 ### 命名の規約
 
 ```php

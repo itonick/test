@@ -101,7 +101,7 @@ echo $user->posts()->count();
 ポイント：**`()` の有無**で意味が変わります。
 
 ```php
-$user->posts     // プロパティ：結果（コレクション）that を取得
+$user->posts     // プロパティ：結果（コレクション）を取得
 $user->posts()   // メソッド：クエリビルダ（さらに where などを足せる）
 ```
 
@@ -109,6 +109,13 @@ $user->posts()   // メソッド：クエリビルダ（さらに where など�
 // 「この人の公開投稿を新しい順で3件」
 $user->posts()->where('is_public', true)->latest()->limit(3)->get();
 ```
+
+> 🆘 **ここで詰まったら**（`Call to a member function ... on null` / リレーションが取れない）
+> - **`Call to a member function name() on null`**：`$post->user` が `null`（投稿者が削除済み・未設定）なのに辿った。`$post->user?->name`（ヌル安全演算子）や `optional($post->user)->name` で守る
+> - **`()` の付け忘れ/付けすぎ**：結果が欲しいのに `$user->posts()`（クエリのまま）を回そうとしている等。**結果＝`$user->posts`、条件を足す＝`$user->posts()->where(...)->get()`**
+> - **リレーションが `null` や空**：外部キー名が規約どおりか（`belongsTo(User::class)` は `user_id` を探す）。違うなら第2引数で明示
+> - **直らなければ、AIにこう聞く**（両モデルのリレーション定義と該当コードを貼る）：
+>   「Eloquentのリレーションで null エラーが出ます。定義の向きと、null の扱いのどこが原因か教えてください」
 
 Blade では：
 

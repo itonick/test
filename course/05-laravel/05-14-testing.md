@@ -77,6 +77,14 @@ class PostTest extends TestCase
 > 💡 手軽に始めるなら `phpunit.xml` でテスト用DBを SQLite の `:memory:` にすると速いです
 > （第4部で使ったSQLiteがここでも活躍）。設定は環境に合わせて。
 
+> 🆘 **ここで詰まったら**（テストで開発中のデータが消えた／テストが落ちる）
+> - **⚠️ 開発DBが消えた**：`RefreshDatabase` が**本番/開発と同じDB**を見ていた。`phpunit.xml`（`.env.testing`）で**テスト専用DB**（`:memory:` のSQLite等）を指定する。これは最初に必ず確認
+> - **`Class ... factory does not exist`**：`make:factory` でファクトリを作り、モデルに `use HasFactory;` を付ける
+> - **毎回結果が変わる**：前のテストのデータが残っている → `RefreshDatabase` を使う
+> - **`actingAs` したのに401/302**：ログイン前提のテストで `->actingAs($user)` を付け忘れ
+> - **直らなければ、AIにこう聞く**（テストコードと phpunit.xml のDB設定を貼る）：
+>   「Laravelのテストが○○で落ちます。RefreshDatabase とテスト用DBの設定が正しいか教えてください」
+
 ---
 
 ## ✍️ 手を動かす③ ─ 一覧ページのテスト

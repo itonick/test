@@ -52,6 +52,13 @@ Blade で一覧と「ページ送りリンク」を出します。
 `paginate()` は、裏で「全体件数のCOUNT」と「LIMIT/OFFSET付きのSELECT」を発行します。
 第4部の `LIMIT ... OFFSET ...` を、件数計算込みで肩代わりしてくれる仕組みです。
 
+> 🆘 **ここで詰まったら**（ページ送りリンクが出ない／2ページ目で検索が消える）
+> - **リンクが出ない**：コントローラが `get()` のまま（`paginate()` に変える）／Bladeに `{{ $posts->links() }}` を書いていない
+> - **リンクの見た目が崩れる**：Laravel既定のページネーションは Tailwind 前提。Bootstrap等を使うなら `AppServiceProvider` で `Paginator::useBootstrapFive()` などを設定
+> - **2ページ目で検索条件が外れる**：`->paginate(20)->withQueryString()` を付ける（この後の③で詳説）
+> - **直らなければ、AIにこう聞く**（コントローラと一覧Bladeを貼る）：
+>   「Laravelのページネーションでリンクが出ません（または検索がページ送りで消えます）。原因を教えてください」
+
 > 💡 `->latest()` は `orderBy('created_at', 'desc')` の短縮形。逆順は `->oldest()`。
 
 ---

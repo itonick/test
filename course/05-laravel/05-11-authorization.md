@@ -99,6 +99,13 @@ public function destroy(Post $post)
 
 第3部では `if (...) { http_response_code(403); exit; }` を手書きしていた部分が、
 `$this->authorize('delete', $post);` の**一行**になりました。
+
+> 🆘 **ここで詰まったら**（誰でも消せてしまう／いつも403／ポリシーが呼ばれない）
+> - **誰でも操作できてしまう**：コントローラで `$this->authorize(...)` を呼んでいない（ビューの `@can` だけでは**防御になりません**。URL直打ちで実行されます）
+> - **いつも403になる**：ポリシーの判定が逆（`$user->id === $post->user_id` の向き）、または `before()` が `null` を返すべき所で `false` を返している
+> - **ポリシーが呼ばれない**：`make:policy PostPolicy --model=Post` で作ったか、メソッド名（`update`/`delete`）と `authorize('update', ...)` の第1引数が一致しているか
+> - **直らなければ、AIにこう聞く**（PostPolicy とコントローラの該当メソッドを貼る）：
+>   「Laravelの認可が意図どおり動きません（誰でも操作できる／常に403）。ポリシーとコントローラのどこが原因か教えてください」
 NGなら Laravel が 403 ページを返して、以降のコードは実行されません。
 
 > 💡 メソッド名の対応：`authorize('update', $post)` → `PostPolicy::update()` が呼ばれる。

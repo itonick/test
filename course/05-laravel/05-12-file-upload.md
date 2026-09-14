@@ -93,6 +93,13 @@ public function store(StorePostRequest $request)
 
 > 💡 マイグレーションで `posts` に `image_path`（`string`, `nullable`）列を足しておくこと（5-6の復習）。
 
+> 🆘 **ここで詰まったら**（保存は成功するのに画像が表示されない ─ 最頻出）
+> - **原因No.1**：`php artisan storage:link` を実行していない（`storage` と `public` を橋渡しするリンク。次の④で実行）
+> - **原因No.2**：表示側が `asset('storage/' . $post->image_path)` になっているか。DBに保存したパス（`posts/xxx.jpg`）と組み合わせる
+> - **ファイルが届かない**：フォームに `enctype="multipart/form-data"` があるか（①）
+> - **直らなければ、AIにこう聞く**（保存処理・表示Blade・実行したartisanコマンドを貼る）：
+>   「Laravelで画像の保存は成功しますが表示されません。storage:link と asset() のどこが問題か教えてください」
+
 ---
 
 ## ✍️ 手を動かす④ ─ 表示する（`storage:link` の魔法）

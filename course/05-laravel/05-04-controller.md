@@ -55,6 +55,11 @@ class ItemController extends Controller
 }
 ```
 
+> 🆘 **ここで詰まったら**（`Target class [ItemController] does not exist`）
+> - **チェック順**：① コントローラ名のつづり ② `routes/web.php` で `use App\Http\Controllers\ItemController;` を書いたか（または `[\App\Http\Controllers\ItemController::class, 'index']` とフル指定）③ ファイルが `app/Http/Controllers/` にあり、クラス名＝ファイル名か ④ 直らなければ `composer dump-autoload`
+> - **直らなければ、AIにこう聞く**（web.php の該当行とコントローラの先頭を貼る）：
+>   「Laravelで Target class does not exist が出ます。ルートとコントローラの対応が正しいか教えてください」
+
 **7つの役割**
 
 | メソッド | HTTPメソッド | 役割 | 返すもの |

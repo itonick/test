@@ -147,6 +147,13 @@ Add [title] to fillable property to allow mass assignment on [App\Models\Post].
 悪意あるユーザーが `is_admin => true` のような**想定外のキー**を紛れ込ませられてしまう。
 これを **mass assignment 脆弱性** と呼びます。
 
+> 🆘 **ここで詰まったら**（`Add [xxx] to fillable...` や、保存したのに値が入らない）
+> - **`Add [title] to fillable property`**：モデルに `protected $fillable = [...]` を書き、**一括代入を許す列**を並べる（下記）。ただし `user_id` や `is_admin` など**ユーザーに決めさせたくない列は入れない**
+> - **`create()` したのに一部の列が空**：その列が `$fillable` に無い（弾かれている）。意図的に入れたい列だけ追加する
+> - **`SQLSTATE... doesn't have a default value`**：NOT NULL の列に値を渡していない。フォーム項目か、マイグレーションの `->nullable()`/`->default()` を見直す
+> - **直らなければ、AIにこう聞く**（モデルと保存処理を貼る）：
+>   「Eloquentの create でこのエラーが出ます。$fillable と、渡している値のどこが原因か教えてください」
+
 対策：モデルに「一括代入を許す列」を明示します。
 
 ```php
