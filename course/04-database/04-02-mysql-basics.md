@@ -45,6 +45,12 @@
 > 正確な値は、MAMP のスタートページ（`http://localhost:8888/MAMP/`）の
 > 「MySQL」欄に表示されています。
 
+> 🆘 **ここで詰まったら**（`Access denied for user 'root'@'localhost'`）
+> - **まず確認**：上の表のとおり、**XAMPPはパスワード空**、**MAMPはパスワード `root`**。この取り違えが原因の大半です
+> - **それでもダメ**：MySQL 自体が起動しているか（XAMPP/MAMPのランプが緑か）を確認
+> - **直らなければ、AIにこう聞く**（使っているのが XAMPP か MAMP かを必ず添える）：
+>   「MySQL に接続すると Access denied for user 'root'@'localhost' が出ます。○○（XAMPP/MAMP）を使っています。原因と確認手順を教えてください」
+
 ---
 
 ## ✍️ 手を動かす② ─ データベースを作る
