@@ -130,6 +130,13 @@ cd flea-market
 > ⏳ **初回は数分かかります。** Composer が Laravel 本体と、依存する数十のライブラリを
 > ダウンロードするためです。**これは正常です。**
 
+> 🆘 **ここで詰まったら**（`composer create-project` が失敗する）
+> - **`command not found: composer`**：Composer 未インストール／PATH未通し（インストール後はターミナルを開き直す）
+> - **`requires ext-xxx` / PHPバージョンエラー**：PHP 8.2系が有効か、必要な拡張（mbstring, openssl 等）が入っているかを確認（このレッスンの「必要なPHP拡張を確認する」参照）
+> - **途中で止まる／メモリ不足**：もう一度実行するか、`COMPOSER_MEMORY_LIMIT=-1 composer create-project ...`
+> - **直らなければ、AIにこう聞く**（`php -v` と `composer -V` の結果、エラー全文を添える）：
+>   「Laravelの `composer create-project` が失敗します。PHPは○○、エラーは△△です。原因と確認手順を教えてください」
+
 ### 何が作られたか確認する
 
 ```bash

@@ -150,6 +150,13 @@ php artisan migrate
 Laravelは「どのマイグレーションを実行済みか」を **`migrations` という管理用テーブル**に記録しています。
 だから2回 `migrate` しても、**同じファイルは二度実行されません**（安全）。
 
+> 🆘 **ここで詰まったら**（`migrate` が失敗する）
+> - **`SQLSTATE[HY000] [1049] Unknown database` / `[2002]`**：`.env` のDB設定ミス、またはDBを作っていない。`.env` の `DB_DATABASE` の名前でデータベースを作成し、`php artisan config:clear` してから再実行
+> - **`.env` を直したのに変わらない**：設定がキャッシュされている。`php artisan config:clear` を実行（5-1で学んだ通り）
+> - **`Syntax error` 等でテーブルが中途半端**：`php artisan migrate:fresh` でまっさらに作り直す（**開発中のみ**。データは消えます）
+> - **直らなければ、AIにこう聞く**（エラー全文と `.env` のDB項目を、パスワードは伏せて貼る）：
+>   「Laravelの migrate が失敗します。エラーは○○です。原因と確認手順を教えてください」
+
 ---
 
 ## ✍️ 手を動かす④ ─ 戻す・やり直す
