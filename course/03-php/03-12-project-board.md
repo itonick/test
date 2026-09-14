@@ -132,6 +132,12 @@ php -S localhost:8000 -t public
 - [`lib/session.php`](../code/03-12/lib/session.php) — `start_secure_session()` とフラッシュメッセージ
 - [`lib/csrf.php`](../code/03-12/lib/csrf.php) — CSRFトークン
 
+> 🆘 **ここで詰まったら**（真っ白／`require` でエラー／変更が反映されない）
+> - **チェック順**：① プロジェクトを **`htdocs` の中**に置き、`http://localhost/...` で開いているか（Live Serverでは動きません）② `require` のパスは `require __DIR__ . '/lib/functions.php';` のように **`__DIR__` 起点**にしているか（相対パスは実行場所でズレます）③ 真っ白なら、まず 3-1 で設定した**エラー表示ON**の状態で開き、画面のエラー文を読む
+> - **詰まったら、まず該当機能のレッスンに戻る**：投稿は 3-6、XSS/CSRF は 3-7、ログインは 3-8。各レッスンの「🆘」を見直すのが近道です
+> - **直らなければ、AIにこう聞く**（エラー全文とファイル構成、該当コードを貼る）：
+>   「PHPの掲示板を作っています。○○というエラーが出ます。原因の候補を、確認手順つきで教えてください」
+
 ### `Post` クラス
 
 [`app/Models/Post.php`](../code/03-12/app/Models/Post.php)

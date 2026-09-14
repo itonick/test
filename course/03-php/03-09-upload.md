@@ -71,6 +71,13 @@ var_dump($_FILES);
 > `evil.php` を `photo.jpg` という名前で送ることも、
 > `type` を `image/jpeg` と偽ることもできます。**どちらも検証に使ってはいけません。**
 
+> 🆘 **ここで詰まったら**（`$_FILES` が空／`Undefined array key` になる）
+> - **原因No.1**：フォームに **`enctype="multipart/form-data"` が無い**（これが無いとファイルは届きません ─ 最頻出）
+> - **原因No.2**：`<input type="file">` の `name` と、`$_FILES["○○"]` の `○○` が一致していない／`method="post"` になっていない
+> - **`error` が 0 以外**：上のエラーコード表で意味を確認（サイズ超過は `php.ini` の `upload_max_filesize`・`post_max_size` も見る）
+> - **直らなければ、AIにこう聞く**（フォームのHTMLと受信PHP、`var_dump($_FILES)` の結果を貼る）：
+>   「ファイルアップロードで $_FILES が空になります。原因を確認手順つきで教えてください」
+
 ### エラーコード
 
 ```php
