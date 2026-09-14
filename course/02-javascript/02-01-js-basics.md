@@ -73,6 +73,12 @@ console.log("読み込まれました");
 
 Live Server で開き、`F12` → **Console** タブを見てください。「読み込まれました」と出れば成功です。
 
+> 🆘 **ここで詰まったら**（Consoleに何も出ない＝JSが動いていない）
+> - **まず確認**：① `<script src="js/app.js">` の**パスが合っているか**（`js/` の付け忘れ・つづり）② `app.js` を保存したか ③ Consoleに赤いエラー（`Failed to load resource` など）が出ていないか ④ 開いているのは Live Server（`127.0.0.1:5500`）か
+> - **切り分け**：`app.js` の代わりに `<script>console.log("test");</script>` を直接 `<body>` 末尾に書いて出るか試すと、「読み込みの問題」か「JSの問題」かが分かります
+> - **直らなければ、AIにこう聞く**（HTMLとファイル構成を貼る）：
+>   「JavaScriptが実行されず、Consoleに何も出ません。script の読み込みに問題がないか、確認手順つきで教えてください」
+
 ### `<script>` を置く場所
 
 ```html

@@ -69,6 +69,13 @@ console.log(localStorage.getItem("user"));   // "[object Object]" 😱
 
 **オブジェクトや配列は、そのまま保存できません。**
 
+> 🆘 **ここで詰まったら**（取り出した値が `"[object Object]"` や文字列になっている）
+> - **原因**：localStorage は**文字列しか保存できません**。保存時に `JSON.stringify(値)`、取り出し時に `JSON.parse(文字列)` を通す必要があります（次で学ぶラッパーがこれを自動化します）
+> - **`JSON.parse` でエラーが出る**：保存されている中身が壊れたJSON。`try/catch` で囲み、失敗したら初期値を返す（②のラッパー参照）
+> - **保存自体ができない/例外が出る**：プライベートブラウズや容量超過。これも `try/catch` が必須
+> - **直らなければ、AIにこう聞く**（保存・取り出しのコードを貼る）：
+>   「localStorage から取り出した値が `[object Object]` になります。JSON の変換のどこが抜けているか教えてください」
+
 ### JSON で変換する
 
 ```javascript
