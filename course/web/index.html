@@ -1,62 +1,62 @@
 <title>AIと一緒につくるWebアプリ開発入門</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 
 <style>
 :root{
-  --paper:#FAF9F5;
+  --paper:#FBF8F2;
   --surface:#FFFFFF;
-  --sunk:#F2F0EA;
-  --ink:#1B1D23;
-  --ink-2:#5B6068;
-  --ink-3:#8A8F97;
-  --rule:#E2DFD6;
-  --rule-soft:#EDEAE2;
-  --grid:rgba(27,29,35,.045);
-  --shu:#BE4126;
-  --shu-soft:#FBEDE9;
-  --ai:#0E6F68;
-  --ai-soft:#E7F2F1;
-  --ok:#3F7A3A;
-  --shadow:0 1px 2px rgba(27,29,35,.05), 0 8px 24px -16px rgba(27,29,35,.25);
+  --sunk:#F5EFE4;
+  --ink:#33302A;
+  --ink-2:#6C665C;
+  --ink-3:#9E958A;
+  --rule:#ECE4D6;
+  --rule-soft:#F3EDE1;
+  --grid:rgba(51,48,42,.04);
+  --shu:#E8703C;
+  --shu-soft:#FCEBDF;
+  --ai:#2A9187;
+  --ai-soft:#E4F1EE;
+  --ok:#5AA05A;
+  --shadow:0 2px 5px rgba(51,48,42,.05), 0 16px 34px -20px rgba(51,48,42,.30);
   --maxw:1240px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#131519;
-    --surface:#1A1D22;
-    --sunk:#0F1114;
-    --ink:#E8E5DE;
-    --ink-2:#A0A6AF;
-    --ink-3:#767C86;
-    --rule:#2C3037;
-    --rule-soft:#23272D;
-    --grid:rgba(232,229,222,.045);
-    --shu:#E77B62;
-    --shu-soft:#2B1D19;
-    --ai:#4FBFB2;
-    --ai-soft:#122A29;
-    --ok:#7FB878;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    --paper:#1B1A16;
+    --surface:#24221C;
+    --sunk:#141310;
+    --ink:#EEE7DA;
+    --ink-2:#B0A899;
+    --ink-3:#7F776A;
+    --rule:#37332B;
+    --rule-soft:#2B2820;
+    --grid:rgba(238,231,218,.04);
+    --shu:#F1926C;
+    --shu-soft:#33211A;
+    --ai:#57C3B4;
+    --ai-soft:#122A27;
+    --ok:#84C384;
+    --shadow:0 2px 5px rgba(0,0,0,.4), 0 16px 34px -20px rgba(0,0,0,.8);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#131519;
-  --surface:#1A1D22;
-  --sunk:#0F1114;
-  --ink:#E8E5DE;
-  --ink-2:#A0A6AF;
-  --ink-3:#767C86;
-  --rule:#2C3037;
-  --rule-soft:#23272D;
-  --grid:rgba(232,229,222,.045);
-  --shu:#E77B62;
-  --shu-soft:#2B1D19;
-  --ai:#4FBFB2;
-  --ai-soft:#122A29;
-  --ok:#7FB878;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  --paper:#1B1A16;
+  --surface:#24221C;
+  --sunk:#141310;
+  --ink:#EEE7DA;
+  --ink-2:#B0A899;
+  --ink-3:#7F776A;
+  --rule:#37332B;
+  --rule-soft:#2B2820;
+  --grid:rgba(238,231,218,.04);
+  --shu:#F1926C;
+  --shu-soft:#33211A;
+  --ai:#57C3B4;
+  --ai-soft:#122A27;
+  --ok:#84C384;
+  --shadow:0 2px 5px rgba(0,0,0,.4), 0 16px 34px -20px rgba(0,0,0,.8);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -65,17 +65,16 @@ body{
   margin:0;
   background-color:var(--paper);
   background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size:28px 28px;
+    radial-gradient(1100px 520px at 50% -8%, var(--shu-soft), transparent 62%);
+  background-repeat:no-repeat;
   color:var(--ink);
   font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
   font-size:15.5px;
-  line-height:1.85;
+  line-height:1.9;
   -webkit-font-smoothing:antialiased;
 }
 
-h1,h2,h3,h4{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:800;line-height:1.35;text-wrap:balance;margin:0}
+h1,h2,h3,h4{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Zen Kaku Gothic New",sans-serif;font-weight:700;line-height:1.4;text-wrap:balance;margin:0}
 p{margin:0}
 a{color:inherit}
 
@@ -89,7 +88,7 @@ a{color:inherit}
 /* ---------- masthead ---------- */
 .masthead{border-bottom:1px solid var(--rule);margin-bottom:44px}
 .masthead-in{max-width:var(--maxw);margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.wordmark{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:15px;letter-spacing:.02em}
+.wordmark{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;font-weight:700;font-size:15px;letter-spacing:.01em}
 .wordmark span{color:var(--shu)}
 .mast-spacer{flex:1}
 .mast-note{font-size:11.5px;color:var(--ink-3);letter-spacing:.08em}
@@ -98,11 +97,11 @@ a{color:inherit}
 
 /* ---------- hero ---------- */
 .hero{padding:8px 0 52px;border-bottom:1px solid var(--rule);margin-bottom:44px}
-.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--shu);text-transform:uppercase;margin-bottom:20px}
-.hero h1{font-size:clamp(30px,5.4vw,54px);letter-spacing:-.01em}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--shu);text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(30px,5.4vw,54px);font-weight:900;letter-spacing:0;line-height:1.28}
 .hero h1 em{font-style:normal;color:var(--shu)}
 .lede{margin-top:22px;max-width:36em;color:var(--ink-2);font-size:16px}
-.figures{display:flex;flex-wrap:wrap;gap:0;margin-top:36px;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--surface)}
+.figures{display:flex;flex-wrap:wrap;gap:0;margin-top:36px;border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:var(--surface)}
 .fig{flex:1 1 132px;padding:16px 18px;border-right:1px solid var(--rule-soft)}
 .fig:last-child{border-right:0}
 .fig b{display:block;font-family:"JetBrains Mono",monospace;font-size:24px;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums}
@@ -120,7 +119,7 @@ a{color:inherit}
 .side nav a.on{color:var(--ink);border-left-color:var(--shu);font-weight:700}
 .side nav a i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-3);margin-right:8px}
 
-.progress-card{margin-top:26px;border:1px solid var(--rule);background:var(--surface);border-radius:3px;padding:16px;display:flex;gap:14px;align-items:center}
+.progress-card{margin-top:26px;border:1px solid var(--rule);background:var(--surface);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center}
 .ring{flex:0 0 auto}
 .ring circle{fill:none;stroke-width:6}
 .ring .bg{stroke:var(--rule)}
@@ -138,18 +137,18 @@ section{scroll-margin-top:24px;margin-bottom:76px}
 .sec-intro{max-width:40em;color:var(--ink-2);margin-bottom:28px}
 
 /* ---------- failure grid ---------- */
-.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
 .why > div{background:var(--surface);padding:20px 22px}
 .why h3{font-size:16px;margin-bottom:8px}
 .why .cause{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--shu);margin-bottom:10px}
 .why p{font-size:13.5px;color:var(--ink-2);line-height:1.8}
 
 /* ---------- curriculum ---------- */
-.part{border:1px solid var(--rule);border-radius:3px;background:var(--surface);margin-bottom:12px;overflow:hidden}
+.part{border:1px solid var(--rule);border-radius:14px;background:var(--surface);margin-bottom:12px;overflow:hidden}
 .part-head{display:flex;align-items:center;gap:14px;width:100%;background:none;border:0;padding:15px 18px;font:inherit;color:inherit;cursor:pointer;text-align:left}
 .part-head:hover{background:var(--sunk)}
 .part-no{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--shu);letter-spacing:.1em;flex:0 0 auto}
-.part-title{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:16px;flex:1 1 auto;min-width:0}
+.part-title{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;font-weight:700;font-size:16px;flex:1 1 auto;min-width:0}
 .part-meta{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);flex:0 0 auto;font-variant-numeric:tabular-nums}
 .chev{flex:0 0 auto;color:var(--ink-3);transition:transform .2s}
 .part.open .chev{transform:rotate(90deg)}
@@ -162,13 +161,13 @@ section{scroll-margin-top:24px;margin-bottom:76px}
 .lesson .id{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);margin-right:10px}
 .lesson.done label{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--rule)}
 .lesson .tags{display:flex;gap:6px;flex:0 0 auto;align-items:center;padding-top:2px}
-.chip{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;padding:1px 7px;border-radius:2px;white-space:nowrap}
+.chip{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;padding:1px 7px;border-radius:8px;white-space:nowrap}
 .chip.ai{background:var(--ai-soft);color:var(--ai)}
 .chip.build{background:var(--shu-soft);color:var(--shu)}
 .chip.h{border:1px solid var(--rule);color:var(--ink-3)}
 
 /* ---------- sample lesson ---------- */
-.lesson-sheet{border:1px solid var(--rule);border-radius:3px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.lesson-sheet{border:1px solid var(--rule);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
 .sheet-top{padding:26px 30px 22px;border-bottom:1px solid var(--rule)}
 @media (max-width:560px){.sheet-top{padding:22px 18px}}
 .sheet-top .id{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--shu)}
@@ -184,7 +183,7 @@ section{scroll-margin-top:24px;margin-bottom:76px}
 .sheet-body ul,.sheet-body ol{margin:0 0 16px;padding-left:1.4em;color:var(--ink-2);max-width:40em}
 .sheet-body li{margin-bottom:5px}
 
-.callout{border-radius:3px;padding:14px 18px;margin:0 0 18px;font-size:13.5px;line-height:1.8}
+.callout{border-radius:14px;padding:14px 18px;margin:0 0 18px;font-size:13.5px;line-height:1.8}
 .callout b{display:block;font-size:12.5px;letter-spacing:.05em;margin-bottom:5px}
 .callout.warn{background:var(--shu-soft);border-left:3px solid var(--shu)}
 .callout.warn b{color:var(--shu)}
@@ -204,35 +203,35 @@ section{scroll-margin-top:24px;margin-bottom:76px}
 .steps span{font-size:13px;color:var(--ink-2)}
 
 pre{
-  background:var(--sunk);border:1px solid var(--rule-soft);border-radius:3px;
+  background:var(--sunk);border:1px solid var(--rule-soft);border-radius:14px;
   padding:14px 16px;overflow-x:auto;margin:0 0 16px;
   font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;color:var(--ink);
   white-space:pre-wrap;word-break:break-word;
 }
 pre.code{white-space:pre;word-break:normal}
 
-.tblwrap{overflow-x:auto;margin:0 0 18px;border:1px solid var(--rule);border-radius:3px}
+.tblwrap{overflow-x:auto;margin:0 0 18px;border:1px solid var(--rule);border-radius:14px}
 table{border-collapse:collapse;width:100%;font-size:13px;background:var(--surface)}
 th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
 th{font-size:11px;letter-spacing:.1em;color:var(--ink-3);font-weight:500;background:var(--sunk);white-space:nowrap}
 tr:last-child td{border-bottom:0}
-td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--sunk);padding:1px 5px;border-radius:2px}
+td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--sunk);padding:1px 5px;border-radius:8px}
 
 /* ---------- error book ---------- */
 .search{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
 .search input{
   flex:1 1 260px;min-width:0;font:inherit;font-size:14px;padding:9px 14px;
-  background:var(--surface);border:1px solid var(--rule);border-radius:3px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--rule);border-radius:14px;color:var(--ink);
 }
 .search input:focus{outline:2px solid var(--shu);outline-offset:1px;border-color:transparent}
 .search .count{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);flex:0 0 auto}
 .errs{display:flex;flex-direction:column;gap:8px}
-.err{border:1px solid var(--rule);border-radius:3px;background:var(--surface);padding:14px 18px}
+.err{border:1px solid var(--rule);border-radius:14px;background:var(--surface);padding:14px 18px}
 .err .msg{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--shu);word-break:break-word;line-height:1.6}
-.err .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:1px 6px;margin-left:8px;white-space:nowrap}
+.err .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:8px;padding:1px 6px;margin-left:8px;white-space:nowrap}
 .err .fix{font-size:13.5px;color:var(--ink-2);margin-top:7px;line-height:1.75}
 .err .fix em{font-style:normal;color:var(--ink);font-weight:500}
-.empty{padding:26px;text-align:center;color:var(--ink-3);font-size:13.5px;border:1px dashed var(--rule);border-radius:3px}
+.empty{padding:26px;text-align:center;color:var(--ink-3);font-size:13.5px;border:1px dashed var(--rule);border-radius:14px}
 
 /* ---------- code library ---------- */
 .codetabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
@@ -245,10 +244,10 @@ td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--s
 .codetab.on{border-color:var(--shu);color:var(--shu);background:var(--shu-soft);font-weight:600}
 
 .codes{display:flex;flex-direction:column;gap:14px}
-.codecard{border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden}
+.codecard{border:1px solid var(--rule);border-radius:14px;background:var(--surface);overflow:hidden}
 .codecard > header{display:flex;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--rule-soft);flex-wrap:wrap}
 .codecard h3{font-size:14px;flex:1 1 auto;min-width:0}
-.codecard .lang{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:1px 6px;white-space:nowrap}
+.codecard .lang{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:8px;padding:1px 6px;white-space:nowrap}
 .codecard .from{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ai)}
 .codecard p.note{padding:10px 16px 0;margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.75}
 
@@ -258,7 +257,7 @@ td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--s
 .copybtn{
   position:absolute;top:8px;right:8px;
   font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.04em;
-  padding:3px 10px;border:1px solid var(--rule);border-radius:2px;
+  padding:3px 10px;border:1px solid var(--rule);border-radius:8px;
   background:var(--surface);color:var(--ink-3);cursor:pointer;opacity:.75;
 }
 .prewrap:hover .copybtn{opacity:1}
@@ -267,25 +266,25 @@ td code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--s
 
 /* ---------- prompts ---------- */
 .prompts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.prompt{border:1px solid var(--rule);border-radius:3px;background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+.prompt{border:1px solid var(--rule);border-radius:14px;background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
 .prompt header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--rule-soft)}
 .prompt header h3{font-size:14px;flex:1 1 auto;min-width:0}
 .prompt header .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ai);letter-spacing:.1em;flex:0 0 auto}
 .prompt pre{margin:0;border:0;border-radius:0;flex:1 1 auto;background:transparent;font-size:12px;line-height:1.7;color:var(--ink-2)}
 .prompt footer{padding:10px 16px;border-top:1px solid var(--rule-soft);background:var(--sunk)}
-.copy{font:inherit;font-family:"JetBrains Mono",monospace;font-size:11.5px;background:var(--surface);border:1px solid var(--rule);color:var(--ink-2);border-radius:2px;padding:4px 12px;cursor:pointer}
+.copy{font:inherit;font-family:"JetBrains Mono",monospace;font-size:11.5px;background:var(--surface);border:1px solid var(--rule);color:var(--ink-2);border-radius:8px;padding:4px 12px;cursor:pointer}
 .copy:hover{border-color:var(--shu);color:var(--shu)}
 .copy.done{border-color:var(--ok);color:var(--ok)}
 
 /* ---------- closing ---------- */
-.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
 .files > div{background:var(--surface);padding:16px 18px}
 .files .path{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--shu);margin-bottom:5px;word-break:break-all}
 .files p{font-size:12.5px;color:var(--ink-2);line-height:1.7}
 
 footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3);font-size:12px;line-height:1.9}
 
-:focus-visible{outline:2px solid var(--shu);outline-offset:2px;border-radius:2px}
+:focus-visible{outline:2px solid var(--shu);outline-offset:2px;border-radius:8px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
