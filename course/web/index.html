@@ -5,58 +5,58 @@
 
 <style>
 :root{
-  --paper:#FBF8F2;
+  --paper:#FEFCF7;
   --surface:#FFFFFF;
-  --sunk:#F5EFE4;
-  --ink:#33302A;
-  --ink-2:#6C665C;
-  --ink-3:#9E958A;
-  --rule:#ECE4D6;
-  --rule-soft:#F3EDE1;
-  --grid:rgba(51,48,42,.04);
-  --shu:#E8703C;
-  --shu-soft:#FCEBDF;
-  --ai:#2A9187;
-  --ai-soft:#E4F1EE;
-  --ok:#5AA05A;
-  --shadow:0 2px 5px rgba(51,48,42,.05), 0 16px 34px -20px rgba(51,48,42,.30);
+  --sunk:#FBF5EC;
+  --ink:#423C34;
+  --ink-2:#7B746B;
+  --ink-3:#B0A79B;
+  --rule:#F1E9DC;
+  --rule-soft:#F8F2E8;
+  --grid:rgba(66,60,52,.03);
+  --shu:#F08A5D;
+  --shu-soft:#FDEEE3;
+  --ai:#35A79B;
+  --ai-soft:#E7F4F1;
+  --ok:#63AE63;
+  --shadow:0 2px 6px rgba(66,60,52,.045), 0 18px 40px -24px rgba(66,60,52,.25);
   --maxw:1240px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#1B1A16;
-    --surface:#24221C;
-    --sunk:#141310;
-    --ink:#EEE7DA;
-    --ink-2:#B0A899;
-    --ink-3:#7F776A;
-    --rule:#37332B;
-    --rule-soft:#2B2820;
-    --grid:rgba(238,231,218,.04);
-    --shu:#F1926C;
-    --shu-soft:#33211A;
-    --ai:#57C3B4;
-    --ai-soft:#122A27;
-    --ok:#84C384;
-    --shadow:0 2px 5px rgba(0,0,0,.4), 0 16px 34px -20px rgba(0,0,0,.8);
+    --paper:#201E19;
+    --surface:#2A2721;
+    --sunk:#17150F;
+    --ink:#F0E9DC;
+    --ink-2:#B7AF9F;
+    --ink-3:#857C6E;
+    --rule:#3C382F;
+    --rule-soft:#2F2B23;
+    --grid:rgba(240,233,220,.04);
+    --shu:#F5A17E;
+    --shu-soft:#382318;
+    --ai:#64C9BA;
+    --ai-soft:#12302B;
+    --ok:#8FCB8F;
+    --shadow:0 2px 6px rgba(0,0,0,.4), 0 18px 40px -24px rgba(0,0,0,.8);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#1B1A16;
-  --surface:#24221C;
-  --sunk:#141310;
-  --ink:#EEE7DA;
-  --ink-2:#B0A899;
-  --ink-3:#7F776A;
-  --rule:#37332B;
-  --rule-soft:#2B2820;
-  --grid:rgba(238,231,218,.04);
-  --shu:#F1926C;
-  --shu-soft:#33211A;
-  --ai:#57C3B4;
-  --ai-soft:#122A27;
-  --ok:#84C384;
-  --shadow:0 2px 5px rgba(0,0,0,.4), 0 16px 34px -20px rgba(0,0,0,.8);
+  --paper:#201E19;
+  --surface:#2A2721;
+  --sunk:#17150F;
+  --ink:#F0E9DC;
+  --ink-2:#B7AF9F;
+  --ink-3:#857C6E;
+  --rule:#3C382F;
+  --rule-soft:#2F2B23;
+  --grid:rgba(240,233,220,.04);
+  --shu:#F5A17E;
+  --shu-soft:#382318;
+  --ai:#64C9BA;
+  --ai-soft:#12302B;
+  --ok:#8FCB8F;
+  --shadow:0 2px 6px rgba(0,0,0,.4), 0 18px 40px -24px rgba(0,0,0,.8);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -309,7 +309,7 @@ footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3)
     </p>
     <div class="figures">
       <div class="fig"><b>7</b><small class="mono">部 / PARTS</small></div>
-      <div class="fig"><b>62</b><small class="mono">レッスン</small></div>
+      <div class="fig"><b>80</b><small class="mono">レッスン</small></div>
       <div class="fig"><b>180<span style="font-size:15px">h</span></b><small class="mono">総学習時間</small></div>
       <div class="fig"><b>9</b><small class="mono">AI専用レッスン</small></div>
       <div class="fig"><b>5</b><small class="mono">ポートフォリオ成果物</small></div>
@@ -335,7 +335,7 @@ footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3)
                   stroke-dasharray="138.2" stroke-dashoffset="138.2"></circle>
         </svg>
         <div>
-          <b id="pcount">0 / 62</b>
+          <b id="pcount">0 / 80</b>
           <small>レッスン完了</small>
           <button class="reset" id="reset" type="button">進捗をリセット</button>
         </div>
@@ -389,7 +389,7 @@ footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3)
       <section id="sample">
         <div class="sec-head"><span class="n mono">03</span><h2>サンプルレッスン</h2></div>
         <p class="sec-intro">
-          第0部の最終レッスンを、実際の形式のまま掲載します。全62レッスンがこの構成です。
+          第0部の最終レッスンを、実際の形式のまま掲載します。全80レッスンがこの構成です。
         </p>
 
         <article class="lesson-sheet">
@@ -529,7 +529,7 @@ echo "こんにちは、" . $name . "さん";</pre>
         <p class="sec-intro">教材本体は Markdown で提供されます。このページはその公開版です。</p>
         <div class="files">
           <div><div class="path mono">README.md</div><p>教材全体の案内と到達点</p></div>
-          <div><div class="path mono">COURSE_MAP.md</div><p>全62レッスンの一覧・所要時間・依存関係</p></div>
+          <div><div class="path mono">COURSE_MAP.md</div><p>全80レッスンの一覧・所要時間・依存関係</p></div>
           <div><div class="path mono">00-orientation/</div><p>第0部 全7レッスン。環境構築とAI入門</p></div>
           <div><div class="path mono">01-html-css/</div><p>第1部 全14レッスン。カフェLPを1枚作りきる</p></div>
           <div><div class="path mono">02-javascript/</div><p>第2部 全13レッスン。ToDoアプリを作る</p></div>

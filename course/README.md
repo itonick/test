@@ -1,6 +1,6 @@
 # AIと一緒につくる Web アプリ開発入門
 
-**HTML / CSS / JavaScript から PHP・Laravel まで、AIを「使いこなしながら」ゼロから学ぶ全 7 部・全 62 レッスン**
+**HTML / CSS / JavaScript から PHP・Laravel まで、AIを「使いこなしながら」ゼロから学ぶ全 7 部・全 80 レッスン**
 
 ---
 
