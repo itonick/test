@@ -396,7 +396,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   <div class="masthead-in">
     <span class="wordmark">AIと一緒につくる<span>／</span>Webアプリ開発入門</span>
     <span class="mast-spacer"></span>
-    <span class="mast-note mono">全81レッスン 本文収録</span>
+    <span class="mast-note mono">全83レッスン 本文収録</span>
     <button class="themetoggle" id="tt" type="button">☾ / ☀</button>
   </div>
 </header>
@@ -414,8 +414,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
       そして学び終えたあと、<strong>その力を仕事につなげる道のり</strong>まで扱います。
     </p>
     <p class="hero-meta">
-      全7部・<strong>81レッスン</strong>、およそ<strong>180時間</strong>。パソコンの基本操作からスタートし、
-      手を動かして作る総合演習が5本、AIとの付き合い方を扱う回が9レッスン含まれます。<br>
+      全7部・<strong>83レッスン</strong>、およそ<strong>180時間</strong>。パソコンの基本操作からスタートし、
+      手を動かして作る総合演習が5本、AIとの付き合い方や<strong>AI時代の思考法（クリティカルシンキング・仕様設計）</strong>を扱う回が含まれます。<br>
       <span class="disclaimer">習得にかかる時間には個人差があります。「必ず稼げる」「誰でも簡単に」といった保証はしません。近道の代わりに、続けられる設計にしています。</span>
     </p>
   </div>
@@ -440,7 +440,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
                   stroke-dasharray="138.2" stroke-dashoffset="138.2"></circle>
         </svg>
         <div>
-          <b id="pcount">0 / 81</b>
+          <b id="pcount">0 / 83</b>
           <small>レッスン完了</small>
           <button class="reset" id="reset" type="button">進捗をリセット</button>
         </div>
@@ -484,7 +484,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
       <section id="map">
         <div class="sec-head"><span class="n mono">02</span><h2>カリキュラム</h2></div>
         <p class="sec-intro">
-          部の見出しをクリックすると一覧が開き、<strong>レッスン名をクリックすると本文がその場で読めます</strong>（全81レッスン収録）。
+          部の見出しをクリックすると一覧が開き、<strong>レッスン名をクリックすると本文がその場で読めます</strong>（全83レッスン収録）。
           左のチェックを付けると、進捗がこのブラウザに保存されます。
           <span class="chip ai mono">AI</span> はAI活用が主題の回、<span class="chip build mono">成果物</span> は手元に動くものが残る回です。
         </p>
@@ -495,7 +495,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
       <section id="sample">
         <div class="sec-head"><span class="n mono">03</span><h2>サンプルレッスン</h2></div>
         <p class="sec-intro">
-          第0部の最終レッスンを、実際の形式のまま掲載します。全81レッスンがこの構成です。
+          第0部の最終レッスンを、実際の形式のまま掲載します。全83レッスンがこの構成です。
           <strong>上の「カリキュラム」から、どのレッスンもクリックすれば本文をそのまま読めます。</strong>
         </p>
 
@@ -661,8 +661,8 @@ echo "こんにちは、" . $name . "さん";</pre>
         <p class="sec-intro">教材本体は Markdown で提供されます。このページはその公開版です。</p>
         <div class="files">
           <div><div class="path mono">README.md</div><p>教材全体の案内と到達点</p></div>
-          <div><div class="path mono">COURSE_MAP.md</div><p>全81レッスンの一覧・所要時間・依存関係</p></div>
-          <div><div class="path mono">00-orientation/</div><p>第0部 全8レッスン。パソコンの基本操作・環境構築・AI入門</p></div>
+          <div><div class="path mono">COURSE_MAP.md</div><p>全83レッスンの一覧・所要時間・依存関係</p></div>
+          <div><div class="path mono">00-orientation/</div><p>第0部 全10レッスン。パソコンの基本操作・環境構築・AI入門・AI時代の思考法</p></div>
           <div><div class="path mono">01-html-css/</div><p>第1部 全14レッスン。カフェLPを1枚作りきる</p></div>
           <div><div class="path mono">02-javascript/</div><p>第2部 全13レッスン。ToDoアプリを作る</p></div>
           <div><div class="path mono">03-php/</div><p>第3部 全12レッスン。掲示板を作る</p></div>
@@ -727,7 +727,7 @@ echo "こんにちは、" . $name . "さん";</pre>
 
   /* ---------- curriculum data ---------- */
   var PARTS = [
-    { n: "第0部", t: "オリエンテーション", h: 7, ls: [
+    { n: "第0部", t: "オリエンテーション", h: 9, ls: [
       ["0-0","はじめの一歩 ─ パソコンの基本操作",""],
       ["0-1","ようこそ / この教材の使い方",""],
       ["0-2","挫折しない学び方の設計",""],
@@ -735,7 +735,9 @@ echo "こんにちは、" . $name . "さん";</pre>
       ["0-4","開発環境をつくる（Windows / Mac）","build"],
       ["0-5","VS Code を自分の道具にする","build"],
       ["0-6","AIを開発の相棒にする — 基本編","ai"],
-      ["0-7","AIの答えを疑う技術 — 検証編","ai"]
+      ["0-7","AIの答えを疑う技術 — 検証編","ai"],
+      ["0-8","クリティカルシンキング入門","ai"],
+      ["0-9","仕様で考える ── 何を・なぜ作るか","ai"]
     ]},
     { n: "第1部", t: "HTML / CSS", h: 25, ls: [
       ["1-1","HTMLの骨格とタグの考え方","build"],
