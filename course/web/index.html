@@ -2,6 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js" defer></script>
 
 <style>
 :root{
@@ -294,6 +295,98 @@ td code{font-family:"Noto Sans Mono",monospace;font-size:12px;background:var(--s
 
 footer.page{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink-3);font-size:12px;line-height:1.9}
 
+/* ---------- lesson row: title opens reader ---------- */
+.lesson-open{
+  flex:1 1 auto;min-width:0;text-align:left;background:none;border:0;padding:0;
+  font:inherit;color:var(--ink);cursor:pointer;line-height:1.6;
+}
+.lesson-open:hover{color:var(--shu)}
+.lesson-open:hover .ttl{text-decoration:underline;text-underline-offset:2px}
+.lesson.done .lesson-open .ttl{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--rule)}
+.lesson-open .read{
+  font-family:"Noto Sans Mono",monospace;font-size:10px;letter-spacing:.04em;color:var(--ink-3);
+  border:1px solid var(--rule);border-radius:4px;padding:0 6px;margin-left:8px;white-space:nowrap;
+  opacity:0;transition:opacity .15s;
+}
+.lesson:hover .lesson-open .read{opacity:1;color:var(--shu);border-color:var(--shu)}
+@media (max-width:560px){.lesson-open .read{display:none}}
+
+/* ---------- reader overlay ---------- */
+.reader{position:fixed;inset:0;z-index:80;display:none}
+.reader.on{display:block}
+.reader-scrim{position:absolute;inset:0;background:rgba(15,15,20,.5);animation:rfade .18s ease}
+.reader-panel{
+  position:absolute;top:0;right:0;bottom:0;width:min(780px,100%);
+  background:var(--paper);border-left:1px solid var(--rule);
+  display:flex;flex-direction:column;box-shadow:-10px 0 44px rgba(0,0,0,.22);
+  animation:rslide .22s cubic-bezier(.2,.7,.3,1);
+}
+@keyframes rfade{from{opacity:0}to{opacity:1}}
+@keyframes rslide{from{transform:translateX(24px);opacity:.4}to{transform:none;opacity:1}}
+.reader-head{
+  flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:13px 22px;
+  border-bottom:1px solid var(--rule);border-top:4px solid var(--shu);background:var(--surface);
+}
+.reader-head .rid{font-family:"Noto Sans Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--shu);flex:0 0 auto}
+.reader-head .rtitle{font-weight:700;font-size:14px;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reader-close{flex:0 0 auto;background:none;border:1px solid var(--rule);color:var(--ink-2);border-radius:8px;width:32px;height:32px;font-size:16px;line-height:1;cursor:pointer}
+.reader-close:hover{border-color:var(--shu);color:var(--shu)}
+.reader-body{flex:1 1 auto;overflow-y:auto;padding:34px 44px 72px;-webkit-overflow-scrolling:touch}
+@media (max-width:560px){.reader-body{padding:24px 18px 60px}}
+.reader-md{max-width:44em;margin:0 auto}
+.reader-loading{color:var(--ink-3);font-size:13.5px;text-align:center;padding:60px 0}
+.reader-foot{
+  flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:11px 18px;
+  border-top:1px solid var(--rule);background:var(--surface);
+}
+.rnav{font-family:"Noto Sans JP",sans-serif;font-size:12px;background:var(--surface);border:1px solid var(--rule);color:var(--ink-2);border-radius:8px;padding:7px 12px;cursor:pointer;max-width:44%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rnav:hover:not(:disabled){border-color:var(--shu);color:var(--shu)}
+.rnav:disabled{opacity:.35;cursor:default}
+.rnav .a{font-family:"Noto Sans Mono",monospace;font-size:10px;color:var(--ink-3);display:block}
+.rnav.next{text-align:right;margin-left:auto}
+.rdone{flex:0 0 auto;font-family:"Noto Sans JP",sans-serif;font-size:12px;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);border-radius:8px;padding:7px 14px;cursor:pointer}
+.rdone:hover{border-color:var(--shu);color:var(--shu)}
+.rdone.is-done{background:var(--shu-soft);border-color:var(--shu);color:var(--shu);font-weight:700}
+@media (max-width:560px){.rdone{padding:7px 10px}.reader-foot{gap:6px;padding:10px 12px}}
+
+/* ---------- rendered markdown ---------- */
+.reader-md > *:first-child{margin-top:0}
+.reader-md h1{font-size:clamp(22px,3.6vw,30px);font-weight:900;line-height:1.35;margin:0 0 6px;letter-spacing:-.01em}
+.reader-md h2{font-size:19px;margin:38px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.reader-md h3{font-size:16px;margin:28px 0 10px}
+.reader-md h4{font-size:14px;margin:22px 0 8px;color:var(--ink-2)}
+.reader-md p{margin:0 0 15px}
+.reader-md ul,.reader-md ol{margin:0 0 16px;padding-left:1.5em;color:var(--ink)}
+.reader-md li{margin-bottom:6px}
+.reader-md li>ul,.reader-md li>ol{margin:6px 0 4px}
+.reader-md a{color:var(--shu);text-decoration:underline;text-underline-offset:2px;word-break:break-word}
+.reader-md strong{font-weight:700}
+.reader-md hr{border:0;border-top:1px solid var(--rule);margin:30px 0}
+.reader-md code{font-family:"Noto Sans Mono",monospace;font-size:.9em;background:var(--sunk);padding:1px 5px;border-radius:4px;word-break:break-word}
+.reader-md pre{background:var(--sunk);border:1px solid var(--rule-soft);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 16px;line-height:1.7}
+.reader-md pre code{font-size:12.5px;background:none;padding:0;border-radius:0;white-space:pre}
+.reader-md blockquote{margin:0 0 16px;padding:13px 18px;border-left:4px solid var(--rule);background:var(--sunk);border-radius:0 8px 8px 0;color:var(--ink)}
+.reader-md blockquote > *:last-child{margin-bottom:0}
+.reader-md blockquote p{margin:0 0 8px}
+.reader-md blockquote.goal{border-left-color:var(--ink);background:var(--sunk)}
+.reader-md blockquote.rescue{border-left-color:var(--warn);background:var(--warn-soft)}
+.reader-md blockquote.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.reader-md blockquote.ai{border-left-color:var(--ai);background:var(--ai-soft)}
+.reader-md blockquote.tip{border-left-color:var(--shu);background:var(--shu-soft)}
+.reader-md .tblwrap{overflow-x:auto;margin:0 0 18px;border:1px solid var(--rule);border-radius:8px}
+.reader-md table{margin:0}
+.reader-md .prewrap{position:relative;margin:0 0 16px}
+.reader-md .prewrap>pre{margin:0}
+
+/* ---------- doc quick-links ---------- */
+.doclinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.doclink{
+  font-family:"Noto Sans JP",sans-serif;font-size:12px;background:var(--surface);
+  border:1px solid var(--rule);color:var(--shu);border-radius:8px;padding:4px 11px;cursor:pointer;
+}
+.doclink:hover{border-color:var(--shu);background:var(--shu-soft)}
+.doclink.lg{font-size:13px;padding:8px 18px;font-weight:700}
+
 :focus-visible{outline:3px solid var(--shu);outline-offset:2px;border-radius:2px}
 a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{box-shadow:0 0 0 2px var(--paper),0 0 0 5px var(--shu);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -303,7 +396,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   <div class="masthead-in">
     <span class="wordmark">AIと一緒につくる<span>／</span>Webアプリ開発入門</span>
     <span class="mast-spacer"></span>
-    <span class="mast-note mono">全7部 執筆済み</span>
+    <span class="mast-note mono">全81レッスン 本文収録</span>
     <button class="themetoggle" id="tt" type="button">☾ / ☀</button>
   </div>
 </header>
@@ -391,7 +484,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
       <section id="map">
         <div class="sec-head"><span class="n mono">02</span><h2>カリキュラム</h2></div>
         <p class="sec-intro">
-          部をクリックすると全レッスンが開きます。チェックを付けると、このブラウザに進捗が保存されます。
+          部の見出しをクリックすると一覧が開き、<strong>レッスン名をクリックすると本文がその場で読めます</strong>（全81レッスン収録）。
+          左のチェックを付けると、進捗がこのブラウザに保存されます。
           <span class="chip ai mono">AI</span> はAI活用が主題の回、<span class="chip build mono">成果物</span> は手元に動くものが残る回です。
         </p>
         <div id="parts"></div>
@@ -402,6 +496,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
         <div class="sec-head"><span class="n mono">03</span><h2>サンプルレッスン</h2></div>
         <p class="sec-intro">
           第0部の最終レッスンを、実際の形式のまま掲載します。全81レッスンがこの構成です。
+          <strong>上の「カリキュラム」から、どのレッスンもクリックすれば本文をそのまま読めます。</strong>
         </p>
 
         <article class="lesson-sheet">
@@ -557,6 +652,7 @@ echo "こんにちは、" . $name . "さん";</pre>
         <p class="sec-intro">
           教材の巻末資料「キャリアの築き方」で、職種の地図・最初の実績の作り方・応募書類・面接・お金の考え方・AIの活かし方まで、さらに詳しく解説しています。
         </p>
+        <p><button class="doclink lg" type="button" data-doc="career-guide">▸ 「キャリアの築き方」を全文読む</button></p>
       </section>
 
       <!-- 08 ---------------------------------------------------------- -->
@@ -573,7 +669,15 @@ echo "こんにちは、" . $name . "さん";</pre>
           <div><div class="path mono">04-database/</div><p>第4部 全10レッスン。掲示板をDB化する</p></div>
           <div><div class="path mono">05-laravel/</div><p>第5部 全16レッスン。フリマアプリを作りきる</p></div>
           <div><div class="path mono">06-portfolio/</div><p>第6部 全8レッスン。公開してポートフォリオにする</p></div>
-          <div><div class="path mono">appendix/</div><p>エラー図鑑・AIプロンプト集・用語集・チートシート・キャリアの築き方</p></div>
+          <div><div class="path mono">appendix/</div><p>巻末資料。クリックで本文が開きます。</p>
+            <div class="doclinks">
+              <button class="doclink" type="button" data-doc="error-book">エラー図鑑</button>
+              <button class="doclink" type="button" data-doc="ai-prompts">AIプロンプト集</button>
+              <button class="doclink" type="button" data-doc="glossary">用語集</button>
+              <button class="doclink" type="button" data-doc="cheatsheets">チートシート</button>
+              <button class="doclink" type="button" data-doc="career-guide">キャリアの築き方</button>
+            </div>
+          </div>
           <div><div class="path mono">code/</div><p>各レッスンの完成コード（動作確認済み）</p></div>
         </div>
       </section>
@@ -585,6 +689,25 @@ echo "こんにちは、" . $name . "さん";</pre>
       </footer>
 
     </main>
+  </div>
+</div>
+
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="rtitle" hidden>
+  <div class="reader-scrim" data-close="1"></div>
+  <div class="reader-panel">
+    <div class="reader-head">
+      <span class="rid mono" id="rid"></span>
+      <span class="rtitle" id="rtitle"></span>
+      <button class="reader-close" id="rclose" type="button" aria-label="閉じる">✕</button>
+    </div>
+    <div class="reader-body" id="rbody">
+      <div class="reader-md" id="rmd"></div>
+    </div>
+    <div class="reader-foot">
+      <button class="rnav prev" id="rprev" type="button"><span class="a">前のレッスン</span><span class="t"></span></button>
+      <button class="rdone" id="rdone" type="button">完了にする</button>
+      <button class="rnav next" id="rnext" type="button"><span class="a">次のレッスン</span><span class="t"></span></button>
+    </div>
   </div>
 </div>
 
@@ -740,8 +863,12 @@ echo "こんにちは、" . $name . "さん";</pre>
         : (l[2] === "build" ? '<span class="chip build mono">成果物</span>' : "");
       var id = "L" + l[0];
       return '<div class="lesson' + (done[l[0]] ? " done" : "") + '" data-l="' + l[0] + '">' +
-             '<input type="checkbox" id="' + id + '"' + (done[l[0]] ? " checked" : "") + '>' +
-             '<label for="' + id + '"><span class="id mono">' + l[0] + '</span>' + esc(l[1]) + '</label>' +
+             '<input type="checkbox" id="' + id + '"' + (done[l[0]] ? " checked" : "") +
+               ' aria-label="' + esc(l[1]) + ' を完了にする">' +
+             '<button class="lesson-open" type="button" data-open="' + l[0] + '">' +
+               '<span class="id mono">' + l[0] + '</span><span class="ttl">' + esc(l[1]) + '</span>' +
+               '<span class="read mono">読む →</span>' +
+             '</button>' +
              '<span class="tags">' + tag + '</span></div>';
     }).join("");
     art.innerHTML =
@@ -1376,5 +1503,213 @@ echo "こんにちは、" . $name . "さん";</pre>
     });
   }, { rootMargin: "-10% 0px -70% 0px" });
   secs.forEach(function (s) { if (s) spy.observe(s); });
+
+  /* ================= LESSON READER ================= */
+
+  // ordered flat list of lessons for prev/next
+  var FLAT = [];
+  PARTS.forEach(function (p) {
+    p.ls.forEach(function (l) { FLAT.push({ id: l[0], title: l[1] }); });
+  });
+  var IDX = {}, TITLE = {};
+  FLAT.forEach(function (f, i) { IDX[f.id] = i; TITLE[f.id] = f.title; });
+
+  var DOC_TITLES = {
+    "career-guide": "キャリアの築き方",
+    "error-book": "エラー図鑑",
+    "ai-prompts": "AIプロンプト集",
+    "glossary": "用語集",
+    "cheatsheets": "チートシート"
+  };
+
+  var DOCS = null, docsPromise = null;
+  function ensureDocs() {
+    if (docsPromise) return docsPromise;
+    docsPromise = fetch("lessons.json").then(function (r) {
+      if (!r.ok) throw new Error("http " + r.status);
+      return r.json();
+    }).then(function (j) { DOCS = j; return j; });
+    return docsPromise;
+  }
+  ensureDocs().catch(function () { /* surfaced on open */ });
+
+  var reader = document.getElementById("reader");
+  var rmd    = document.getElementById("rmd");
+  var rbody  = document.getElementById("rbody");
+  var ridEl  = document.getElementById("rid");
+  var rtitleEl = document.getElementById("rtitle");
+  var rprev  = document.getElementById("rprev");
+  var rnext  = document.getElementById("rnext");
+  var rdone  = document.getElementById("rdone");
+  var curKey = null, lastFocus = null;
+
+  function hrefToKey(href) {
+    var h = href.split("#")[0].split("?")[0];
+    var base = h.substring(h.lastIndexOf("/") + 1);
+    if (!/\.md$/i.test(base)) return null;
+    var stem = base.replace(/\.md$/i, "");
+    var m = stem.match(/^(\d+)-(\d+)-/);
+    if (m) {
+      var k = parseInt(m[1], 10) + "-" + parseInt(m[2], 10);
+      return IDX.hasOwnProperty(k) ? k : null;
+    }
+    return DOC_TITLES[stem] ? stem : null;
+  }
+
+  function decorate() {
+    Array.prototype.forEach.call(rmd.querySelectorAll("blockquote"), function (bq) {
+      var t = bq.textContent || "", c = "";
+      if (t.indexOf("🆘") > -1) c = "rescue";
+      else if (t.indexOf("⚠") > -1) c = "warn";
+      else if (t.indexOf("🤖") > -1) c = "ai";
+      else if (t.indexOf("🎯") > -1) c = "goal";
+      else if (t.indexOf("💡") > -1 || t.indexOf("🧠") > -1 || t.indexOf("💬") > -1 ||
+               t.indexOf("📎") > -1 || t.indexOf("🖐") > -1) c = "tip";
+      if (c) bq.classList.add(c);
+    });
+    Array.prototype.forEach.call(rmd.querySelectorAll("table"), function (tb) {
+      var pn = tb.parentNode;
+      if (pn && pn.classList && pn.classList.contains("tblwrap")) return;
+      var w = document.createElement("div"); w.className = "tblwrap";
+      pn.insertBefore(w, tb); w.appendChild(tb);
+    });
+    Array.prototype.forEach.call(rmd.querySelectorAll("pre"), function (pre) {
+      var pn = pre.parentNode;
+      if (pn && pn.classList && pn.classList.contains("prewrap")) return;
+      var w = document.createElement("div"); w.className = "prewrap";
+      pn.insertBefore(w, pre); w.appendChild(pre);
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "copybtn mono"; b.textContent = "コピー";
+      b.addEventListener("click", function () { flashCopied(b, pre.textContent); });
+      w.appendChild(b);
+    });
+    Array.prototype.forEach.call(rmd.querySelectorAll("a"), function (a) {
+      var href = a.getAttribute("href") || "";
+      if (/^https?:/i.test(href)) { a.target = "_blank"; a.rel = "noopener noreferrer"; return; }
+      var key = hrefToKey(href);
+      if (key) a.setAttribute("data-key", key);
+      else if (/\.md(#|$)/i.test(href.split("?")[0])) a.setAttribute("data-nokey", "1");
+    });
+  }
+
+  function renderMd(md) {
+    var html;
+    if (window.marked && window.marked.parse) {
+      try {
+        html = window.marked.parse(md, { gfm: true, breaks: false, headerIds: false, mangle: false });
+      } catch (e) { html = "<pre>" + esc(md) + "</pre>"; }
+    } else {
+      html = "<pre>" + esc(md) + "</pre>";
+    }
+    rmd.innerHTML = html;
+    decorate();
+  }
+
+  function updateNav(key, isLesson) {
+    if (!isLesson) { rprev.style.display = "none"; rnext.style.display = "none"; return; }
+    rprev.style.display = ""; rnext.style.display = "";
+    var i = IDX[key], p = FLAT[i - 1], n = FLAT[i + 1];
+    rprev.disabled = !p; rnext.disabled = !n;
+    rprev.querySelector(".t").textContent = p ? (p.id + "　" + p.title) : "";
+    rnext.querySelector(".t").textContent = n ? (n.id + "　" + n.title) : "";
+    rprev.dataset.go = p ? p.id : "";
+    rnext.dataset.go = n ? n.id : "";
+  }
+
+  function updateDoneBtn(key, isLesson) {
+    if (!isLesson) { rdone.style.display = "none"; return; }
+    rdone.style.display = "";
+    var d = !!done[key];
+    rdone.classList.toggle("is-done", d);
+    rdone.textContent = d ? "完了済み ✓" : "完了にする";
+  }
+
+  function openLesson(key) {
+    var isLesson = IDX.hasOwnProperty(key);
+    if (!isLesson && !DOC_TITLES[key]) return;
+    if (!reader.classList.contains("on")) lastFocus = document.activeElement;
+    curKey = key;
+    reader.hidden = false;
+    reader.classList.add("on");
+    document.body.style.overflow = "hidden";
+    ridEl.textContent = isLesson ? key : "巻末資料";
+    rtitleEl.textContent = isLesson ? TITLE[key] : (DOC_TITLES[key] || key);
+    updateNav(key, isLesson);
+    updateDoneBtn(key, isLesson);
+    rbody.scrollTop = 0;
+    rmd.innerHTML = '<div class="reader-loading">読み込んでいます…</div>';
+    try { document.getElementById("rclose").focus(); } catch (e) {}
+    ensureDocs().then(function (docs) {
+      if (curKey !== key) return;
+      var md = docs && docs[key];
+      if (md == null) {
+        rmd.innerHTML = '<div class="reader-loading">このレッスンの本文が見つかりませんでした。</div>';
+        return;
+      }
+      renderMd(md);
+      rbody.scrollTop = 0;
+    }, function () {
+      if (curKey !== key) return;
+      rmd.innerHTML = '<div class="reader-loading">本文を読み込めませんでした。<br>' +
+        'ページを再読み込みしてから、もう一度お試しください。</div>';
+    });
+  }
+
+  function closeReader() {
+    reader.classList.remove("on");
+    reader.hidden = true;
+    document.body.style.overflow = "";
+    curKey = null;
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+  }
+
+  // open from curriculum rows
+  host.addEventListener("click", function (e) {
+    var b = e.target.closest(".lesson-open");
+    if (!b) return;
+    lastFocus = b;
+    openLesson(b.getAttribute("data-open"));
+  });
+
+  // open appendix / docs from anywhere via [data-doc]
+  document.addEventListener("click", function (e) {
+    var d = e.target.closest("[data-doc]");
+    if (!d) return;
+    e.preventDefault();
+    lastFocus = d;
+    openLesson(d.getAttribute("data-doc"));
+  });
+
+  // internal links inside the rendered lesson
+  rmd.addEventListener("click", function (e) {
+    var a = e.target.closest("a");
+    if (!a) return;
+    if (a.getAttribute("data-key")) { e.preventDefault(); openLesson(a.getAttribute("data-key")); }
+    else if (a.getAttribute("data-nokey")) { e.preventDefault(); }
+  });
+
+  rprev.addEventListener("click", function () { if (this.dataset.go) openLesson(this.dataset.go); });
+  rnext.addEventListener("click", function () { if (this.dataset.go) openLesson(this.dataset.go); });
+
+  rdone.addEventListener("click", function () {
+    if (!curKey || !IDX.hasOwnProperty(curKey)) return;
+    if (done[curKey]) delete done[curKey]; else done[curKey] = 1;
+    save(); refresh();
+    var box = document.getElementById("L" + curKey);
+    if (box) {
+      box.checked = !!done[curKey];
+      var row = box.closest(".lesson");
+      if (row) row.classList.toggle("done", !!done[curKey]);
+    }
+    updateDoneBtn(curKey, true);
+  });
+
+  document.getElementById("rclose").addEventListener("click", closeReader);
+  reader.addEventListener("click", function (e) {
+    if (e.target.getAttribute("data-close")) closeReader();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && reader.classList.contains("on")) closeReader();
+  });
 })();
 </script>
