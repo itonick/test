@@ -107,6 +107,7 @@ a{color:inherit}
 .hero h1{font-size:clamp(30px,5.4vw,52px);font-weight:900;letter-spacing:-.01em;line-height:1.3}
 .hero-meta{margin-top:24px;padding-top:18px;border-top:1px solid var(--rule);color:var(--ink-2);font-size:14px;max-width:40em}
 .hero-meta strong{color:var(--ink);font-weight:700}
+.disclaimer{display:inline-block;margin-top:10px;color:var(--ink-3);font-size:12.5px;line-height:1.7}
 .hero h1 em{font-style:normal;color:var(--shu)}
 .lede{margin-top:22px;max-width:36em;color:var(--ink-2);font-size:16px}
 .figures{display:flex;flex-wrap:wrap;gap:0;margin-top:36px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--surface)}
@@ -310,16 +311,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 <div class="shell">
 
   <div class="hero">
-    <div class="eyebrow">プログラミング未経験から、一人で作りきるまで</div>
+    <div class="eyebrow">パソコンにはじめて触れる人から、一人で作りきるまで</div>
     <h1>AIに書かせるな。<br><em>AIを疑え。</em></h1>
     <p class="lede">
-      HTML から Laravel まで、180時間で「一人で作りきる力」を身につける全7部の教材です。
-      この教材の主役は文法ではなく、<strong>詰まったときに自力で抜け出す手順</strong>と、
-      <strong>AIの答えが正しいかを自分で判断する技術</strong>です。
+      <strong>パソコンの基本操作からはじめて</strong>、HTML から Laravel まで、
+      手を動かしながら「自分で作れる力」を身につけられるように設計した教材です。
+      主役は文法ではなく、<strong>詰まったときに自力で抜け出す手順</strong>と、
+      <strong>AIの答えが正しいかを自分で判断する技術</strong>。
+      そして学び終えたあと、<strong>その力を仕事につなげる道のり</strong>まで扱います。
     </p>
     <p class="hero-meta">
-      全7部・<strong>80レッスン</strong>、およそ<strong>180時間</strong>。
-      手を動かして作る総合演習が5本、AIとの付き合い方を扱う回が9レッスン含まれます。
+      全7部・<strong>81レッスン</strong>、およそ<strong>180時間</strong>。パソコンの基本操作からスタートし、
+      手を動かして作る総合演習が5本、AIとの付き合い方を扱う回が9レッスン含まれます。<br>
+      <span class="disclaimer">習得にかかる時間には個人差があります。「必ず稼げる」「誰でも簡単に」といった保証はしません。近道の代わりに、続けられる設計にしています。</span>
     </p>
   </div>
 
@@ -333,7 +337,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
         <a href="#code"><i>04</i>コード集</a>
         <a href="#errors"><i>05</i>エラー図鑑</a>
         <a href="#prompts"><i>06</i>AIプロンプト集</a>
-        <a href="#files"><i>07</i>教材の構成</a>
+        <a href="#career"><i>07</i>この先のキャリア</a>
+        <a href="#files"><i>08</i>教材の構成</a>
       </nav>
       <div class="progress-card">
         <svg class="ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true">
@@ -342,7 +347,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
                   stroke-dasharray="138.2" stroke-dashoffset="138.2"></circle>
         </svg>
         <div>
-          <b id="pcount">0 / 80</b>
+          <b id="pcount">0 / 81</b>
           <small>レッスン完了</small>
           <button class="reset" id="reset" type="button">進捗をリセット</button>
         </div>
@@ -396,7 +401,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
       <section id="sample">
         <div class="sec-head"><span class="n mono">03</span><h2>サンプルレッスン</h2></div>
         <p class="sec-intro">
-          第0部の最終レッスンを、実際の形式のまま掲載します。全80レッスンがこの構成です。
+          第0部の最終レッスンを、実際の形式のまま掲載します。全81レッスンがこの構成です。
         </p>
 
         <article class="lesson-sheet">
@@ -531,20 +536,44 @@ echo "こんにちは、" . $name . "さん";</pre>
       </section>
 
       <!-- 07 ---------------------------------------------------------- -->
+      <section id="career">
+        <div class="sec-head"><span class="n mono">07</span><h2>この先のキャリア</h2></div>
+        <p class="sec-intro">
+          「作れる力」がついたあと、それを仕事につなげる<strong>現実的な順番</strong>を示します。
+          楽な道ではありませんが、飛ばさず一歩ずつ進めば、道はつながります。
+        </p>
+        <ol class="steps">
+          <li><b>作れる力をつける</b><span>この教材を最後まで。特に各部の総合演習を完走する。</span></li>
+          <li><b>ポートフォリオを作る</b><span>動くURL＋GitHub＋README。「なぜそう作ったか」を語れる状態に。</span></li>
+          <li><b>発信して可視化する</b><span>GitHubの活動、学びのアウトプット。見える実績を積む。</span></li>
+          <li><b>小さな実績を1つ作る</b><span>身近な困りごと・小さな案件・自主制作。1本を丁寧に。</span></li>
+          <li><b>応募・面接に挑む</b><span>盛らない・偽らない。コードの意図を自分の言葉で説明できるように。</span></li>
+          <li><b>入った先で伸ばす</b><span>正しく質問し、AIを検証しながら使う。ここからが本番。</span></li>
+        </ol>
+        <div class="callout warn">
+          <b>正直な但し書き</b>
+          <p>成果には個人差があり、「必ず稼げる」「誰でも簡単に・短期間で」といった保証はしません。報酬や相場は雇用形態・地域・経験で大きく変わるため、最新の一次情報でご確認ください。この教材は、保証の代わりに<strong>現実的な順番と、続けられる設計</strong>を提供します。</p>
+        </div>
+        <p class="sec-intro">
+          教材の巻末資料「キャリアの築き方」で、職種の地図・最初の実績の作り方・応募書類・面接・お金の考え方・AIの活かし方まで、さらに詳しく解説しています。
+        </p>
+      </section>
+
+      <!-- 08 ---------------------------------------------------------- -->
       <section id="files">
-        <div class="sec-head"><span class="n mono">07</span><h2>教材の構成</h2></div>
+        <div class="sec-head"><span class="n mono">08</span><h2>教材の構成</h2></div>
         <p class="sec-intro">教材本体は Markdown で提供されます。このページはその公開版です。</p>
         <div class="files">
           <div><div class="path mono">README.md</div><p>教材全体の案内と到達点</p></div>
-          <div><div class="path mono">COURSE_MAP.md</div><p>全80レッスンの一覧・所要時間・依存関係</p></div>
-          <div><div class="path mono">00-orientation/</div><p>第0部 全7レッスン。環境構築とAI入門</p></div>
+          <div><div class="path mono">COURSE_MAP.md</div><p>全81レッスンの一覧・所要時間・依存関係</p></div>
+          <div><div class="path mono">00-orientation/</div><p>第0部 全8レッスン。パソコンの基本操作・環境構築・AI入門</p></div>
           <div><div class="path mono">01-html-css/</div><p>第1部 全14レッスン。カフェLPを1枚作りきる</p></div>
           <div><div class="path mono">02-javascript/</div><p>第2部 全13レッスン。ToDoアプリを作る</p></div>
           <div><div class="path mono">03-php/</div><p>第3部 全12レッスン。掲示板を作る</p></div>
           <div><div class="path mono">04-database/</div><p>第4部 全10レッスン。掲示板をDB化する</p></div>
           <div><div class="path mono">05-laravel/</div><p>第5部 全16レッスン。フリマアプリを作りきる</p></div>
           <div><div class="path mono">06-portfolio/</div><p>第6部 全8レッスン。公開してポートフォリオにする</p></div>
-          <div><div class="path mono">appendix/</div><p>エラー図鑑・AIプロンプト集・用語集・チートシート</p></div>
+          <div><div class="path mono">appendix/</div><p>エラー図鑑・AIプロンプト集・用語集・チートシート・キャリアの築き方</p></div>
           <div><div class="path mono">code/</div><p>各レッスンの完成コード（動作確認済み）</p></div>
         </div>
       </section>
@@ -575,7 +604,8 @@ echo "こんにちは、" . $name . "さん";</pre>
 
   /* ---------- curriculum data ---------- */
   var PARTS = [
-    { n: "第0部", t: "オリエンテーション", h: 6, ls: [
+    { n: "第0部", t: "オリエンテーション", h: 7, ls: [
+      ["0-0","はじめの一歩 ─ パソコンの基本操作",""],
       ["0-1","ようこそ / この教材の使い方",""],
       ["0-2","挫折しない学び方の設計",""],
       ["0-3","Webサイトが表示される仕組み",""],

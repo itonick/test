@@ -6,10 +6,11 @@
 
 ---
 
-## 第0部 オリエンテーション（6h）
+## 第0部 オリエンテーション（7h）
 
 | # | タイトル | 所要 | 難度 | 成果物 |
 | --- | --- | --- | --- | --- |
+| 0-0 | [はじめの一歩 ─ パソコンの基本操作](00-orientation/00-00-pc-basics.md) | 60分 | 🟢 | — |
 | 0-1 | [ようこそ / この教材の使い方](00-orientation/00-01-welcome.md) | 20分 | 🟢 | — |
 | 0-2 | [挫折しない学び方の設計](00-orientation/00-02-how-to-learn.md) | 30分 | 🟢 | 学習計画表 |
 | 0-3 | [Webサイトが表示される仕組み](00-orientation/00-03-how-web-works.md) | 40分 | 🟢 | — |
@@ -131,6 +132,7 @@
 | [AIプロンプト集](appendix/ai-prompts.md) | 場面別のコピペで使えるプロンプト |
 | [用語集](appendix/glossary.md) | 初出用語をやさしく解説 |
 | [チートシート](appendix/cheatsheets.md) | HTML / CSS / JS / PHP / SQL / Laravel / Git |
+| [キャリアの築き方](appendix/career-guide.md) | 学び終えたあと、仕事につなげる現実的な道のり（正直版） |
 
 ---
 
