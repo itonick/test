@@ -1,0 +1,235 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>サンプルレッスン｜AIと一緒につくるWebアプリ開発入門</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F3F8F5;--surface:#FFFFFF;--sunk:#E9F1EC;--ink:#233029;--ink2:#55615A;--ink3:#6E7A73;
+--rule:#D3E0D8;--rule-soft:#E4EDE7;--teal:#0F766E;--tealDk:#0B5A54;--tealSoft:#DBEDE8;
+--ai:#6A4FA3;--aiSoft:#EBE7F6;--warn:#8A6300;--warnSoft:#F6EED8;--dark:#12332F;--mint:#2FBBA6;}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased}
+.masthead{background:var(--dark);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.masthead .wm{font-weight:900;font-size:15px}.masthead .wm span{color:var(--mint)}
+.badge{margin-left:auto;background:var(--mint);color:#06231f;font-weight:700;font-size:12px;letter-spacing:.08em;padding:3px 12px;border-radius:999px}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 80px}
+.intro{padding:34px 0 26px;border-bottom:1px solid var(--rule);margin-bottom:34px}
+.eyebrow{color:var(--teal);font-weight:700;font-size:13px;letter-spacing:.1em;margin-bottom:10px}
+.intro h1{font-size:clamp(24px,4.5vw,34px);font-weight:900;margin:0 0 12px;line-height:1.35}
+.intro p{color:var(--ink2);font-size:14.5px;margin:0}
+.note{display:inline-block;margin-top:14px;background:var(--tealSoft);color:var(--tealDk);font-size:13px;padding:8px 14px;border-radius:8px}
+.md>*:first-child{margin-top:0}
+.md h1{font-size:26px;font-weight:900;line-height:1.35;margin:0 0 8px}
+.md h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.md h3{font-size:16px;margin:26px 0 8px}.md h4{font-size:14px;margin:20px 0 6px;color:var(--ink2)}
+.md p{margin:0 0 15px}.md ul,.md ol{margin:0 0 16px;padding-left:1.5em}.md li{margin-bottom:6px}
+.md a{color:var(--teal)}.md strong{font-weight:700}.md hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.md code{font-family:"Noto Sans Mono",monospace;font-size:.9em;background:var(--sunk);padding:1px 5px;border-radius:4px;word-break:break-word}
+.md pre{background:var(--sunk);border:1px solid var(--rule-soft);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 16px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+.md pre code{font-size:12.5px;background:none;padding:0}
+.md blockquote{margin:0 0 16px;padding:13px 18px;border-left:4px solid var(--rule);background:var(--sunk);border-radius:0 8px 8px 0}
+.md blockquote>*:last-child{margin-bottom:0}
+.md blockquote.goal{border-left-color:var(--ink)}
+.md blockquote.warn,.md blockquote.rescue{border-left-color:var(--warn);background:var(--warnSoft)}
+.md blockquote.ai{border-left-color:var(--ai);background:var(--aiSoft)}
+.md blockquote.tip{border-left-color:var(--teal);background:var(--tealSoft)}
+.md .tblwrap{overflow-x:auto;margin:0 0 18px;border:1px solid var(--rule);border-radius:8px}
+.md table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--surface);margin:0}
+.md th,.md td{border-bottom:1px solid var(--rule-soft);padding:9px 12px;text-align:left;vertical-align:top}
+.md th{background:var(--sunk);font-size:11.5px;letter-spacing:.06em;color:var(--ink3);white-space:nowrap}
+.md tr:last-child td{border-bottom:0}
+.md details{margin:0 0 16px}.md summary{font-weight:700;color:var(--tealDk);cursor:pointer}
+.overview{margin-top:48px;padding-top:30px;border-top:2px solid var(--ink)}
+.overview>h2{font-size:20px;margin:0 0 6px}.overview>p{color:var(--ink2);font-size:14px;margin:0 0 20px}
+.cpart{margin-bottom:18px}.cpart h3{font-size:14px;color:var(--teal);margin:0 0 6px}
+.cpart ul{list-style:none;margin:0;padding:0}.cpart li{font-size:13px;padding:3px 0;border-bottom:1px solid var(--rule-soft)}
+.cpart .cid{font-family:"Noto Sans Mono",monospace;font-size:11px;color:var(--ink3);margin-right:10px}.cpart .here{color:var(--teal);font-weight:700;font-size:11.5px}
+.cta{margin-top:44px;background:var(--dark);color:#fff;border-radius:14px;padding:34px 30px;text-align:center}
+.cta h2{color:#fff;font-size:24px;margin:0 0 10px;border:0}.cta p{color:#CFE0D8;font-size:14.5px;margin:0 auto 6px;max-width:34em}.cta .big{color:var(--mint);font-weight:700}
+.foot{margin-top:40px;color:var(--ink3);font-size:12px;line-height:1.9;border-top:1px solid var(--rule);padding-top:20px}
+@media print{body{background:#fff}.masthead,.cta{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body>
+<header class="masthead"><span class="wm">AIと一緒につくる<span>／</span>Webアプリ開発入門</span><span class="badge">無料サンプル</span></header>
+<div class="wrap">
+  <div class="intro">
+    <div class="eyebrow">SAMPLE LESSON ／ 無料お試し</div>
+    <h1>サンプルレッスン：AIの答えを疑う技術 — 検証編</h1>
+    <p>全7部・全83レッスンのうちの1本（レッスン 0-7）を、<strong>実際の教材そのままの形式</strong>で公開しています。文章の密度・つまずき対策・AIの使い方まで、この一本で教材の雰囲気がわかります。</p>
+    <span class="note">このページは無料サンプルです。続きの82レッスンと完成コードは本編に収録しています。</span>
+  </div>
+  <article class="md">
+<h1>0-7 AIの答えを疑う技術 — 検証編</h1>
+<blockquote><p>◎ <strong>このレッスンのゴール</strong></p>
+<ul><li>AIの回答が信用できるかを、初学者でも判定できるようになる</li><li>5段階の検証手順を身につける</li><li>AIに任せてはいけない領域を線引きできる</li></ul></blockquote>
+<p>所要 60分 / 難度 🟡</p>
+<hr>
+<h2>この技術が、あなたの市場価値になる</h2>
+<p>いま、「AIにコードを書かせられる人」は珍しくありません。誰でもできます。</p>
+<p>希少なのは、<strong>「AIが出したコードの正しさを判断できる人」</strong>です。</p>
+<p>現場で起きていること：</p>
+<ul><li>AIが出したコードをそのまま入れて、SQLインジェクションの穴が空いた</li><li>AIが提案したライブラリが、実は3年前に開発終了していた</li><li>AIが「動く」と言ったコードが、特定の条件でだけ壊れた</li></ul>
+<p>これらを<strong>リリース前に止められる人</strong>が、いま最も評価されています。このレッスンで、その第一歩を踏みます。</p>
+<hr>
+<h2>AIが間違える5つのパターン</h2>
+<h3>パターン1：存在しないものを作る（ハルシネーション）</h3>
+<pre><code class="language-php">// AIが自信満々に提示してきたコード
+$reversed = str_reverse($text);  // ❌ こんな関数はPHPに存在しない</code></pre>
+<p><strong>なぜ起きるか</strong>：AIは「それっぽい次の単語」を予測しています。<code>str_replace</code> <code>str_split</code> <code>strrev</code> …と似た名前が学習データにあるため、<code>str_reverse</code> という<strong>あってもおかしくない名前</strong>を生成してしまいます。</p>
+<p><strong>見抜き方</strong>：関数名を公式ドキュメントで検索する（後述）。</p>
+<h3>パターン2：情報が古い</h3>
+<p>AIには<strong>学習データの締め切り</strong>があります。それ以降の情報は知りません。</p>
+<pre><code class="language-php">// AIが出してくることがある古い書き方
+mysql_query("SELECT * FROM users");  // ❌ PHP 7.0 で削除済み</code></pre>
+<p><strong>見抜き方</strong>：「この書き方は現在も推奨されていますか？ 非推奨になっていませんか？」と追加で聞く。ただしAI自身も気づいていないことがあるので、<strong>最終判断は公式ドキュメント</strong>です。</p>
+<h3>パターン3：バージョンがずれている</h3>
+<p>Laravel、PHP、JavaScript は頻繁に更新されます。AIは、質問者が使っているバージョンを知りません。</p>
+<p><strong>対策</strong>：質問時に必ずバージョンを書く。</p>
+<pre><code class="language-text">Laravel 11 / PHP 8.2 を使っています。</code></pre>
+<h3>パターン4：質問を誤解したまま、完璧な答えを返す</h3>
+<p>あなたが聞きたかったことと、AIが答えたことがズレているのに、答えの完成度が高いので気づけない、というパターンです。</p>
+<p><strong>見抜き方</strong>：AIの回答の冒頭に「あなたの質問はこう理解しました」と要約させる。</p>
+<pre><code class="language-text">回答の前に、私の質問をあなたがどう理解したかを1〜2文で要約してください。</code></pre>
+<h3>パターン5：動くけれど、まずいコード</h3>
+<p><strong>これが最も危険です。</strong> 動いてしまうので、初学者には問題が見えません。</p>
+<pre><code class="language-php">// 動く。しかし危険
+$sql = "SELECT * FROM users WHERE name = '$name'";  // ❌ SQLインジェクション</code></pre>
+<pre><code class="language-php">// 動く。しかし危険
+echo $_POST['comment'];  // ❌ XSS</code></pre>
+<p><strong>対策</strong>：AIに書かせたコードには、必ず<strong>セキュリティレビューを別途かける</strong>（後述のテンプレート参照）。</p>
+<hr>
+<h2>検証の5ステップ</h2>
+<p>AIの回答を受け取ったら、この順に確認します。<strong>慣れれば1〜2分です。</strong></p>
+<pre><code>STEP 1  自分の言葉で説明できるか？
+   ↓ できない
+   → 理解できるまで聞き直す。理解できないコードは使わない
+
+STEP 2  出てくる関数・メソッドは実在するか？
+   ↓ 公式ドキュメントで検索
+
+STEP 3  実際に動かして、期待通りか？
+   ↓ 正常系だけでなく、異常系も試す
+
+STEP 4  セキュリティ上の問題はないか？
+   ↓ 別のプロンプトでレビューさせる
+
+STEP 5  もっと簡単な方法はないか？
+   → AIは複雑な解を出しがち。「もっと簡単に」と聞き返す</code></pre>
+<hr>
+<h3>STEP 1: 自分の言葉で説明できるか</h3>
+<p><strong>最重要のステップです。</strong></p>
+<p>AIが出したコードを見て、「この行は何をしている？」に答えられなければ、<strong>そのコードは使ってはいけません</strong>。</p>
+<p>答えられないときは、こう聞きます。</p>
+<pre><code class="language-text">いただいたコードの、以下の行の意味がわかりません。
+
+（該当行を貼る）
+
+この行がないとどうなりますか？
+また、この書き方以外の方法はありますか？あるなら、なぜこの書き方を選んだのですか？</code></pre>
+<blockquote><p>💡 <strong>「これがないとどうなる？」</strong> は、理解を確認する最強の質問です。役割がわかっていないと答えられません。</p></blockquote>
+<hr>
+<h3>STEP 2: 実在するか公式ドキュメントで確認する</h3>
+<p><strong>公式ドキュメントのURL（ブックマーク推奨）</strong></p>
+<table><thead><tr><th>技術</th><th>URL</th></tr></thead><tbody><tr><td>HTML / CSS / JavaScript</td><td>https://developer.mozilla.org/ja/ （MDN）</td></tr><tr><td>PHP</td><td>https://www.php.net/manual/ja/</td></tr><tr><td>Laravel</td><td>https://laravel.com/docs</td></tr><tr><td>MySQL</td><td>https://dev.mysql.com/doc/refman/8.0/ja/</td></tr></tbody></table>
+<p><strong>確認の仕方（PHPの例）</strong></p>
+<ol><li><code>https://www.php.net/manual/ja/function.strrev.php</code> のように、<code>function.関数名.php</code> でアクセスできます</li><li>または php.net の検索窓に関数名を入れる</li><li><strong>ページが存在しなければ、その関数は存在しません</strong></li></ol>
+<blockquote><p>✍️ <strong>手を動かす</strong> <code>https://www.php.net/manual/ja/function.str-reverse.php</code> を開いてみてください。 「該当ページが見つかりません」と出ます。これが、AIの嘘を見抜いた瞬間です。 次に <code>https://www.php.net/manual/ja/function.strrev.php</code> を開いてください。存在します。これが正解です。</p></blockquote>
+<blockquote><p>🆘 <strong>ここで詰まったら</strong>（公式ドキュメントが英語・専門的で読めない）</p>
+<ul><li><strong>考え方</strong>：読めないから確認を飛ばす、が一番危険。<strong>AIを「翻訳・要約係」として使い、ただし原典リンクは必ず自分で開く</strong>のが安全な折衷案です</li><li><strong>AIにこう聞く</strong>：<p>「次の公式ドキュメントのページの内容を、初心者向けに日本語で要約してください。あわせて、①この関数（機能）は現在も推奨されているか ②非推奨・廃止予定でないか を、ページの記述にもとづいて教えてください。（URLまたは本文を貼る）」</p></li><li>要約は便利ですが、<strong>AIが原典を誤読することもあります</strong>。最後は自分でページを開き、関数名・引数・バージョン表記を目で確かめてください。</li></ul></blockquote>
+<hr>
+<h3>STEP 3: 動かして確かめる — 異常系を忘れない</h3>
+<p>初学者がやりがちなのは、<strong>うまくいくケースだけ試して「動いた」と判断する</strong>ことです。</p>
+<p>以下も必ず試してください。</p>
+<table><thead><tr><th>試すこと</th><th>例</th></tr></thead><tbody><tr><td>空の入力</td><td>フォームを何も入れずに送信する</td></tr><tr><td>想定外の型</td><td>数値のはずの欄に文字を入れる</td></tr><tr><td>極端に長い入力</td><td>1000文字貼り付ける</td></tr><tr><td>日本語・絵文字</td><td>「あいうえお🎉」を入れる</td></tr><tr><td>特殊文字</td><td><code>'</code> <code>"</code> <code>&lt;script&gt;</code> <code>&amp;</code> を入れる</td></tr><tr><td>0 と マイナス</td><td>数量に <code>0</code> や <code>-1</code> を入れる</td></tr></tbody></table>
+<blockquote><p>💡 これは<strong>テスト設計</strong>という、れっきとしたエンジニアリングスキルです。第5部（5-14）で本格的に学びます。</p></blockquote>
+<hr>
+<h3>STEP 4: セキュリティレビューをかける</h3>
+<p>AIに書かせたコードは、<strong>別プロンプトで</strong>必ずセキュリティを見させてください。同じ会話の続きではなく、<strong>新しい会話で</strong>聞くのがコツです（自分が書いたコードを庇う傾向を避けるため）。</p>
+<pre><code class="language-text">以下のコードを、セキュリティの観点からレビューしてください。
+このコードはWebアプリケーションで一般ユーザーからの入力を扱います。
+
+（コードを貼る）
+
+次の観点で、問題があれば具体的に指摘してください。
+- SQLインジェクション
+- XSS（クロスサイトスクリプティング）
+- CSRF
+- ファイルアップロードの脆弱性
+- 認証・認可の不備
+- 機密情報のハードコーディング
+
+問題がない場合も「問題なし」と明言してください。
+それぞれについて、なぜ危険なのか、攻撃されるとどうなるかも説明してください。</code></pre>
+<hr>
+<h3>STEP 5: もっと簡単にできないか聞く</h3>
+<p>AIは、聞かれた通りに答えます。回りくどい方法でも、それが答えられるなら答えます。</p>
+<pre><code class="language-text">このコードは、もっと簡潔に・読みやすく書けますか？
+初学者が読んでも理解できることを優先して、書き直し方を教えてください。
+また、あえて簡潔にしないほうがよい理由があれば、それも教えてください。</code></pre>
+<hr>
+<h2>AIに任せてよい領域 / いけない領域</h2>
+<pre><code>┌──────────────────────────────────────────────┐
+│ ✅ 積極的に任せてよい                          │
+│  ・概念の説明、比喩を使った解説                 │
+│  ・エラーメッセージの意味を訳させる             │
+│  ・定型的なコードの雛形（HTMLの構造など）       │
+│  ・命名のアイデア出し                          │
+│  ・自分のコードのレビュー                      │
+│  ・練習問題の作成                              │
+│  ・ドキュメントやコメントの下書き               │
+├──────────────────────────────────────────────┤
+│ ⚠️ 任せてよいが、必ず検証が必要                 │
+│  ・具体的な実装コード                          │
+│  ・SQL文                                       │
+│  ・正規表現                                    │
+│  ・ライブラリやツールの選定                     │
+│  ・パフォーマンス改善の提案                     │
+├──────────────────────────────────────────────┤
+│ ❌ 任せてはいけない                            │
+│  ・「何を作るか」の意思決定                     │
+│  ・セキュリティの最終判断                       │
+│  ・個人情報・機密情報を含むコードの貼り付け      │
+│  ・APIキー・パスワードを含むコードの貼り付け     │
+│  ・業務データそのものの投入                     │
+└──────────────────────────────────────────────┘</code></pre>
+<blockquote><p>⚠️ <strong>APIキーやパスワードを、絶対にAIに貼らないでください。</strong> 学習中でも癖をつけないことが大切です。貼る前に、必ず <code>xxxxx</code> などに置き換えてください。 会社のコードを貼ってよいかは、勤務先のルールに従ってください（レッスン6-7で扱います）。</p></blockquote>
+<hr>
+<h2>🔧 やってみよう：AIの嘘を見つける演習</h2>
+<p>以下のプロンプトを、実際にAIに投げてください。</p>
+<pre><code class="language-text">PHPで、文字列を逆順にする関数を教えてください。
+また、配列の要素をランダムに並べ替える関数も教えてください。
+それぞれ、コード例も示してください。</code></pre>
+<p>返ってきた関数名を、<strong>すべて php.net で確認</strong>してください。</p>
+<ul><li>存在した関数：<code>___________</code></li><li>存在しなかった関数：<code>___________</code></li></ul>
+<p>多くの場合は正しく答えますが、<strong>確認する習慣</strong>をつけることが目的です。実在した場合も、公式ドキュメントで<strong>引数と戻り値</strong>を確認してください。AIは関数名は合っていても、<strong>引数の順番を間違える</strong>ことがあります。</p>
+<h3>追加演習</h3>
+<p>次のコードをAIに渡し、セキュリティレビューをさせてください（STEP 4のテンプレートを使用）。</p>
+<pre><code class="language-php">&lt;?php
+$name = $_GET['name'];
+$conn = new mysqli("localhost", "root", "", "testdb");
+$result = $conn-&gt;query("SELECT * FROM users WHERE name = '$name'");
+echo "こんにちは、" . $name . "さん";</code></pre>
+<p>このコードには<strong>2つの重大な脆弱性</strong>があります。AIは指摘できましたか？ （答え：SQLインジェクションとXSS。詳しくは第3部・第4部で学びます）</p>
+<hr>
+<h2>✅ 章末チェック</h2>
+<ul><li>[ ] AIが間違える5パターンを言える</li><li>[ ] 検証の5ステップを言える</li><li>[ ] MDN と php.net をブックマークした</li><li>[ ] 「実在しない関数」を自分の目で確認した</li><li>[ ] セキュリティレビュー用プロンプトを保存した</li><li>[ ] AIに貼ってはいけないものを言える</li></ul>
+<hr>
+<h2>ここまでで整ったこと</h2>
+<ul><li>学習計画と、詰まったときの行動ルート</li><li>Web の全体像の地図</li><li>動く開発環境</li><li>事故を減らすエディタ設定</li><li><strong>AIとの正しい付き合い方</strong></li></ul>
+<p>AIの答えを「疑って検証する」姿勢が身につきました。次はこれを、AI以外にも効く一般的な思考法──<strong>クリティカルシンキング</strong>と、<strong>「何を作るか」を決める仕様の力</strong>へ広げます。第0部の総仕上げです。</p>
+<p><strong>次のレッスン → <a href="00-08-critical-thinking.md">0-8 クリティカルシンキング入門</a></strong></p>
+  </article>
+  <section class="overview">
+    <h2>この教材の全体像（全7部・全83レッスン）</h2>
+    <p>サンプルはこのうちの1本です。全体像はこちら。</p>
+    <div class="cpart"><h3>第0部 オリエンテーション（AI入門・思考法）</h3><ul><li><span class="cid">0-0</span>はじめの一歩 ─ パソコンの基本操作</li><li><span class="cid">0-1</span>ようこそ / この教材の使い方</li><li><span class="cid">0-2</span>挫折しない学び方の設計</li><li><span class="cid">0-3</span>Webサイトが表示される仕組み</li><li><span class="cid">0-4</span>開発環境をつくる（Windows / Mac）</li><li><span class="cid">0-5</span>VS Code を自分の道具にする</li><li><span class="cid">0-6</span>AIを開発の相棒にする — 基本編</li><li><span class="cid">0-7</span>AIの答えを疑う技術 — 検証編 <span class="here">◀ このサンプル</span></li><li><span class="cid">0-8</span>クリティカルシンキング入門 ── AI時代に「考える」を武器にする</li><li><span class="cid">0-9</span>仕様で考える ── 「何を・なぜ作るか」を決める技術</li></ul></div><div class="cpart"><h3>第1部 HTML / CSS</h3><ul><li><span class="cid">1-1</span>HTMLの骨格とタグの考え方</li><li><span class="cid">1-2</span>文書構造とセマンティックHTML</li><li><span class="cid">1-3</span>画像・リンク・リストを扱う</li><li><span class="cid">1-4</span>フォームの部品をひと通り</li><li><span class="cid">1-5</span>CSSの書き方とセレクタ</li><li><span class="cid">1-6</span>ボックスモデルを完全に理解する</li><li><span class="cid">1-7</span>文字と色のデザイン基礎</li><li><span class="cid">1-8</span>Flexbox で横並びを制する</li><li><span class="cid">1-9</span>CSS Grid でページ全体を組む</li><li><span class="cid">1-10</span>レスポンシブ対応とメディアクエリ</li><li><span class="cid">1-11</span>position と重なり順</li><li><span class="cid">1-12</span>開発者ツールでCSSをデバッグする</li><li><span class="cid">1-13</span>AIにデザインカンプを実装させる</li><li><span class="cid">1-14</span>【総合演習】架空カフェのLPを作る</li></ul></div><div class="cpart"><h3>第2部 JavaScript</h3><ul><li><span class="cid">2-1</span>JavaScriptを動かす・値と変数</li><li><span class="cid">2-2</span>条件分岐と繰り返し</li><li><span class="cid">2-3</span>関数とスコープ</li><li><span class="cid">2-4</span>配列とオブジェクト</li><li><span class="cid">2-5</span>配列メソッド（map / filter / reduce）</li><li><span class="cid">2-6</span>DOM操作で画面を書き換える</li><li><span class="cid">2-7</span>イベントで「動く」を作る</li><li><span class="cid">2-8</span>フォームバリデーション実装</li><li><span class="cid">2-9</span>エラーの読み方とデバッグ手順</li><li><span class="cid">2-10</span>非同期処理と fetch でAPIを叩く</li><li><span class="cid">2-11</span>localStorage でデータを保存する</li><li><span class="cid">2-12</span>AIとペアプロする実践フロー</li><li><span class="cid">2-13</span>【総合演習】ToDoアプリを作る</li></ul></div><div class="cpart"><h3>第3部 PHP</h3><ul><li><span class="cid">3-1</span>サーバーサイドとは何か / PHPを動かす</li><li><span class="cid">3-2</span>変数・型・演算子</li><li><span class="cid">3-3</span>条件分岐・繰り返し・配列</li><li><span class="cid">3-4</span>関数と組み込み関数の調べ方</li><li><span class="cid">3-5</span>HTMLとPHPを混ぜて書く</li><li><span class="cid">3-6</span>GET / POST でデータを受け取る</li><li><span class="cid">3-7</span>バリデーションとエスケープ（XSS対策）</li><li><span class="cid">3-8</span>セッションとクッキー</li><li><span class="cid">3-9</span>ファイルアップロードを扱う</li><li><span class="cid">3-10</span>クラスとオブジェクト指向の入口</li><li><span class="cid">3-11</span>AIにコードレビューさせる</li><li><span class="cid">3-12</span>【総合演習】掲示板を作る</li></ul></div><div class="cpart"><h3>第4部 データベースとSQL</h3><ul><li><span class="cid">4-1</span>データベースが必要な理由</li><li><span class="cid">4-2</span>MySQL に触れる / phpMyAdmin</li><li><span class="cid">4-3</span>SELECT で取り出す</li><li><span class="cid">4-4</span>INSERT / UPDATE / DELETE</li><li><span class="cid">4-5</span>テーブル設計と正規化の基本</li><li><span class="cid">4-6</span>JOIN で複数テーブルをつなぐ</li><li><span class="cid">4-7</span>PHPからDBを操作する（PDO）</li><li><span class="cid">4-8</span>SQLインジェクションを防ぐ</li><li><span class="cid">4-9</span>AIにSQLとテーブル設計を相談する</li><li><span class="cid">4-10</span>【総合演習】掲示板をDB化する</li></ul></div><div class="cpart"><h3>第5部 Laravel</h3><ul><li><span class="cid">5-1</span>フレームワークとは / Laravelを入れる</li><li><span class="cid">5-2</span>ディレクトリ構成とMVC</li><li><span class="cid">5-3</span>ルーティング</li><li><span class="cid">5-4</span>コントローラ</li><li><span class="cid">5-5</span>Bladeテンプレート</li><li><span class="cid">5-6</span>マイグレーションでテーブルを作る</li><li><span class="cid">5-7</span>Eloquent ORM の基本</li><li><span class="cid">5-8</span>リレーション（1対多・多対多）</li><li><span class="cid">5-9</span>フォームリクエストとバリデーション</li><li><span class="cid">5-10</span>認証機能（Breeze）</li><li><span class="cid">5-11</span>認可（ポリシー）とミドルウェア</li><li><span class="cid">5-12</span>ファイルアップロードと画像表示</li><li><span class="cid">5-13</span>ページネーション・検索・並び替え</li><li><span class="cid">5-14</span>テストを書く（PHPUnit入門）</li><li><span class="cid">5-15</span>🤖 AIにLaravelの設計を相談する</li><li><span class="cid">5-16</span>【総合演習】フリマアプリを作る</li></ul></div><div class="cpart"><h3>第6部 ポートフォリオ制作と公開</h3><ul><li><span class="cid">6-1</span>Git / GitHub の基本操作</li><li><span class="cid">6-2</span>読まれる README の書き方</li><li><span class="cid">6-3</span>要件定義と画面設計</li><li><span class="cid">6-4</span>オリジナルアプリを企画する</li><li><span class="cid">6-5</span>🤖 AIと進める個人開発の進め方</li><li><span class="cid">6-6</span>レンタルサーバーにデプロイする</li><li><span class="cid">6-7</span>実務でのAI利用のマナーと注意点</li><li><span class="cid">6-8</span>学習を続けるためのロードマップ</li></ul></div>
+  </section>
+  <section class="cta">
+    <h2>続きは、本編で。</h2>
+    <p>パソコンの基本操作から <span class="big">Laravelでアプリを作りきる</span> まで。手を動かす総合演習が5本、AIとの付き合い方と「考える力」まで学べます。</p>
+    <p>※ 効果には個人差があります。「必ず稼げる／誰でも簡単に」といった保証はしていません。近道の代わりに、続けられる設計で着実な前進を支えます。</p>
+  </section>
+  <div class="foot">本サンプルは無料でご覧いただけます。教材本体は購入者個人の学習用です。無断での再配布・転載を禁じます。<br>掲載サンプルコードは学習・ポートフォリオ・商用問わず自由に利用いただけます。</div>
+</div>
+</body></html>

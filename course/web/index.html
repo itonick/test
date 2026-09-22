@@ -425,7 +425,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
       <nav id="toc">
         <a href="#why" class="on"><i>01</i>なぜ挫折するのか</a>
         <a href="#map"><i>02</i>カリキュラム</a>
-        <a href="#sample"><i>03</i>サンプルレッスン</a>
         <a href="#code"><i>04</i>コード集</a>
         <a href="#errors"><i>05</i>エラー図鑑</a>
         <a href="#prompts"><i>06</i>AIプロンプト集</a>
@@ -490,109 +489,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
         <div id="parts"></div>
       </section>
 
-      <!-- 03 ---------------------------------------------------------- -->
-      <section id="sample">
-        <div class="sec-head"><span class="n mono">03</span><h2>サンプルレッスン</h2></div>
-        <p class="sec-intro">
-          第0部の最終レッスンを、実際の形式のまま掲載します。全83レッスンがこの構成です。
-          <strong>上の「カリキュラム」から、どのレッスンもクリックすれば本文をそのまま読めます。</strong>
-        </p>
-
-        <article class="lesson-sheet">
-          <div class="sheet-top">
-            <div class="id mono">LESSON 0-7 ／ 60分 ／ 難度 ふつう</div>
-            <h3>AIの答えを疑う技術 — 検証編</h3>
-            <div class="goal">
-              <b>このレッスンのゴール</b>
-              <ul>
-                <li>AIの回答が信用できるかを、初学者でも判定できるようになる</li>
-                <li>5段階の検証手順を身につける</li>
-                <li>AIに任せてはいけない領域を線引きできる</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="sheet-body">
-            <h4>この技術が、あなたの市場価値になる</h4>
-            <p>いま「AIにコードを書かせられる人」は珍しくありません。誰でもできます。希少なのは、<strong>AIが出したコードの正しさを判断できる人</strong>です。</p>
-            <p>現場では、AIが出したコードをそのまま入れてSQLインジェクションの穴が空いた、提案されたライブラリが3年前に開発終了していた、といった事故が実際に起きています。これらを<strong>リリース前に止められる人</strong>が、いま最も評価されています。</p>
-
-            <h4>AIが間違える5つのパターン</h4>
-            <div class="tblwrap">
-              <table>
-                <thead><tr><th>パターン</th><th>具体例</th><th>見抜き方</th></tr></thead>
-                <tbody>
-                  <tr><td>存在しないものを作る</td><td>PHPに <code>str_reverse()</code> はない（正しくは <code>strrev()</code>）</td><td>公式ドキュメントで検索する</td></tr>
-                  <tr><td>情報が古い</td><td>PHP 7.0 で削除された <code>mysql_query()</code> を提示する</td><td>「非推奨になっていませんか」と追加で聞く</td></tr>
-                  <tr><td>バージョンがずれる</td><td>Laravel 11 の質問に 8 の書き方で答える</td><td>質問時に必ずバージョンを書く</td></tr>
-                  <tr><td>質問を誤解する</td><td>ズレた問いに、完成度の高い答えを返す</td><td>「私の質問をどう理解したか要約して」</td></tr>
-                  <tr><td>動くが、まずい</td><td>SQLインジェクションやXSSを含んだまま動作する</td><td>別会話でセキュリティレビューをかける</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="callout warn">
-              <b>⚠ つまずきポイント</b>
-              <p>5番目が最も危険です。<strong>動いてしまうので、初学者には問題が見えません。</strong>「動いた＝正しい」は、この教材で最初に捨てる思い込みです。</p>
-            </div>
-
-            <h4>検証の5ステップ</h4>
-            <ol class="steps">
-              <li><b>自分の言葉で説明できるか？</b><span>できないコードは使わない。「この行がないとどうなりますか」と聞き返す。</span></li>
-              <li><b>その関数は実在するか？</b><span>php.net / MDN で検索する。ページが無ければ、その関数は存在しない。</span></li>
-              <li><b>動かして、期待通りか？</b><span>正常系だけでなく、空・特殊文字・0・極端に長い入力も試す。</span></li>
-              <li><b>セキュリティ上の問題はないか？</b><span>新しい会話でレビューさせる。同じ会話だと自分の出力を庇う傾向がある。</span></li>
-              <li><b>もっと簡単な方法はないか？</b><span>AIは複雑な解を出しがち。「もっと簡単に」と聞き返す。</span></li>
-            </ol>
-
-            <div class="callout ai">
-              <b>🤖 AIに聞いてみよう ─ セキュリティレビュー</b>
-              <p>自分で書いたコードにも、AIに書かせたコードにも、必ずこれをかけます。</p>
-              <pre>以下のコードを、セキュリティの観点からレビューしてください。
-Webアプリケーションで、一般ユーザーからの入力を扱うコードです。
-
-（コードを貼る）
-
-次の観点で、問題があれば具体的に指摘してください。
-- SQLインジェクション  - XSS  - CSRF
-- ファイルアップロードの脆弱性
-- 認証・認可の不備   - 機密情報のハードコーディング
-
-それぞれ、なぜ危険か・攻撃されると何が起きるかも説明してください。
-問題がない場合は「問題なし」と明言してください。</pre>
-            </div>
-
-            <h4>任せてよい領域 / いけない領域</h4>
-            <div class="tblwrap">
-              <table>
-                <thead><tr><th>判断</th><th>領域</th></tr></thead>
-                <tbody>
-                  <tr><td><strong style="color:var(--ok)">任せてよい</strong></td><td>概念の説明、エラー文の翻訳、定型コードの雛形、命名のアイデア、自分のコードのレビュー、練習問題の作成</td></tr>
-                  <tr><td><strong style="color:var(--ink-2)">検証すれば可</strong></td><td>実装コード、SQL文、正規表現、ライブラリ選定、パフォーマンス改善の提案</td></tr>
-                  <tr><td><strong style="color:var(--shu)">任せてはいけない</strong></td><td>「何を作るか」の意思決定、セキュリティの最終判断、個人情報・APIキー・パスワードを含むコードの貼り付け、業務データの投入</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h4>やってみよう ─ AIの嘘を見つける</h4>
-            <p>AIに頼らず、自力でやってください。ここが実力になる部分です。</p>
-            <pre>PHPで、文字列を逆順にする関数を教えてください。
-また、配列の要素をランダムに並べ替える関数も教えてください。
-それぞれ、コード例も示してください。</pre>
-            <p>返ってきた関数名を、<strong>すべて php.net で確認</strong>してください。正しく答えた場合も、引数の順番と戻り値まで公式で確認します。AIは名前は合っていても<strong>引数の順番を間違える</strong>ことがあります。</p>
-
-            <div class="callout warn">
-              <b>⚠ 追加演習 ─ この4行には脆弱性が2つある</b>
-              <pre class="code">$name = $_GET['name'];
-$conn = new mysqli("localhost", "root", "", "testdb");
-$result = $conn-&gt;query("SELECT * FROM users WHERE name = '$name'");
-echo "こんにちは、" . $name . "さん";</pre>
-              <p>上のプロンプトでAIにレビューさせてください。SQLインジェクションとXSSの両方を指摘できましたか？ 指摘できなかったAIの答えは、鵜呑みにできないということです。</p>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <!-- 04 ---------------------------------------------------------- -->
+<!-- 04 ---------------------------------------------------------- -->
       <section id="code">
         <div class="sec-head"><span class="n mono">04</span><h2>コード集</h2></div>
         <p class="sec-intro">
@@ -1472,26 +1369,6 @@ echo "こんにちは、" . $name . "さん";</pre>
   });
 
   renderCodes();
-
-  /* ---------- サンプルレッスン内の pre にもコピーボタンを付ける ---------- */
-  Array.prototype.forEach.call(
-    document.querySelectorAll("#sample pre"),
-    function (pre) {
-      var wrap = document.createElement("div");
-      wrap.className = "prewrap";
-      pre.parentNode.insertBefore(wrap, pre);
-      wrap.appendChild(pre);
-
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "copybtn mono";
-      btn.textContent = "コピー";
-      btn.addEventListener("click", function () {
-        flashCopied(btn, pre.textContent);
-      });
-      wrap.appendChild(btn);
-    }
-  );
 
   /* ---------- scrollspy ---------- */
   var links = Array.prototype.slice.call(document.querySelectorAll("#toc a"));
